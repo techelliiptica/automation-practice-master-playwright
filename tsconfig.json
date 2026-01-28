@@ -11,10 +11,11 @@
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "moduleResolution": "node",
-    "types": ["node", "@playwright/test"]
+    "types": ["node", "@playwright/test", "@cucumber/cucumber"]
   },
   "include": [
-    "**/*.ts"
+    "**/*.ts",
+    "features/**/*.ts"
   ],
   "exclude": [
     "node_modules",
