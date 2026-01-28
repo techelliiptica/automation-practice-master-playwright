@@ -2,6 +2,57 @@
 
 A comprehensive Playwright automation framework for testing the Automation Practice web application.
 
+## 👨‍💻 Developed By
+
+**TechElliptica**
+
+This project is developed and maintained by [TechElliptica](https://www.techelliptica.com).
+
+### Logo Information
+
+The TechElliptica logo used throughout this project:
+
+- **Logo URL**: [https://techelliptica.com/images/logo.png](https://techelliptica.com/images/logo.png)
+- **Format**: PNG
+- **Dimensions**: 250 × 92 pixels
+- **Color Mode**: RGB
+- **Usage**: The logo appears in the footer of all HTML pages and represents TechElliptica branding
+
+The logo is the exclusive property of TechElliptica and is protected by copyright. Unauthorized use, modification, or distribution of the logo is strictly prohibited.
+
+---
+
+## ⚖️ Terms and Conditions
+
+### Intellectual Property
+
+This project, including all source code, documentation, test cases, and related materials, is the **exclusive property of TechElliptica**. All rights are reserved.
+
+### Usage Restrictions
+
+1. **Educational and Learning Purposes**: This project may be used for educational and learning purposes only.
+
+2. **Commercial Use Prohibited**: 
+   - **NO ONE** may copy, modify, distribute, or use this project for any **monetary or commercial purposes** without explicit written permission from TechElliptica.
+   - This includes but is not limited to:
+     - Selling or licensing the project
+     - Using it in commercial training programs
+     - Incorporating it into paid services or products
+     - Using it to generate revenue in any form
+
+3. **Permission Required**: 
+   - Any commercial use, distribution, or modification requires prior written consent from TechElliptica.
+   - To request permission, please contact TechElliptica through [www.techelliptica.com](https://www.techelliptica.com/about)
+
+4. **Attribution**: 
+   - When using this project for educational purposes, proper attribution to TechElliptica must be maintained.
+
+### Violations
+
+Unauthorized commercial use or distribution of this project may result in legal action. TechElliptica reserves the right to pursue all available legal remedies.
+
+---
+
 ## 📋 Prerequisites
 
 - Node.js (v16 or higher)
@@ -240,6 +291,26 @@ This opens an interactive HTML report showing:
 4. Add appropriate assertions
 5. Keep tests independent and isolated
 
-## 📄 License
+## 📄 License & Copyright
 
-ISC
+**Copyright © 2026 TechElliptica. All Rights Reserved.**
+
+This project is proprietary software owned by TechElliptica. Unauthorized copying, modification, distribution, or commercial use is strictly prohibited without explicit written permission from TechElliptica.
+
+For licensing inquiries, please contact TechElliptica at [www.techelliptica.com](https://www.techelliptica.com)
+
+---
+
+## 📞 Contact
+
+For questions, support, or licensing inquiries:
+
+- **Website**: [www.techelliptica.com](https://www.techelliptica.com)
+- **Email**: Contact through [www.techelliptica.com](https://www.techelliptica.com)
+- **Logo**: [https://techelliptica.com/images/logo.png](https://techelliptica.com/images/logo.png)
+
+---
+
+**Powered by [TechElliptica](https://www.techelliptica.com)**
+
+![TechElliptica Logo](https://techelliptica.com/images/logo.png)
