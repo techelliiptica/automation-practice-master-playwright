@@ -8,18 +8,6 @@ A comprehensive Playwright automation framework for testing the Automation Pract
 
 This project is developed and maintained by [TechElliptica](https://www.techelliptica.com).
 
-### Logo Information
-
-The TechElliptica logo used throughout this project:
-
-- **Logo URL**: [https://techelliptica.com/images/logo.png](https://techelliptica.com/images/logo.png)
-- **Format**: PNG
-- **Dimensions**: 250 × 92 pixels
-- **Color Mode**: RGB
-- **Usage**: The logo appears in the footer of all HTML pages and represents TechElliptica branding
-
-The logo is the exclusive property of TechElliptica and is protected by copyright. Unauthorized use, modification, or distribution of the logo is strictly prohibited.
-
 ---
 
 ## ⚖️ Terms and Conditions
@@ -307,10 +295,15 @@ For questions, support, or licensing inquiries:
 
 - **Website**: [www.techelliptica.com](https://www.techelliptica.com)
 - **Email**: Contact through [www.techelliptica.com](https://www.techelliptica.com)
-- **Logo**: [https://techelliptica.com/images/logo.png](https://techelliptica.com/images/logo.png)
 
 ---
 
-**Powered by [TechElliptica](https://www.techelliptica.com)**
+<div align="center">
 
-![TechElliptica Logo](https://techelliptica.com/images/logo.png)
+**Powered by**
+
+<a href="https://www.techelliptica.com" target="_blank">
+  <img src="https://techelliptica.com/images/logo.png" alt="TechElliptica Logo" height="40">
+</a>
+
+</div>
