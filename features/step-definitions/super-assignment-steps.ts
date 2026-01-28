@@ -76,7 +76,7 @@ When('I select the following skills:', async function(this: CustomWorld, dataTab
   if (!superPage) {
     superPage = new SuperAssignmentPage(this.page);
   }
-  const skills = dataTable.raw().map(row => row[0]);
+  const skills = dataTable.raw().map((row: string[]) => row[0]);
   await superPage.selectSkills(skills);
 });
 
@@ -84,7 +84,7 @@ When('I select the following languages:', async function(this: CustomWorld, data
   if (!superPage) {
     superPage = new SuperAssignmentPage(this.page);
   }
-  const languages = dataTable.raw().map(row => row[0]);
+  const languages = dataTable.raw().map((row: string[]) => row[0]);
   await superPage.selectLanguages(languages);
 });
 

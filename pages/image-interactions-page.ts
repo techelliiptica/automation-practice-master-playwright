@@ -41,7 +41,7 @@ export class ImageInteractionsPage extends BasePage {
 
   async isImageBroken(imageIndex: number) {
     const img = this.page.locator('.image-item').nth(imageIndex).locator('img');
-    const naturalWidth = await img.evaluate((el: HTMLImageElement) => el.naturalWidth);
+    const naturalWidth = await img.evaluate((el: any) => (el as HTMLImageElement).naturalWidth);
     return naturalWidth === 0;
   }
 }
