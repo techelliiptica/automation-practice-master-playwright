@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super Assignment - Job Registration</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            background: #f4f5f7;
+            min-height: 100vh;
+            padding: 24px;
+            color: #172b4d;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 32px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 24px;
+            color: #0052cc;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        h1 {
+            color: #172b4d;
+            margin-bottom: 8px;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .description {
+            color: #6b778c;
+            margin-bottom: 24px;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        .scenarios-box {
+            background: #f4f5f7;
+            border: 1px solid #dfe1e6;
+            padding: 16px;
+            border-radius: 3px;
+            margin-bottom: 24px;
+        }
+
+        .scenarios-box h2 {
+            color: #172b4d;
+            margin-bottom: 12px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .scenarios-box ol {
+            margin-left: 20px;
+            color: #172b4d;
+        }
+
+        .scenarios-box li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        .form-section {
+            margin-bottom: 32px;
+            padding: 20px;
+            background: #ffffff;
+            border: 1px solid #dfe1e6;
+            border-radius: 3px;
+        }
+
+        .form-section h2 {
+            color: #172b4d;
+            margin-bottom: 16px;
+            font-size: 18px;
+            font-weight: 600;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #dfe1e6;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            color: #172b4d;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        label.required::after {
+            content: " *";
+            color: #de350b;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="number"],
+        input[type="date"],
+        input[type="url"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #dfe1e6;
+            border-radius: 3px;
+            font-size: 14px;
+            transition: border-color 0.2s;
+            background: #ffffff;
+            color: #172b4d;
+            font-family: inherit;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: #0052cc;
+            box-shadow: 0 0 0 2px rgba(0, 82, 204, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .checkbox-group,
+        .radio-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-top: 8px;
+        }
+
+        .checkbox-item,
+        .radio-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .checkbox-item input[type="checkbox"],
+        .radio-item input[type="radio"] {
+            width: auto;
+            margin: 0;
+        }
+
+        .checkbox-item label,
+        .radio-item label {
+            margin: 0;
+            font-weight: 400;
+            cursor: pointer;
+        }
+
+        .file-upload-wrapper {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .file-upload-wrapper input[type="file"] {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #dfe1e6;
+            border-radius: 3px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .file-name {
+            margin-top: 8px;
+            font-size: 13px;
+            color: #6b778c;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .file-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .download-btn {
+            background: #36b37e;
+            color: white;
+            padding: 4px 12px;
+            border: none;
+            border-radius: 3px;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+            display: none;
+        }
+
+        .download-btn.show {
+            display: inline-block;
+        }
+
+        .download-btn:hover {
+            background: #2e9d6f;
+        }
+
+        .progress-section {
+            margin-bottom: 24px;
+            padding: 16px;
+            background: #f4f5f7;
+            border-radius: 3px;
+            border: 1px solid #dfe1e6;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #172b4d;
+            font-weight: 500;
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            height: 8px;
+            background: #dfe1e6;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: #0052cc;
+            transition: width 0.3s ease;
+            border-radius: 4px;
+        }
+
+        .progress-bar.success {
+            background: #36b37e;
+        }
+
+        .iframe-container {
+            margin: 16px 0;
+            border: 1px solid #dfe1e6;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .iframe-container iframe {
+            width: 100%;
+            height: 300px;
+            border: none;
+        }
+
+        .loader-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .loader-overlay.show {
+            display: flex;
+        }
+
+        .loader {
+            border: 4px solid #f4f5f7;
+            border-top: 4px solid #0052cc;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loader-text {
+            color: white;
+            margin-top: 16px;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .loader-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        button {
+            background: #0052cc;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-right: 8px;
+        }
+
+        button:hover {
+            background: #0065ff;
+        }
+
+        button:disabled {
+            background: #dfe1e6;
+            color: #6b778c;
+            cursor: not-allowed;
+        }
+
+        button.secondary {
+            background: #6b778c;
+        }
+
+        button.secondary:hover {
+            background: #5e6c84;
+        }
+
+        .error-message {
+            color: #de350b;
+            font-size: 12px;
+            margin-top: 4px;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .form-group.error input,
+        .form-group.error textarea,
+        .form-group.error select {
+            border-color: #de350b;
+        }
+
+        .submissions-section {
+            margin-top: 48px;
+            padding: 20px;
+            background: #ffffff;
+            border: 1px solid #dfe1e6;
+            border-radius: 3px;
+            display: none;
+        }
+
+        .submissions-section.show {
+            display: block;
+        }
+
+        .submissions-section h2 {
+            color: #172b4d;
+            margin-bottom: 16px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 16px;
+        }
+
+        table th,
+        table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #dfe1e6;
+            font-size: 14px;
+        }
+
+        table th {
+            background: #f4f5f7;
+            font-weight: 600;
+            color: #172b4d;
+        }
+
+        table tr:hover {
+            background: #f4f5f7;
+        }
+
+        .table-actions {
+            margin-bottom: 16px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .no-submissions {
+            text-align: center;
+            padding: 40px;
+            color: #6b778c;
+            font-size: 14px;
+        }
+
+        .footer {
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid #dfe1e6;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: #6b778c;
+            font-size: 14px;
+        }
+
+        .footer-logo {
+            height: 24px;
+            width: auto;
+            vertical-align: middle;
+        }
+
+        .footer-text {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-text a {
+            transition: opacity 0.2s;
+        }
+
+        .footer-text a:hover {
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Back to Home</a>
+        <h1>🎯 Super Assignment - Job Registration Form</h1>
+        <p class="description">
+            Complete this comprehensive job registration form with various input types, progress tracking, file uploads, and more.
+            After submission, view your registration details in the table below.
+        </p>
+
+        <div class="scenarios-box">
+            <h2>🎯 Practice Scenarios - Automation Steps</h2>
+            <ol>
+                <li>Fill in all text input fields (First Name, Last Name, Email, Phone, Address)</li>
+                <li>Select options from dropdown menus (Position, Experience Level, Location, Country)</li>
+                <li>Select radio button options (Employment Type, Work Preference)</li>
+                <li>Check multiple checkboxes (Skills, Languages, Availability)</li>
+                <li>Select a date using the date picker (Available Start Date)</li>
+                <li>Upload a file (Resume/CV) and verify the download button appears</li>
+                <li>Click the download button to download the uploaded file</li>
+                <li>Fill in textarea fields (Cover Letter, Additional Information)</li>
+                <li>Verify the progress bar updates as you fill the form</li>
+                <li>Review terms and conditions in the iframe</li>
+                <li>Check the terms and conditions checkbox</li>
+                <li>Submit the form and observe the loader</li>
+                <li>Verify the submitted data appears in the table</li>
+                <li>Test form validation by submitting with empty required fields</li>
+                <li>Clear the form and start over</li>
+            </ol>
+        </div>
+
+        <!-- Progress Bar Section -->
+        <div class="progress-section">
+            <div class="progress-label">
+                <span>Form Completion Progress</span>
+                <span id="progressPercentage">0%</span>
+            </div>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+            </div>
+        </div>
+
+        <form id="jobRegistrationForm">
+            <!-- Personal Information Section -->
+            <div class="form-section">
+                <h2>Personal Information</h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName" class="required">First Name</label>
+                        <input type="text" id="firstName" name="firstName" required>
+                        <div class="error-message" id="firstNameError">First name is required</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName" class="required">Last Name</label>
+                        <input type="text" id="lastName" name="lastName" required>
+                        <div class="error-message" id="lastNameError">Last name is required</div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email" class="required">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                        <div class="error-message" id="emailError">Valid email is required</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone" class="required">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" placeholder="+1-234-567-8900" required>
+                        <div class="error-message" id="phoneError">Phone number is required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <textarea id="address" name="address" rows="3"></textarea>
+                </div>
+            </div>
+
+            <!-- Job Application Details Section -->
+            <div class="form-section">
+                <h2>Job Application Details</h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="position" class="required">Position Applied For</label>
+                        <select id="position" name="position" required>
+                            <option value="">Select Position</option>
+                            <option value="Software Engineer">Software Engineer</option>
+                            <option value="QA Engineer">QA Engineer</option>
+                            <option value="DevOps Engineer">DevOps Engineer</option>
+                            <option value="Product Manager">Product Manager</option>
+                            <option value="UI/UX Designer">UI/UX Designer</option>
+                            <option value="Data Analyst">Data Analyst</option>
+                            <option value="Business Analyst">Business Analyst</option>
+                            <option value="Project Manager">Project Manager</option>
+                        </select>
+                        <div class="error-message" id="positionError">Position selection is required</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="experienceLevel" class="required">Experience Level</label>
+                        <select id="experienceLevel" name="experienceLevel" required>
+                            <option value="">Select Experience</option>
+                            <option value="Entry Level (0-2 years)">Entry Level (0-2 years)</option>
+                            <option value="Mid Level (3-5 years)">Mid Level (3-5 years)</option>
+                            <option value="Senior Level (6-10 years)">Senior Level (6-10 years)</option>
+                            <option value="Expert Level (10+ years)">Expert Level (10+ years)</option>
+                        </select>
+                        <div class="error-message" id="experienceLevelError">Experience level is required</div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="location" class="required">Preferred Location</label>
+                        <select id="location" name="location" required>
+                            <option value="">Select Location</option>
+                            <option value="Remote">Remote</option>
+                            <option value="New York, USA">New York, USA</option>
+                            <option value="San Francisco, USA">San Francisco, USA</option>
+                            <option value="London, UK">London, UK</option>
+                            <option value="Toronto, Canada">Toronto, Canada</option>
+                            <option value="Bangalore, India">Bangalore, India</option>
+                            <option value="Sydney, Australia">Sydney, Australia</option>
+                        </select>
+                        <div class="error-message" id="locationError">Location selection is required</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="country" class="required">Country</label>
+                        <select id="country" name="country" required>
+                            <option value="">Select Country</option>
+                            <option value="United States">United States</option>
+                            <option value="United Kingdom">United Kingdom</option>
+                            <option value="Canada">Canada</option>
+                            <option value="India">India</option>
+                            <option value="Australia">Australia</option>
+                            <option value="Germany">Germany</option>
+                            <option value="France">France</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <div class="error-message" id="countryError">Country selection is required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="availableDate" class="required">Available Start Date</label>
+                    <input type="date" id="availableDate" name="availableDate" required>
+                    <div class="error-message" id="availableDateError">Start date is required</div>
+                </div>
+            </div>
+
+            <!-- Employment Preferences Section -->
+            <div class="form-section">
+                <h2>Employment Preferences</h2>
+                <div class="form-group">
+                    <label class="required">Employment Type</label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" id="fullTime" name="employmentType" value="Full Time" required>
+                            <label for="fullTime">Full Time</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="partTime" name="employmentType" value="Part Time">
+                            <label for="partTime">Part Time</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="contract" name="employmentType" value="Contract">
+                            <label for="contract">Contract</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="internship" name="employmentType" value="Internship">
+                            <label for="internship">Internship</label>
+                        </div>
+                    </div>
+                    <div class="error-message" id="employmentTypeError">Employment type selection is required</div>
+                </div>
+                <div class="form-group">
+                    <label class="required">Work Preference</label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" id="remote" name="workPreference" value="Remote" required>
+                            <label for="remote">Remote</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="onsite" name="workPreference" value="On-site">
+                            <label for="onsite">On-site</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="hybrid" name="workPreference" value="Hybrid">
+                            <label for="hybrid">Hybrid</label>
+                        </div>
+                    </div>
+                    <div class="error-message" id="workPreferenceError">Work preference selection is required</div>
+                </div>
+            </div>
+
+            <!-- Skills & Languages Section -->
+            <div class="form-section">
+                <h2>Skills & Languages</h2>
+                <div class="form-group">
+                    <label class="required">Technical Skills</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="skillJava" name="skills" value="Java">
+                            <label for="skillJava">Java</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="skillPython" name="skills" value="Python">
+                            <label for="skillPython">Python</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="skillJavaScript" name="skills" value="JavaScript">
+                            <label for="skillJavaScript">JavaScript</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="skillSelenium" name="skills" value="Selenium">
+                            <label for="skillSelenium">Selenium</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="skillCypress" name="skills" value="Cypress">
+                            <label for="skillCypress">Cypress</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="skillSQL" name="skills" value="SQL">
+                            <label for="skillSQL">SQL</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="skillGit" name="skills" value="Git">
+                            <label for="skillGit">Git</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="skillDocker" name="skills" value="Docker">
+                            <label for="skillDocker">Docker</label>
+                        </div>
+                    </div>
+                    <div class="error-message" id="skillsError">At least one skill is required</div>
+                </div>
+                <div class="form-group">
+                    <label class="required">Languages</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="langEnglish" name="languages" value="English">
+                            <label for="langEnglish">English</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="langSpanish" name="languages" value="Spanish">
+                            <label for="langSpanish">Spanish</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="langFrench" name="languages" value="French">
+                            <label for="langFrench">French</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="langGerman" name="languages" value="German">
+                            <label for="langGerman">German</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="langHindi" name="languages" value="Hindi">
+                            <label for="langHindi">Hindi</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="langMandarin" name="languages" value="Mandarin">
+                            <label for="langMandarin">Mandarin</label>
+                        </div>
+                    </div>
+                    <div class="error-message" id="languagesError">At least one language is required</div>
+                </div>
+            </div>
+
+            <!-- Additional Information Section -->
+            <div class="form-section">
+                <h2>Additional Information</h2>
+                <div class="form-group">
+                    <label for="coverLetter">Cover Letter</label>
+                    <textarea id="coverLetter" name="coverLetter" rows="5" placeholder="Tell us why you're interested in this position..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="portfolioUrl">Portfolio/Website URL</label>
+                    <input type="url" id="portfolioUrl" name="portfolioUrl" placeholder="https://yourportfolio.com">
+                </div>
+                <div class="form-group">
+                    <label for="additionalInfo">Additional Information</label>
+                    <textarea id="additionalInfo" name="additionalInfo" rows="4" placeholder="Any additional information you'd like to share..."></textarea>
+                </div>
+            </div>
+
+            <!-- File Upload Section -->
+            <div class="form-section">
+                <h2>Resume/CV Upload</h2>
+                <div class="form-group">
+                    <label for="resume" class="required">Upload Resume</label>
+                    <div class="file-upload-wrapper">
+                        <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx" required>
+                        <div class="file-name" id="fileName">
+                            <span id="fileNameText">No file selected</span>
+                            <div class="file-actions">
+                                <button type="button" class="download-btn" id="downloadBtn" onclick="downloadFile()">Download</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="error-message" id="resumeError">Resume upload is required</div>
+                </div>
+            </div>
+
+            <!-- Terms and Conditions Section -->
+            <div class="form-section">
+                <h2>Terms and Conditions</h2>
+                <div class="iframe-container">
+                    <iframe id="termsIframe" src="terms-conditions.html" title="Terms and Conditions"></iframe>
+                </div>
+                <div class="form-group" style="margin-top: 16px;">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="acceptTerms" name="acceptTerms" required>
+                        <label for="acceptTerms" class="required">I have read and agree to the terms and conditions</label>
+                    </div>
+                    <div class="error-message" id="acceptTermsError">You must accept the terms and conditions</div>
+                </div>
+            </div>
+
+            <!-- Form Actions -->
+            <div style="display: flex; gap: 12px; margin-top: 24px;">
+                <button type="submit" id="submitBtn">Submit Application</button>
+                <button type="button" class="secondary" onclick="clearForm()">Clear Form</button>
+            </div>
+        </form>
+
+        <!-- Submissions Table Section -->
+        <div class="submissions-section" id="submissionsSection">
+            <h2>Submitted Applications</h2>
+            <div class="table-actions">
+                <button type="button" class="secondary" onclick="clearSubmissions()">Clear All Submissions</button>
+            </div>
+            <div id="submissionsTableContainer">
+                <table id="submissionsTable">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Position</th>
+                            <th>Experience</th>
+                            <th>Location</th>
+                            <th>Employment Type</th>
+                            <th>Work Preference</th>
+                            <th>Skills</th>
+                            <th>Start Date</th>
+                            <th>Submitted At</th>
+                        </tr>
+                    </thead>
+                    <tbody id="submissionsTableBody">
+                        <tr>
+                            <td colspan="11" class="no-submissions">No submissions yet. Submit the form to see data here.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Loader Overlay -->
+        <div class="loader-overlay" id="loaderOverlay">
+            <div class="loader-container">
+                <div class="loader"></div>
+                <div class="loader-text">Submitting your application...</div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="footer-content">
+                <span class="footer-text">
+                    Powered by
+                    <a href="https://www.techelliptica.com" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; gap: 8px; text-decoration: none; color: inherit;">
+                        <img src="https://techelliptica.com/images/logo.png" alt="TechElliptica Logo" class="footer-logo">
+                        <strong>TechElliptica</strong>
+                    </a>
+                </span>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        let submissionCount = 0;
+        const submissions = [];
+        let uploadedFile = null;
+
+        // Calculate and update progress bar
+        function updateProgressBar() {
+            const form = document.getElementById('jobRegistrationForm');
+            const inputs = form.querySelectorAll('input[required], select[required], textarea[required]');
+            const checkboxes = form.querySelectorAll('input[type="checkbox"][required]');
+            const radios = form.querySelectorAll('input[type="radio"][required]');
+            
+            let filledCount = 0;
+            let totalRequired = 0;
+
+            // Count text inputs, selects, textareas
+            inputs.forEach(input => {
+                if (input.type !== 'checkbox' && input.type !== 'radio' && input.type !== 'file') {
+                    totalRequired++;
+                    if (input.value.trim() !== '') {
+                        filledCount++;
+                    }
+                }
+            });
+
+            // Count file inputs
+            const fileInputs = form.querySelectorAll('input[type="file"][required]');
+            fileInputs.forEach(input => {
+                totalRequired++;
+                if (input.files.length > 0) {
+                    filledCount++;
+                }
+            });
+
+            // Count checkboxes (at least one checked)
+            const checkboxGroups = {};
+            checkboxes.forEach(checkbox => {
+                const name = checkbox.name;
+                if (!checkboxGroups[name]) {
+                    checkboxGroups[name] = [];
+                    totalRequired++;
+                }
+                checkboxGroups[name].push(checkbox);
+            });
+            Object.keys(checkboxGroups).forEach(name => {
+                const group = checkboxGroups[name];
+                if (group.some(cb => cb.checked)) {
+                    filledCount++;
+                }
+            });
+
+            // Count radio groups (at least one selected)
+            const radioGroups = {};
+            radios.forEach(radio => {
+                const name = radio.name;
+                if (!radioGroups[name]) {
+                    radioGroups[name] = [];
+                    totalRequired++;
+                }
+                radioGroups[name].push(radio);
+            });
+            Object.keys(radioGroups).forEach(name => {
+                const group = radioGroups[name];
+                if (group.some(r => r.checked)) {
+                    filledCount++;
+                }
+            });
+
+            const percentage = totalRequired > 0 ? Math.round((filledCount / totalRequired) * 100) : 0;
+            document.getElementById('progressBar').style.width = percentage + '%';
+            document.getElementById('progressPercentage').textContent = percentage + '%';
+
+            if (percentage === 100) {
+                document.getElementById('progressBar').classList.add('success');
+            } else {
+                document.getElementById('progressBar').classList.remove('success');
+            }
+        }
+
+        // Add event listeners for progress tracking
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('jobRegistrationForm');
+            const inputs = form.querySelectorAll('input, select, textarea');
+            
+            inputs.forEach(input => {
+                input.addEventListener('input', updateProgressBar);
+                input.addEventListener('change', updateProgressBar);
+            });
+
+            // File input change handler
+            document.getElementById('resume').addEventListener('change', function(e) {
+                const fileInput = e.target;
+                if (fileInput.files.length > 0) {
+                    uploadedFile = fileInput.files[0];
+                    const fileName = uploadedFile.name;
+                    document.getElementById('fileNameText').textContent = fileName;
+                    document.getElementById('downloadBtn').classList.add('show');
+                } else {
+                    uploadedFile = null;
+                    document.getElementById('fileNameText').textContent = 'No file selected';
+                    document.getElementById('downloadBtn').classList.remove('show');
+                }
+                updateProgressBar();
+            });
+        });
+
+        // Form validation
+        function validateForm() {
+            let isValid = true;
+            const form = document.getElementById('jobRegistrationForm');
+
+            // Clear previous errors
+            form.querySelectorAll('.form-group').forEach(group => {
+                group.classList.remove('error');
+            });
+            form.querySelectorAll('.error-message').forEach(msg => {
+                msg.classList.remove('show');
+            });
+
+            // Validate required fields
+            const requiredInputs = form.querySelectorAll('input[required], select[required], textarea[required]');
+            requiredInputs.forEach(input => {
+                if (input.type === 'checkbox' || input.type === 'radio') {
+                    const name = input.name;
+                    const group = form.querySelectorAll(`input[name="${name}"]`);
+                    const checked = Array.from(group).some(inp => inp.checked);
+                    
+                    if (!checked) {
+                        isValid = false;
+                        group[0].closest('.form-group')?.classList.add('error');
+                        const errorMsg = document.getElementById(name + 'Error');
+                        if (errorMsg) errorMsg.classList.add('show');
+                    }
+                } else if (input.type === 'file') {
+                    if (input.files.length === 0) {
+                        isValid = false;
+                        input.closest('.form-group').classList.add('error');
+                        const errorMsg = document.getElementById(input.id + 'Error');
+                        if (errorMsg) errorMsg.classList.add('show');
+                    }
+                } else {
+                    if (!input.value.trim()) {
+                        isValid = false;
+                        input.closest('.form-group').classList.add('error');
+                        const errorMsg = document.getElementById(input.id + 'Error');
+                        if (errorMsg) errorMsg.classList.add('show');
+                    }
+                }
+            });
+
+            // Validate email format
+            const email = document.getElementById('email');
+            if (email.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
+                isValid = false;
+                email.closest('.form-group').classList.add('error');
+                document.getElementById('emailError').textContent = 'Please enter a valid email address';
+                document.getElementById('emailError').classList.add('show');
+            }
+
+            // Validate checkboxes (skills and languages)
+            const skillsChecked = Array.from(document.querySelectorAll('input[name="skills"]')).some(cb => cb.checked);
+            if (!skillsChecked) {
+                isValid = false;
+                document.getElementById('skillsError').classList.add('show');
+            }
+
+            const languagesChecked = Array.from(document.querySelectorAll('input[name="languages"]')).some(cb => cb.checked);
+            if (!languagesChecked) {
+                isValid = false;
+                document.getElementById('languagesError').classList.add('show');
+            }
+
+            return isValid;
+        }
+
+        // Form submission handler
+        document.getElementById('jobRegistrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            if (!validateForm()) {
+                return;
+            }
+
+            // Show loader
+            document.getElementById('loaderOverlay').classList.add('show');
+            document.getElementById('submitBtn').disabled = true;
+
+            // Simulate form submission delay
+            setTimeout(() => {
+                const formData = new FormData(this);
+                const submission = {
+                    id: ++submissionCount,
+                    firstName: formData.get('firstName'),
+                    lastName: formData.get('lastName'),
+                    email: formData.get('email'),
+                    phone: formData.get('phone'),
+                    address: formData.get('address'),
+                    position: formData.get('position'),
+                    experienceLevel: formData.get('experienceLevel'),
+                    location: formData.get('location'),
+                    country: formData.get('country'),
+                    availableDate: formData.get('availableDate'),
+                    employmentType: formData.get('employmentType'),
+                    workPreference: formData.get('workPreference'),
+                    skills: Array.from(document.querySelectorAll('input[name="skills"]:checked')).map(cb => cb.value).join(', '),
+                    languages: Array.from(document.querySelectorAll('input[name="languages"]:checked')).map(cb => cb.value).join(', '),
+                    coverLetter: formData.get('coverLetter'),
+                    portfolioUrl: formData.get('portfolioUrl'),
+                    additionalInfo: formData.get('additionalInfo'),
+                    resume: formData.get('resume').name,
+                    submittedAt: new Date().toLocaleString()
+                };
+
+                submissions.push(submission);
+                updateSubmissionsTable();
+                
+                // Hide loader
+                document.getElementById('loaderOverlay').classList.remove('show');
+                document.getElementById('submitBtn').disabled = false;
+
+                // Reset progress bar
+                document.getElementById('progressBar').style.width = '0%';
+                document.getElementById('progressPercentage').textContent = '0%';
+                document.getElementById('progressBar').classList.remove('success');
+
+                // Reset form
+                this.reset();
+                document.getElementById('fileNameText').textContent = 'No file selected';
+                document.getElementById('downloadBtn').classList.remove('show');
+                uploadedFile = null;
+
+                // Scroll to submissions table
+                document.getElementById('submissionsSection').scrollIntoView({ behavior: 'smooth' });
+            }, 2000);
+        });
+
+        // Update submissions table
+        function updateSubmissionsTable() {
+            const tbody = document.getElementById('submissionsTableBody');
+            const submissionsSection = document.getElementById('submissionsSection');
+            
+            if (submissions.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="11" class="no-submissions">No submissions yet. Submit the form to see data here.</td></tr>';
+                submissionsSection.classList.remove('show');
+                return;
+            }
+
+            submissionsSection.classList.add('show');
+            tbody.innerHTML = submissions.map(sub => `
+                <tr>
+                    <td>${sub.id}</td>
+                    <td>${sub.firstName} ${sub.lastName}</td>
+                    <td>${sub.email}</td>
+                    <td>${sub.position}</td>
+                    <td>${sub.experienceLevel}</td>
+                    <td>${sub.location}</td>
+                    <td>${sub.employmentType}</td>
+                    <td>${sub.workPreference}</td>
+                    <td>${sub.skills || 'N/A'}</td>
+                    <td>${sub.availableDate || 'N/A'}</td>
+                    <td>${sub.submittedAt}</td>
+                </tr>
+            `).join('');
+        }
+
+        // Clear form
+        function clearForm() {
+            document.getElementById('jobRegistrationForm').reset();
+            document.getElementById('fileNameText').textContent = 'No file selected';
+            document.getElementById('downloadBtn').classList.remove('show');
+            uploadedFile = null;
+            document.getElementById('progressBar').style.width = '0%';
+            document.getElementById('progressPercentage').textContent = '0%';
+            document.getElementById('progressBar').classList.remove('success');
+            
+            document.querySelectorAll('.form-group').forEach(group => {
+                group.classList.remove('error');
+            });
+            document.querySelectorAll('.error-message').forEach(msg => {
+                msg.classList.remove('show');
+            });
+        }
+
+        // Clear submissions
+        function clearSubmissions() {
+            submissions.length = 0;
+            submissionCount = 0;
+            updateSubmissionsTable();
+        }
+
+        // Download uploaded file
+        function downloadFile() {
+            if (!uploadedFile) {
+                alert('No file available to download');
+                return;
+            }
+
+            // Create a blob URL from the file
+            const url = URL.createObjectURL(uploadedFile);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = uploadedFile.name;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            // Clean up the blob URL after a short delay
+            setTimeout(() => {
+                URL.revokeObjectURL(url);
+            }, 100);
+        }
+    </script>
+</body>
+</html>

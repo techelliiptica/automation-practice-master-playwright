@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button Interactions Practice</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            background: #f4f5f7;
+            min-height: 100vh;
+            color: #172b4d;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 32px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 24px;
+            color: #0052cc;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        h1 {
+            color: #172b4d;
+            margin-bottom: 8px;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .description {
+            color: #6b778c;
+            margin-bottom: 24px;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        .button-section {
+            margin-bottom: 24px;
+            padding: 16px;
+            background: #ffffff;
+            border: 1px solid #dfe1e6;
+            border-radius: 3px;
+        }
+
+        .button-section h2 {
+            color: #172b4d;
+            margin-bottom: 12px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        button {
+            padding: 8px 16px;
+            margin: 4px;
+            border: none;
+            border-radius: 3px;
+            font-size: 14px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .primary-btn {
+            background: #0052cc;
+            color: white;
+        }
+
+        .primary-btn:hover {
+            background: #0065ff;
+        }
+
+        .secondary-btn {
+            background: #6b778c;
+            color: white;
+        }
+
+        .secondary-btn:hover {
+            background: #5e6c84;
+        }
+
+        .success-btn {
+            background: #36b37e;
+            color: white;
+        }
+
+        .success-btn:hover {
+            background: #00875a;
+        }
+
+        .danger-btn {
+            background: #de350b;
+            color: white;
+        }
+
+        .danger-btn:hover {
+            background: #bf2600;
+        }
+
+        button:disabled {
+            background: #dfe1e6;
+            color: #6b778c;
+            cursor: not-allowed;
+            opacity: 1;
+        }
+
+        .click-counter {
+            margin-top: 15px;
+            padding: 10px;
+            background: white;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .dynamic-button-container {
+            margin-top: 15px;
+        }
+
+        .message-display {
+            margin-top: 12px;
+            padding: 12px 16px;
+            background: #e3fcef;
+            color: #006644;
+            border-radius: 3px;
+            border-left: 3px solid #36b37e;
+            display: none;
+            font-size: 14px;
+        }
+
+        .message-display.show {
+            display: block;
+        }
+
+        .scenarios-box {
+            background: #f4f5f7;
+            border: 1px solid #dfe1e6;
+            padding: 16px;
+            border-radius: 3px;
+            margin-bottom: 24px;
+        }
+
+        .scenarios-box h2 {
+            color: #172b4d;
+            margin-bottom: 12px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .scenarios-box ol {
+            margin-left: 20px;
+            color: #172b4d;
+        }
+
+        .scenarios-box li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        .context-menu {
+            position: absolute;
+            background: #ffffff;
+            border: 1px solid #dfe1e6;
+            border-radius: 3px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            padding: 4px 0;
+            min-width: 160px;
+            z-index: 1000;
+        }
+
+        .context-menu-item {
+            padding: 8px 16px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #172b4d;
+            transition: background 0.15s;
+        }
+
+        .context-menu-item:hover {
+            background: #f4f5f7;
+        }
+
+        .context-menu-divider {
+            height: 1px;
+            background: #dfe1e6;
+            margin: 4px 0;
+        }
+    
+        .footer {
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid #dfe1e6;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: #6b778c;
+            font-size: 14px;
+        }
+
+        .footer-logo {
+            height: 24px;
+            width: auto;
+            vertical-align: middle;
+        }
+
+        .footer-text {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .footer-text a {
+            transition: opacity 0.2s;
+        }
+
+        .footer-text a:hover {
+            opacity: 0.8;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Back to Home</a>
+        <h1>🔘 Button Interactions Practice</h1>
+        <p class="description">
+            Practice clicking different types of buttons. Try clicking buttons, handling disabled buttons, 
+            right-clicking for context menus, and interacting with dynamically generated buttons.
+        </p>
+
+        <div class="scenarios-box">
+            <h2>🎯 Practice Scenarios - Automation Steps</h2>
+            <ol>
+                <li>Click the "Primary Button" and verify the message appears</li>
+                <li>Click the "Secondary Button" and verify the response</li>
+                <li>Click the "Success Button" and "Danger Button"</li>
+                <li>Click the "Click Me!" button multiple times and verify the counter increments</li>
+                <li>Try to click the "Disabled Button" (should not be clickable)</li>
+                <li>Click "Enable/Disable Button" to toggle the disabled button state</li>
+                <li>Click "Add New Button" to create dynamic buttons</li>
+                <li>Click on the dynamically created buttons</li>
+                <li>Click "Remove Last Button" to remove dynamic buttons</li>
+                <li>Perform a double-click on the "Double Click Me!" button</li>
+                <li>Click the "Click Me (3s delay)" button and wait for the delayed response</li>
+                <li>Right-click on the "Right Click Me!" button and verify the context menu appears</li>
+                <li>Select an option from the context menu after right-clicking</li>
+                <li>Right-click on different buttons and verify different context menus appear</li>
+            </ol>
+        </div>
+
+        <div class="button-section">
+            <h2>Basic Buttons</h2>
+            <button class="primary-btn" id="primaryBtn">Primary Button</button>
+            <button class="secondary-btn" id="secondaryBtn">Secondary Button</button>
+            <button class="success-btn" id="successBtn">Success Button</button>
+            <button class="danger-btn" id="dangerBtn">Danger Button</button>
+            <div class="message-display" id="basicMessage"></div>
+        </div>
+
+        <div class="button-section">
+            <h2>Click Counter</h2>
+            <button class="primary-btn" id="counterBtn">Click Me!</button>
+            <div class="click-counter">
+                Click Count: <span id="clickCount">0</span>
+            </div>
+        </div>
+
+        <div class="button-section">
+            <h2>Disabled Button</h2>
+            <button class="primary-btn" id="disabledBtn" disabled>Disabled Button</button>
+            <button class="secondary-btn" id="toggleBtn">Enable/Disable Button</button>
+            <p style="margin-top: 10px; color: #666; font-size: 0.9em;">
+                Try to click the disabled button, then use the toggle button to enable/disable it.
+            </p>
+        </div>
+
+        <div class="button-section">
+            <h2>Dynamic Buttons</h2>
+            <button class="primary-btn" id="addBtn">Add New Button</button>
+            <button class="danger-btn" id="removeBtn">Remove Last Button</button>
+            <div class="dynamic-button-container" id="dynamicContainer">
+                <p style="color: #999; font-style: italic;">No dynamic buttons yet. Click "Add New Button" to create some!</p>
+            </div>
+        </div>
+
+        <div class="button-section">
+            <h2>Double Click Button</h2>
+            <button class="success-btn" id="doubleClickBtn">Double Click Me!</button>
+            <div class="message-display" id="doubleClickMessage"></div>
+        </div>
+
+        <div class="button-section">
+            <h2>Button with Delay</h2>
+            <button class="primary-btn" id="delayBtn">Click Me (3s delay)</button>
+            <div class="message-display" id="delayMessage"></div>
+        </div>
+
+        <div class="button-section">
+            <h2>Right Click (Context Menu)</h2>
+            <button class="primary-btn" id="rightClickBtn">Right Click Me!</button>
+            <p style="margin-top: 10px; color: #6b778c; font-size: 14px;">
+                Right-click on the button to see the context menu. Select an option from the menu.
+            </p>
+            <div class="message-display" id="rightClickMessage"></div>
+            <div id="contextMenu" class="context-menu" style="display: none;">
+                <div class="context-menu-item" data-action="edit">Edit</div>
+                <div class="context-menu-item" data-action="copy">Copy</div>
+                <div class="context-menu-item" data-action="delete">Delete</div>
+                <div class="context-menu-divider"></div>
+                <div class="context-menu-item" data-action="properties">Properties</div>
+            </div>
+        </div>
+
+        <div class="button-section">
+            <h2>Multiple Right Click Buttons</h2>
+            <button class="success-btn" id="rightClickBtn1">Right Click Button 1</button>
+            <button class="danger-btn" id="rightClickBtn2">Right Click Button 2</button>
+            <button class="secondary-btn" id="rightClickBtn3">Right Click Button 3</button>
+            <div class="message-display" id="multiRightClickMessage"></div>
+        </div>
+
+        <footer class="footer">
+            <div class="footer-content">
+                <span class="footer-text">
+                    Powered by
+                    <a href="https://www.techelliptica.com" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; gap: 8px; text-decoration: none; color: inherit;">
+                        <img src="https://techelliptica.com/images/logo.png" alt="TechElliptica Logo" class="footer-logo">
+                        <strong>TechElliptica</strong>
+                    </a>
+                </span>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        let clickCount = 0;
+        let dynamicButtonCount = 0;
+
+        // Basic buttons
+        document.getElementById('primaryBtn').addEventListener('click', function() {
+            showMessage('basicMessage', 'Primary button clicked!');
+        });
+
+        document.getElementById('secondaryBtn').addEventListener('click', function() {
+            showMessage('basicMessage', 'Secondary button clicked!');
+        });
+
+        document.getElementById('successBtn').addEventListener('click', function() {
+            showMessage('basicMessage', 'Success button clicked!');
+        });
+
+        document.getElementById('dangerBtn').addEventListener('click', function() {
+            showMessage('basicMessage', 'Danger button clicked!');
+        });
+
+        // Click counter
+        document.getElementById('counterBtn').addEventListener('click', function() {
+            clickCount++;
+            document.getElementById('clickCount').textContent = clickCount;
+        });
+
+        // Disabled button toggle
+        document.getElementById('toggleBtn').addEventListener('click', function() {
+            const disabledBtn = document.getElementById('disabledBtn');
+            disabledBtn.disabled = !disabledBtn.disabled;
+            disabledBtn.textContent = disabledBtn.disabled ? 'Disabled Button' : 'Enabled Button';
+        });
+
+        // Dynamic buttons
+        document.getElementById('addBtn').addEventListener('click', function() {
+            dynamicButtonCount++;
+            const container = document.getElementById('dynamicContainer');
+            if (container.querySelector('p')) {
+                container.innerHTML = '';
+            }
+            const newBtn = document.createElement('button');
+            newBtn.className = 'primary-btn';
+            newBtn.id = 'dynamicBtn' + dynamicButtonCount;
+            newBtn.textContent = 'Dynamic Button ' + dynamicButtonCount;
+            newBtn.addEventListener('click', function() {
+                alert('Dynamic button ' + dynamicButtonCount + ' clicked!');
+            });
+            container.appendChild(newBtn);
+        });
+
+        document.getElementById('removeBtn').addEventListener('click', function() {
+            const container = document.getElementById('dynamicContainer');
+            const buttons = container.querySelectorAll('button');
+            if (buttons.length > 0) {
+                buttons[buttons.length - 1].remove();
+                if (container.children.length === 0) {
+                    container.innerHTML = '<p style="color: #999; font-style: italic;">No dynamic buttons yet. Click "Add New Button" to create some!</p>';
+                }
+            }
+        });
+
+        // Double click
+        let lastClickTime = 0;
+        document.getElementById('doubleClickBtn').addEventListener('click', function() {
+            const currentTime = Date.now();
+            if (currentTime - lastClickTime < 300) {
+                showMessage('doubleClickMessage', 'Double click detected!');
+            }
+            lastClickTime = currentTime;
+        });
+
+        // Delay button
+        document.getElementById('delayBtn').addEventListener('click', function() {
+            const btn = this;
+            btn.disabled = true;
+            btn.textContent = 'Processing...';
+            showMessage('delayMessage', 'Button clicked! Processing...');
+            
+            setTimeout(() => {
+                btn.disabled = false;
+                btn.textContent = 'Click Me (3s delay)';
+                showMessage('delayMessage', 'Processing complete after 3 seconds!');
+            }, 3000);
+        });
+
+        // Right click button
+        const rightClickBtn = document.getElementById('rightClickBtn');
+        const contextMenu = document.getElementById('contextMenu');
+        let contextMenuVisible = false;
+
+        rightClickBtn.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            contextMenuVisible = true;
+            contextMenu.style.display = 'block';
+            contextMenu.style.left = e.pageX + 'px';
+            contextMenu.style.top = e.pageY + 'px';
+            showMessage('rightClickMessage', 'Right-click detected! Context menu opened.');
+        });
+
+        // Handle context menu item clicks
+        document.querySelectorAll('.context-menu-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const action = this.dataset.action;
+                showMessage('rightClickMessage', `Context menu action "${action}" selected!`);
+                contextMenu.style.display = 'none';
+                contextMenuVisible = false;
+            });
+        });
+
+        // Close context menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (contextMenuVisible && !contextMenu.contains(e.target) && e.target !== rightClickBtn) {
+                contextMenu.style.display = 'none';
+                contextMenuVisible = false;
+            }
+        });
+
+        // Multiple right click buttons
+        const rightClickButtons = [
+            { id: 'rightClickBtn1', name: 'Button 1' },
+            { id: 'rightClickBtn2', name: 'Button 2' },
+            { id: 'rightClickBtn3', name: 'Button 3' }
+        ];
+
+        rightClickButtons.forEach((btnInfo, index) => {
+            const btn = document.getElementById(btnInfo.id);
+            btn.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+                const actions = ['Edit', 'Copy', 'Delete', 'Properties'];
+                const action = actions[index % actions.length];
+                showMessage('multiRightClickMessage', `Right-clicked on ${btnInfo.name}. Action: ${action}`);
+            });
+        });
+
+        function showMessage(elementId, message) {
+            const element = document.getElementById(elementId);
+            element.textContent = message;
+            element.classList.add('show');
+            setTimeout(() => {
+                element.classList.remove('show');
+            }, 3000);
+        }
+    </script>
+    </div>
+</body>
+</html>

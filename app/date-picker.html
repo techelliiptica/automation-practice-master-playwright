@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date Picker Practice</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            background: #f4f5f7;
+            min-height: 100vh;
+            padding: 24px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 32px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 24px;
+            color: #0052cc;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        h1 {
+            color: #172b4d;
+            margin-bottom: 8px;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .description {
+            color: #6b778c;
+            margin-bottom: 24px;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        .section {
+            margin-bottom: 24px;
+            padding: 0;
+            background: #ffffff;
+            border: 1px solid #dfe1e6;
+            border-radius: 3px;
+        }
+
+        .section h2 {
+            color: #0052cc;
+            margin-bottom: 12px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #172b4d;
+            font-weight: 600;
+        }
+
+        input[type="date"],
+        input[type="datetime-local"],
+        input[type="month"],
+        input[type="time"],
+        input[type="week"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #0052cc;
+        }
+
+        button {
+            background: #0052cc;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 3px;
+            font-size: 14px;
+            cursor: pointer;
+            font-weight: 500;
+            margin-top: 12px;
+            transition: background 0.2s;
+        }
+
+        button:hover {
+            background: #0065ff;
+        }
+
+        .result-display {
+            margin-top: 12px;
+            padding: 12px 16px;
+            background: #d4edda;
+            color: #155724;
+            border-radius: 3px;
+            display: none;
+        }
+
+        .result-display.show {
+            display: block;
+        }
+
+        .calendar-container {
+            margin-top: 12px;
+            padding: 0;
+            background: white;
+            border-radius: 3px;
+            border: 1px solid #ddd;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+        }
+
+        .calendar-day {
+            padding: 10px;
+            text-align: center;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .calendar-day:hover {
+            background: #e7f3ff;
+        }
+
+        .calendar-day.selected {
+            background: #0052cc;
+            color: white;
+        }
+
+        .calendar-day.other-month {
+            color: #ccc;
+        }
+
+        .calendar-day-header {
+            padding: 10px;
+            text-align: center;
+            font-weight: 500;
+            color: #0052cc;
+        }
+
+        .scenarios-box {
+            background: #e7f3ff;
+            border-left: 4px solid #667eea;
+            padding: 0;
+            border-radius: 3px;
+            margin-bottom: 24px;
+        }
+
+        .scenarios-box h2 {
+            color: #0052cc;
+            margin-bottom: 12px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .scenarios-box ol {
+            margin-left: 20px;
+            color: #172b4d;
+        }
+
+        .scenarios-box li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+    
+        .footer {
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid #dfe1e6;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: #6b778c;
+            font-size: 14px;
+        }
+
+        .footer-logo {
+            height: 24px;
+            width: auto;
+            vertical-align: middle;
+        }
+
+        .footer-text {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .footer-text a {
+            transition: opacity 0.2s;
+        }
+
+        .footer-text a:hover {
+            opacity: 0.8;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Back to Home</a>
+        <h1>📅 Date Picker Practice</h1>
+        <p class="description">
+            Practice interacting with date pickers, selecting dates, and handling calendar widgets.
+            Different browsers may show different date picker UIs.
+        </p>
+
+        <div class="scenarios-box">
+            <h2>🎯 Practice Scenarios - Automation Steps</h2>
+            <ol>
+                <li>Click on the "Basic Date Picker" input field</li>
+                <li>Select a date from the calendar popup</li>
+                <li>Verify the selected date appears in the input field</li>
+                <li>Select a date within the allowed range (2024-01-01 to 2024-12-31)</li>
+                <li>Try selecting a date outside the range and verify it's not allowed</li>
+                <li>Click on "Date and Time Picker" and select both date and time</li>
+                <li>Select a month from the "Month Picker"</li>
+                <li>Select a time from the "Time Picker"</li>
+                <li>Select a week from the "Week Picker"</li>
+                <li>Use the custom calendar widget - click on "Previous Month" arrow</li>
+                <li>Click on "Next Month" arrow to navigate months</li>
+                <li>Click on a specific date in the custom calendar</li>
+                <li>Verify the selected date is highlighted and result message appears</li>
+            </ol>
+        </div>
+
+        <div class="section">
+            <h2>Basic Date Picker</h2>
+            <label for="dateInput">Select Date:</label>
+            <input type="date" id="dateInput" onchange="handleDateChange()">
+            <div class="result-display" id="dateResult"></div>
+        </div>
+
+        <div class="section">
+            <h2>Date with Min/Max</h2>
+            <label for="dateRange">Select Date (Between 2024-01-01 and 2024-12-31):</label>
+            <input type="date" id="dateRange" min="2024-01-01" max="2024-12-31" onchange="handleDateRangeChange()">
+            <div class="result-display" id="dateRangeResult"></div>
+        </div>
+
+        <div class="section">
+            <h2>Date and Time Picker</h2>
+            <label for="datetimeInput">Select Date and Time:</label>
+            <input type="datetime-local" id="datetimeInput" onchange="handleDateTimeChange()">
+            <div class="result-display" id="datetimeResult"></div>
+        </div>
+
+        <div class="section">
+            <h2>Month Picker</h2>
+            <label for="monthInput">Select Month:</label>
+            <input type="month" id="monthInput" onchange="handleMonthChange()">
+            <div class="result-display" id="monthResult"></div>
+        </div>
+
+        <div class="section">
+            <h2>Time Picker</h2>
+            <label for="timeInput">Select Time:</label>
+            <input type="time" id="timeInput" onchange="handleTimeChange()">
+            <div class="result-display" id="timeResult"></div>
+        </div>
+
+        <div class="section">
+            <h2>Week Picker</h2>
+            <label for="weekInput">Select Week:</label>
+            <input type="week" id="weekInput" onchange="handleWeekChange()">
+            <div class="result-display" id="weekResult"></div>
+        </div>
+
+        <div class="section">
+            <h2>Custom Calendar Widget</h2>
+            <div class="calendar-container">
+                <div class="calendar-header">
+                    <button onclick="previousMonth()">←</button>
+                    <h3 id="calendarMonth"></h3>
+                    <button onclick="nextMonth()">→</button>
+                </div>
+                <div class="calendar-grid" id="calendarGrid">
+                    <!-- Calendar will be generated by JavaScript -->
+                </div>
+            </div>
+            <div class="result-display" id="customCalendarResult"></div>
+        </div>
+    
+                <footer class="footer">
+            <div class="footer-content">
+                <span class="footer-text">
+                    Powered by
+                    <a href="https://www.techelliptica.com" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; gap: 8px; text-decoration: none; color: inherit;">
+                        <img src="https://techelliptica.com/images/logo.png" alt="TechElliptica Logo" class="footer-logo">
+                        <strong>TechElliptica</strong>
+                    </a>
+                </span>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        // Basic date
+        function handleDateChange() {
+            const date = document.getElementById('dateInput').value;
+            const result = document.getElementById('dateResult');
+            if (date) {
+                result.textContent = `✅ Selected date: ${date}`;
+                result.classList.add('show');
+            }
+        }
+
+        // Date range
+        function handleDateRangeChange() {
+            const date = document.getElementById('dateRange').value;
+            const result = document.getElementById('dateRangeResult');
+            if (date) {
+                result.textContent = `✅ Selected date: ${date}`;
+                result.classList.add('show');
+            }
+        }
+
+        // Date and time
+        function handleDateTimeChange() {
+            const datetime = document.getElementById('datetimeInput').value;
+            const result = document.getElementById('datetimeResult');
+            if (datetime) {
+                result.textContent = `✅ Selected date and time: ${datetime}`;
+                result.classList.add('show');
+            }
+        }
+
+        // Month
+        function handleMonthChange() {
+            const month = document.getElementById('monthInput').value;
+            const result = document.getElementById('monthResult');
+            if (month) {
+                result.textContent = `✅ Selected month: ${month}`;
+                result.classList.add('show');
+            }
+        }
+
+        // Time
+        function handleTimeChange() {
+            const time = document.getElementById('timeInput').value;
+            const result = document.getElementById('timeResult');
+            if (time) {
+                result.textContent = `✅ Selected time: ${time}`;
+                result.classList.add('show');
+            }
+        }
+
+        // Week
+        function handleWeekChange() {
+            const week = document.getElementById('weekInput').value;
+            const result = document.getElementById('weekResult');
+            if (week) {
+                result.textContent = `✅ Selected week: ${week}`;
+                result.classList.add('show');
+            }
+        }
+
+        // Custom calendar
+        let currentDate = new Date();
+        let selectedDate = null;
+
+        const monthNames = ["January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"];
+
+        const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+        function renderCalendar() {
+            const year = currentDate.getFullYear();
+            const month = currentDate.getMonth();
+            
+            document.getElementById('calendarMonth').textContent = 
+                `${monthNames[month]} ${year}`;
+
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            const daysInPrevMonth = new Date(year, month, 0).getDate();
+
+            const grid = document.getElementById('calendarGrid');
+            grid.innerHTML = '';
+
+            // Day headers
+            dayNames.forEach(day => {
+                const header = document.createElement('div');
+                header.className = 'calendar-day-header';
+                header.textContent = day;
+                grid.appendChild(header);
+            });
+
+            // Previous month days
+            for (let i = firstDay - 1; i >= 0; i--) {
+                const day = document.createElement('div');
+                day.className = 'calendar-day other-month';
+                day.textContent = daysInPrevMonth - i;
+                grid.appendChild(day);
+            }
+
+            // Current month days
+            for (let i = 1; i <= daysInMonth; i++) {
+                const day = document.createElement('div');
+                day.className = 'calendar-day';
+                day.textContent = i;
+                
+                const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
+                if (selectedDate === dateStr) {
+                    day.classList.add('selected');
+                }
+                
+                day.onclick = () => selectDate(dateStr, day);
+                grid.appendChild(day);
+            }
+
+            // Next month days
+            const remaining = 42 - (firstDay + daysInMonth);
+            for (let i = 1; i <= remaining; i++) {
+                const day = document.createElement('div');
+                day.className = 'calendar-day other-month';
+                day.textContent = i;
+                grid.appendChild(day);
+            }
+        }
+
+        function selectDate(dateStr, element) {
+            selectedDate = dateStr;
+            document.querySelectorAll('.calendar-day').forEach(day => {
+                day.classList.remove('selected');
+            });
+            element.classList.add('selected');
+            
+            const result = document.getElementById('customCalendarResult');
+            result.textContent = `✅ Selected date: ${dateStr}`;
+            result.classList.add('show');
+        }
+
+        function previousMonth() {
+            currentDate.setMonth(currentDate.getMonth() - 1);
+            renderCalendar();
+        }
+
+        function nextMonth() {
+            currentDate.setMonth(currentDate.getMonth() + 1);
+            renderCalendar();
+        }
+
+        // Initialize calendar
+        renderCalendar();
+    </script>
+    </div>
+
+    <script>
+</html>

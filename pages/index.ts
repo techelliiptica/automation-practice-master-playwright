@@ -1,0 +1,16 @@
+export { HomePage } from './home-page';
+export { FormSubmissionPage } from './form-submission-page';
+export { ButtonInteractionsPage } from './button-interactions-page';
+export { SuperAssignmentPage } from './super-assignment-page';
+export { DropdownSelectPage } from './dropdown-select-page';
+export { CheckboxRadioPage } from './checkbox-radio-page';
+export { LinkInteractionsPage } from './link-interactions-page';
+export { ImageInteractionsPage } from './image-interactions-page';
+export { DynamicContentPage } from './dynamic-content-page';
+export { AlertsModalsPage } from './alerts-modals-page';
+export { TableDataPage } from './table-data-page';
+export { FileUploadPage } from './file-upload-page';
+export { HoverTooltipPage } from './hover-tooltip-page';
+export { DragDropPage } from './drag-drop-page';
+export { IframePage } from './iframe-page';
+export { DatePickerPage } from './date-picker-page';

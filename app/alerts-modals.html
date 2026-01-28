@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alerts & Modals Practice</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            background: #f4f5f7;
+            min-height: 100vh;
+            padding: 24px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 32px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 24px;
+            color: #0052cc;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        h1 {
+            color: #172b4d;
+            margin-bottom: 8px;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .description {
+            color: #6b778c;
+            margin-bottom: 24px;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        .section {
+            margin-bottom: 24px;
+            padding: 0;
+            background: #ffffff;
+            border: 1px solid #dfe1e6;
+            border-radius: 3px;
+        }
+
+        .section h2 {
+            color: #0052cc;
+            margin-bottom: 12px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        button {
+            background: #0052cc;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 3px;
+            font-size: 14px;
+            cursor: pointer;
+            font-weight: 500;
+            margin: 5px;
+            transition: background 0.2s;
+        }
+
+        button:hover {
+            background: #0065ff;
+        }
+
+        .result-display {
+            margin-top: 12px;
+            padding: 12px 16px;
+            background: #d4edda;
+            color: #155724;
+            border-radius: 3px;
+            display: none;
+        }
+
+        .result-display.show {
+            display: block;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 30px;
+            border-radius: 3px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .modal-header h3 {
+            color: #172b4d;
+            margin: 0;
+        }
+
+        .close {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: 500;
+            cursor: pointer;
+            line-height: 20px;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        .modal-body {
+            color: #6b778c;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .modal-footer {
+            text-align: right;
+        }
+
+        .modal-footer button {
+            margin-left: 10px;
+        }
+
+        .btn-danger {
+            background: #dc3545;
+        }
+
+        .btn-danger:hover {
+            background: #c82333;
+        }
+
+        .btn-success {
+            background: #28a745;
+        }
+
+        .btn-success:hover {
+            background: #218838;
+        }
+
+        .scenarios-box {
+            background: #e7f3ff;
+            border-left: 4px solid #667eea;
+            padding: 0;
+            border-radius: 3px;
+            margin-bottom: 24px;
+        }
+
+        .scenarios-box h2 {
+            color: #0052cc;
+            margin-bottom: 12px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .scenarios-box ol {
+            margin-left: 20px;
+            color: #172b4d;
+        }
+
+        .scenarios-box li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+    
+        .footer {
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid #dfe1e6;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: #6b778c;
+            font-size: 14px;
+        }
+
+        .footer-logo {
+            height: 24px;
+            width: auto;
+            vertical-align: middle;
+        }
+
+        .footer-text {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .footer-text a {
+            transition: opacity 0.2s;
+        }
+
+        .footer-text a:hover {
+            opacity: 0.8;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Back to Home</a>
+        <h1>⚠️ Alerts & Modals Practice</h1>
+        <p class="description">
+            Practice handling JavaScript alerts, confirm dialogs, prompt boxes, and custom modal popups. 
+            These are common scenarios in web automation testing.
+        </p>
+
+        <div class="scenarios-box">
+            <h2>🎯 Practice Scenarios - Automation Steps</h2>
+            <ol>
+                <li>Click "Show Alert" and handle the JavaScript alert dialog (click OK)</li>
+                <li>Click "Show Confirm Dialog" and handle both OK and Cancel responses</li>
+                <li>Click "Show Prompt" and enter text, then verify the result</li>
+                <li>Click "Open Simple Modal" and close it using the X button</li>
+                <li>Click outside the modal to close it</li>
+                <li>Click "Open Confirmation Modal" and test both Confirm and Cancel buttons</li>
+                <li>Click "Open Form Modal" and fill in the form fields</li>
+                <li>Submit the form in the modal and verify the result</li>
+                <li>Click "Show Modal (2s delay)" and wait for the modal to appear</li>
+                <li>Verify the modal appears after the delay and can be closed</li>
+            </ol>
+        </div>
+
+        <div class="section">
+            <h2>JavaScript Alert</h2>
+            <button onclick="showAlert()">Show Alert</button>
+            <p style="margin-top: 10px; color: #6b778c; font-size: 0.9em;">
+                Click the button to trigger a simple JavaScript alert dialog.
+            </p>
+        </div>
+
+        <div class="section">
+            <h2>Confirm Dialog</h2>
+            <button onclick="showConfirm()">Show Confirm Dialog</button>
+            <div class="result-display" id="confirmResult"></div>
+        </div>
+
+        <div class="section">
+            <h2>Prompt Dialog</h2>
+            <button onclick="showPrompt()">Show Prompt</button>
+            <div class="result-display" id="promptResult"></div>
+        </div>
+
+        <div class="section">
+            <h2>Simple Modal</h2>
+            <button onclick="openModal('simpleModal')">Open Simple Modal</button>
+            <div id="simpleModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Simple Modal</h3>
+                        <span class="close" onclick="closeModal('simpleModal')">&times;</span>
+                    </div>
+                    <div class="modal-body">
+                        <p>This is a simple modal dialog. Click the X button or outside the modal to close it.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button onclick="closeModal('simpleModal')">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Confirmation Modal</h2>
+            <button onclick="openModal('confirmModal')">Open Confirmation Modal</button>
+            <div id="confirmModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Confirm Action</h3>
+                        <span class="close" onclick="closeModal('confirmModal')">&times;</span>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to proceed with this action?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn-danger" onclick="handleConfirm(false)">Cancel</button>
+                        <button class="btn-success" onclick="handleConfirm(true)">Confirm</button>
+                    </div>
+                </div>
+            </div>
+            <div class="result-display" id="modalConfirmResult"></div>
+        </div>
+
+        <div class="section">
+            <h2>Form Modal</h2>
+            <button onclick="openModal('formModal')">Open Form Modal</button>
+            <div id="formModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Enter Information</h3>
+                        <span class="close" onclick="closeModal('formModal')">&times;</span>
+                    </div>
+                    <div class="modal-body">
+                        <form id="modalForm" onsubmit="handleFormSubmit(event)">
+                            <label style="display: block; margin-bottom: 10px;">
+                                Name: <input type="text" id="modalName" required style="width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ddd; border-radius: 5px;">
+                            </label>
+                            <label style="display: block; margin-bottom: 10px;">
+                                Email: <input type="email" id="modalEmail" required style="width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ddd; border-radius: 5px;">
+                            </label>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button onclick="closeModal('formModal')">Cancel</button>
+                        <button class="btn-success" onclick="document.getElementById('modalForm').dispatchEvent(new Event('submit'))">Submit</button>
+                    </div>
+                </div>
+            </div>
+            <div class="result-display" id="formModalResult"></div>
+        </div>
+
+        <div class="section">
+            <h2>Delayed Modal</h2>
+            <button onclick="showDelayedModal()">Show Modal (2s delay)</button>
+            <div id="delayedModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Delayed Modal</h3>
+                        <span class="close" onclick="closeModal('delayedModal')">&times;</span>
+                    </div>
+                    <div class="modal-body">
+                        <p>This modal appeared after a 2-second delay. Practice waiting for it to appear!</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button onclick="closeModal('delayedModal')">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+                <footer class="footer">
+            <div class="footer-content">
+                <span class="footer-text">
+                    Powered by
+                    <a href="https://www.techelliptica.com" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; gap: 8px; text-decoration: none; color: inherit;">
+                        <img src="https://techelliptica.com/images/logo.png" alt="TechElliptica Logo" class="footer-logo">
+                        <strong>TechElliptica</strong>
+                    </a>
+                </span>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        // JavaScript Alert
+        function showAlert() {
+            alert('This is a simple JavaScript alert! Click OK to dismiss.');
+        }
+
+        // Confirm Dialog
+        function showConfirm() {
+            const result = confirm('Do you want to proceed with this action?');
+            const resultDiv = document.getElementById('confirmResult');
+            resultDiv.textContent = result ? 'You clicked OK!' : 'You clicked Cancel!';
+            resultDiv.classList.add('show');
+        }
+
+        // Prompt Dialog
+        function showPrompt() {
+            const name = prompt('Please enter your name:', '');
+            const resultDiv = document.getElementById('promptResult');
+            if (name) {
+                resultDiv.textContent = `Hello, ${name}! Welcome!`;
+            } else {
+                resultDiv.textContent = 'You cancelled the prompt or entered nothing.';
+            }
+            resultDiv.classList.add('show');
+        }
+
+        // Modal Functions
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+        }
+
+        // Confirmation Modal Handler
+        function handleConfirm(confirmed) {
+            closeModal('confirmModal');
+            const resultDiv = document.getElementById('modalConfirmResult');
+            resultDiv.textContent = confirmed ? 'You confirmed the action!' : 'You cancelled the action.';
+            resultDiv.classList.add('show');
+        }
+
+        // Form Modal Handler
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const name = document.getElementById('modalName').value;
+            const email = document.getElementById('modalEmail').value;
+            
+            closeModal('formModal');
+            const resultDiv = document.getElementById('formModalResult');
+            resultDiv.textContent = `Form submitted! Name: ${name}, Email: ${email}`;
+            resultDiv.classList.add('show');
+            
+            // Reset form
+            document.getElementById('modalForm').reset();
+        }
+
+        // Delayed Modal
+        function showDelayedModal() {
+            setTimeout(() => {
+                openModal('delayedModal');
+            }, 2000);
+        }
+    </script>
+    </div>
+
+    <script>
+</html>

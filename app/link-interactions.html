@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Link Interactions Practice</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            background: #f4f5f7;
+            min-height: 100vh;
+            padding: 24px;
+            color: #172b4d;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 32px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 24px;
+            color: #0052cc;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        h1 {
+            color: #172b4d;
+            margin-bottom: 8px;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .description {
+            color: #6b778c;
+            margin-bottom: 24px;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        .section {
+            margin-bottom: 24px;
+            padding: 16px;
+            background: #ffffff;
+            border: 1px solid #dfe1e6;
+            border-radius: 3px;
+        }
+
+        .section h2 {
+            color: #172b4d;
+            margin-bottom: 12px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .link-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .link-list li {
+            margin-bottom: 12px;
+            padding: 12px;
+            background: #f4f5f7;
+            border-radius: 3px;
+            border-left: 3px solid #0052cc;
+        }
+
+        .link-list a {
+            color: #0052cc;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .link-list a:hover {
+            color: #0065ff;
+            text-decoration: underline;
+        }
+
+        .link-list a:visited {
+            color: #6554c0;
+        }
+
+
+        .link-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .link-group a {
+            padding: 8px 16px;
+            background: #0052cc;
+            color: white;
+            text-decoration: none;
+            border-radius: 3px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+
+        .link-group a:hover {
+            background: #0065ff;
+        }
+
+        .link-group a.secondary {
+            background: #6b778c;
+        }
+
+        .link-group a.secondary:hover {
+            background: #5e6c84;
+        }
+
+        .link-group a.success {
+            background: #36b37e;
+        }
+
+        .link-group a.success:hover {
+            background: #00875a;
+        }
+
+        .result-display {
+            margin-top: 12px;
+            padding: 12px 16px;
+            background: #e3fcef;
+            color: #006644;
+            border-radius: 3px;
+            border-left: 3px solid #36b37e;
+            display: none;
+            font-size: 14px;
+        }
+
+        .result-display.show {
+            display: block;
+        }
+
+        .scenarios-box {
+            background: #f4f5f7;
+            border: 1px solid #dfe1e6;
+            padding: 16px;
+            border-radius: 3px;
+            margin-bottom: 24px;
+        }
+
+        .scenarios-box h2 {
+            color: #172b4d;
+            margin-bottom: 12px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .scenarios-box ol {
+            margin-left: 20px;
+            color: #172b4d;
+        }
+
+        .scenarios-box li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        .external-link-icon {
+            display: inline-block;
+            margin-left: 4px;
+            font-size: 12px;
+        }
+
+        .footer {
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid #dfe1e6;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: #6b778c;
+            font-size: 14px;
+        }
+
+        .footer-logo {
+            height: 24px;
+            width: auto;
+            vertical-align: middle;
+        }
+
+        .footer-text {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-text a {
+            transition: opacity 0.2s;
+        }
+
+        .footer-text a:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Back to Home</a>
+        <h1>🔗 Link Interactions Practice</h1>
+        <p class="description">
+            Practice clicking links, handling links that open in new tabs, and verifying link navigation.
+            This is essential for testing web applications with multiple pages and external links.
+        </p>
+
+        <div class="scenarios-box">
+            <h2>🎯 Practice Scenarios - Automation Steps</h2>
+            <ol>
+                <li>Click on "Internal Link" and verify it navigates to the same page</li>
+                <li>Click on "Link Opening in New Tab" and verify it opens in a new tab</li>
+                <li>Click on multiple links that open in new tabs</li>
+                <li>Click on "External Link" and verify it opens the external website</li>
+                <li>Click on "Link with Target Blank" and verify new tab behavior</li>
+                <li>Click on "Link with Custom Text" and verify the link text</li>
+                <li>Click on "Download Link" and verify download behavior</li>
+                <li>Click on "Email Link" and verify email client opens</li>
+                <li>Click on "Phone Link" and verify phone dialer opens</li>
+                <li>Verify visited links change color (if supported by automation tool)</li>
+                <li>Click on button-style links and verify navigation</li>
+                <li>Click "Add Dynamic Link" button to add links dynamically</li>
+                <li>Click on dynamically added TechElliptica links</li>
+                <li>Verify that all dynamic links are TechElliptica links</li>
+                <li>Verify that TechElliptica links open the TechElliptica website (https://www.techelliptica.com) in a new tab</li>
+                <li>Practice handling multiple dynamically generated TechElliptica links</li>
+                <li>Click on Link 1, Link 2, Link 3, Link 4, Link 5, and Link 6 in the "Broken Links" section</li>
+                <li>Identify which links are broken (Link 3, Link 5, Link 6) and which are working (Link 1, Link 2, Link 4)</li>
+                <li>Verify that broken links show 404 errors or connection errors when opened</li>
+                <li>Verify that working links open correctly</li>
+                <li>Practice handling broken link scenarios in automation scripts</li>
+            </ol>
+        </div>
+
+        <div class="section">
+            <h2>Basic Links</h2>
+            <ul class="link-list">
+                <li>
+                    <a href="#section1" onclick="handleLinkClick(event, 'Internal anchor link clicked!')">Internal Link (Anchor)</a>
+                </li>
+                <li>
+                    <a href="index.html" onclick="handleLinkClick(event, 'Navigated to home page!')">Link to Home Page</a>
+                </li>
+                <li>
+                    <a href="form-submission.html" onclick="handleLinkClick(event, 'Navigated to form submission page!')">Link to Form Submission Page</a>
+                </li>
+            </ul>
+            <div class="result-display" id="basicLinkResult"></div>
+        </div>
+
+        <div class="section">
+            <h2>Links Opening in New Tab</h2>
+            <ul class="link-list">
+                <li>
+                    <a href="https://www.google.com" target="_blank" rel="noopener noreferrer" onclick="handleNewTabLink(event, 'Google opened in new tab!')">
+                        Link Opening in New Tab (Google)
+                        <span class="external-link-icon">↗</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.github.com" target="_blank" rel="noopener noreferrer" onclick="handleNewTabLink(event, 'GitHub opened in new tab!')">
+                        Link Opening in New Tab (GitHub)
+                        <span class="external-link-icon">↗</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.stackoverflow.com" target="_blank" rel="noopener noreferrer" onclick="handleNewTabLink(event, 'Stack Overflow opened in new tab!')">
+                        Link Opening in New Tab (Stack Overflow)
+                        <span class="external-link-icon">↗</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="index.html" target="_blank" rel="noopener noreferrer" onclick="handleNewTabLink(event, 'Home page opened in new tab!')">
+                        Internal Link Opening in New Tab
+                        <span class="external-link-icon">↗</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="result-display" id="newTabLinkResult"></div>
+        </div>
+
+        <div class="section">
+            <h2>External Links</h2>
+            <ul class="link-list">
+                <li>
+                    <a href="https://www.techelliptica.com" target="_blank" rel="noopener noreferrer" onclick="handleNewTabLink(event, 'TechElliptica opened!')">
+                        External Link - TechElliptica
+                        <span class="external-link-icon">↗</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.wikipedia.org" target="_blank" rel="noopener noreferrer" onclick="handleNewTabLink(event, 'Wikipedia opened!')">
+                        External Link - Wikipedia
+                        <span class="external-link-icon">↗</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="result-display" id="externalLinkResult"></div>
+        </div>
+
+        <div class="section">
+            <h2>Special Link Types</h2>
+            <ul class="link-list">
+                <li>
+                    <a href="mailto:info@example.com" onclick="handleLinkClick(event, 'Email link clicked!')">Email Link (mailto:)</a>
+                </li>
+                <li>
+                    <a href="tel:+1234567890" onclick="handleLinkClick(event, 'Phone link clicked!')">Phone Link (tel:)</a>
+                </li>
+                <li>
+                    <a href="#" onclick="handleDownloadLink(event); return false;">Download Link (Simulated)</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)" onclick="handleLinkClick(event, 'JavaScript link clicked!')">JavaScript Link</a>
+                </li>
+            </ul>
+            <div class="result-display" id="specialLinkResult"></div>
+        </div>
+
+        <div class="section">
+            <h2>Button-Style Links</h2>
+            <div class="link-group">
+                <a href="button-interactions.html" target="_blank" rel="noopener noreferrer" onclick="handleNewTabLink(event, 'Button interactions page opened in new tab!')">
+                    Open Button Page (New Tab)
+                </a>
+                <a href="table-data.html" class="secondary" onclick="handleLinkClick(event, 'Table data page opened!')">
+                    Open Table Page
+                </a>
+                <a href="https://www.techelliptica.com" target="_blank" rel="noopener noreferrer" class="success" onclick="handleNewTabLink(event, 'TechElliptica opened in new tab!')">
+                    Visit TechElliptica (New Tab)
+                </a>
+            </div>
+            <div class="result-display" id="buttonLinkResult"></div>
+        </div>
+
+        <div class="section">
+            <h2>Dynamic Links</h2>
+            <p style="color: #6b778c; font-size: 14px; margin-bottom: 12px;">
+                Click the button below to add dynamic links. All dynamically added links will be TechElliptica links that open in a new tab.
+            </p>
+            <button onclick="addDynamicLink()" style="background: #0052cc; color: white; padding: 8px 16px; border: none; border-radius: 3px; font-size: 14px; font-weight: 500; cursor: pointer; margin-bottom: 12px;">
+                Add Dynamic Link
+            </button>
+            <ul class="link-list" id="dynamicLinks">
+                <li style="color: #6b778c; font-style: italic;">No dynamic links yet. Click the button to add links.</li>
+            </ul>
+            <div class="result-display" id="dynamicLinkResult"></div>
+        </div>
+
+        <div class="section">
+            <h2>Broken Links</h2>
+            <p style="color: #6b778c; font-size: 14px; margin-bottom: 12px;">
+                Some links below are working correctly, while others are broken (404 errors or invalid URLs). Practice identifying and handling broken links.
+            </p>
+            <ul class="link-list">
+                <li>
+                    <a href="https://www.techelliptica.com" target="_blank" rel="noopener noreferrer" onclick="handleBrokenLinkClick(event, 1, false)">
+                        Link 1
+                        <span class="external-link-icon">↗</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.google.com" target="_blank" rel="noopener noreferrer" onclick="handleBrokenLinkClick(event, 2, false)">
+                        Link 2
+                        <span class="external-link-icon">↗</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.techelliptica.com/nonexistent-page-12345" target="_blank" rel="noopener noreferrer" onclick="handleBrokenLinkClick(event, 3, true)">
+                        Link 3
+                        <span class="external-link-icon">↗</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.techelliptica.com" target="_blank" rel="noopener noreferrer" onclick="handleBrokenLinkClick(event, 4, false)">
+                        Link 4
+                        <span class="external-link-icon">↗</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.invalid-domain-that-does-not-exist-12345.com" target="_blank" rel="noopener noreferrer" onclick="handleBrokenLinkClick(event, 5, true)">
+                        Link 5
+                        <span class="external-link-icon">↗</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.techelliptica.com/another-broken-page-xyz" target="_blank" rel="noopener noreferrer" onclick="handleBrokenLinkClick(event, 6, true)">
+                        Link 6
+                        <span class="external-link-icon">↗</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="result-display" id="brokenLinkResult"></div>
+        </div>
+
+        <div class="section" id="section1">
+            <h2>Link Target Section</h2>
+            <p style="color: #6b778c; font-size: 14px; margin-top: 8px;">
+                This is the target section for anchor links. Scroll to this section by clicking the "Internal Link (Anchor)" above.
+            </p>
+        </div>
+
+        <footer class="footer">
+            <div class="footer-content">
+                <span class="footer-text">
+                    Powered by
+                    <a href="https://www.techelliptica.com" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; gap: 8px; text-decoration: none; color: inherit;">
+                        <img src="https://techelliptica.com/images/logo.png" alt="TechElliptica Logo" class="footer-logo">
+                        <strong>TechElliptica</strong>
+                    </a>
+                </span>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        let dynamicLinkCount = 0;
+
+        function handleLinkClick(event, message) {
+            const result = document.getElementById('basicLinkResult');
+            result.textContent = message;
+            result.classList.add('show');
+            setTimeout(() => {
+                result.classList.remove('show');
+            }, 3000);
+        }
+
+        function handleNewTabLink(event, message) {
+            const result = document.getElementById('newTabLinkResult');
+            result.textContent = message;
+            result.classList.add('show');
+            setTimeout(() => {
+                result.classList.remove('show');
+            }, 3000);
+        }
+
+        function handleDownloadLink(event) {
+            const result = document.getElementById('specialLinkResult');
+            result.textContent = 'Download link clicked! (Simulated download)';
+            result.classList.add('show');
+            setTimeout(() => {
+                result.classList.remove('show');
+            }, 3000);
+        }
+
+        function handleBrokenLink(event, message) {
+            const result = document.getElementById('brokenLinkResult');
+            result.textContent = message + ' - This link will show a 404 error or connection error when opened.';
+            result.style.background = '#ffebe6';
+            result.style.color = '#bf2600';
+            result.style.borderLeftColor = '#de350b';
+            result.classList.add('show');
+            setTimeout(() => {
+                result.classList.remove('show');
+            }, 4000);
+        }
+
+        function handleBrokenLinkClick(event, linkNumber, isBroken) {
+            const result = document.getElementById('brokenLinkResult');
+            if (isBroken) {
+                result.textContent = `Link ${linkNumber} clicked - This is a broken link! It will show a 404 error or connection error when opened.`;
+                result.style.background = '#ffebe6';
+                result.style.color = '#bf2600';
+                result.style.borderLeftColor = '#de350b';
+            } else {
+                result.textContent = `Link ${linkNumber} clicked - This is a working link!`;
+                result.style.background = '#e3fcef';
+                result.style.color = '#006644';
+                result.style.borderLeftColor = '#36b37e';
+            }
+            result.classList.add('show');
+            setTimeout(() => {
+                result.classList.remove('show');
+            }, 4000);
+        }
+
+        function addDynamicLink() {
+            dynamicLinkCount++;
+            const container = document.getElementById('dynamicLinks');
+            
+            if (container.querySelector('li[style*="italic"]')) {
+                container.innerHTML = '';
+            }
+
+            const li = document.createElement('li');
+            const link = document.createElement('a');
+            
+            // Make TechElliptica links more prominent - every link is TechElliptica
+            // Or alternate: first link TechElliptica, second example, third TechElliptica, etc.
+            const linkTypes = [
+                { url: 'https://www.techelliptica.com', name: 'TechElliptica', message: 'TechElliptica dynamic link' },
+                { url: 'https://www.techelliptica.com', name: 'TechElliptica', message: 'TechElliptica dynamic link' },
+                { url: 'https://www.techelliptica.com', name: 'TechElliptica', message: 'TechElliptica dynamic link' }
+            ];
+            
+            // Use modulo to cycle through, but prioritize TechElliptica
+            const linkType = linkTypes[dynamicLinkCount % linkTypes.length];
+            
+            link.href = linkType.url;
+            link.textContent = `Dynamic ${linkType.name} Link ${dynamicLinkCount} (Opens in new tab)`;
+            link.target = '_blank';
+            link.rel = 'noopener noreferrer';
+            link.innerHTML += ' <span class="external-link-icon">↗</span>';
+            link.onclick = function(e) {
+                handleDynamicLink(e, `${linkType.message} ${dynamicLinkCount} clicked! Opening ${linkType.name} website.`);
+            };
+            
+            li.appendChild(link);
+            container.appendChild(li);
+
+            const result = document.getElementById('dynamicLinkResult');
+            result.textContent = `Dynamic ${linkType.name} link ${dynamicLinkCount} added!`;
+            result.classList.add('show');
+            setTimeout(() => {
+                result.classList.remove('show');
+            }, 2000);
+        }
+
+        function handleDynamicLink(event, message) {
+            const result = document.getElementById('dynamicLinkResult');
+            result.textContent = message;
+            result.classList.add('show');
+            setTimeout(() => {
+                result.classList.remove('show');
+            }, 3000);
+        }
+
+        // Handle button-style links
+        document.querySelectorAll('.link-group a').forEach(link => {
+            if (link.onclick) return; // Skip if already has onclick
+            
+            link.addEventListener('click', function(e) {
+                if (this.target === '_blank') {
+                    handleNewTabLink(e, this.textContent.trim() + ' - opened in new tab!');
+                } else {
+                    handleLinkClick(e, this.textContent.trim() + ' - clicked!');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

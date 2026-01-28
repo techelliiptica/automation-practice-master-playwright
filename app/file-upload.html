@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload Practice</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            background: #f4f5f7;
+            min-height: 100vh;
+            padding: 24px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 32px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 24px;
+            color: #0052cc;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        h1 {
+            color: #172b4d;
+            margin-bottom: 8px;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .description {
+            color: #6b778c;
+            margin-bottom: 24px;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        .section {
+            margin-bottom: 24px;
+            padding: 0;
+            background: #ffffff;
+            border: 1px solid #dfe1e6;
+            border-radius: 3px;
+        }
+
+        .section h2 {
+            color: #0052cc;
+            margin-bottom: 12px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .upload-area {
+            border: 2px dashed #667eea;
+            border-radius: 3px;
+            padding: 30px;
+            text-align: center;
+            background: white;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .upload-area:hover {
+            background: #f0f4ff;
+            border-color: #5568d3;
+        }
+
+        .upload-area.dragover {
+            background: #e7f3ff;
+            border-color: #0052cc;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        button {
+            background: #0052cc;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 3px;
+            font-size: 14px;
+            cursor: pointer;
+            font-weight: 500;
+            margin-top: 12px;
+            transition: background 0.2s;
+        }
+
+        button:hover {
+            background: #0065ff;
+        }
+
+        .file-list {
+            margin-top: 12px;
+            padding: 12px 16px;
+            background: white;
+            border-radius: 3px;
+        }
+
+        .file-item {
+            padding: 10px;
+            margin: 5px 0;
+            background: #e7f3ff;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .result-display {
+            margin-top: 12px;
+            padding: 12px 16px;
+            background: #d4edda;
+            color: #155724;
+            border-radius: 3px;
+            display: none;
+        }
+
+        .result-display.show {
+            display: block;
+        }
+
+        .result-display.error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .scenarios-box {
+            background: #e7f3ff;
+            border-left: 4px solid #667eea;
+            padding: 0;
+            border-radius: 3px;
+            margin-bottom: 24px;
+        }
+
+        .scenarios-box h2 {
+            color: #0052cc;
+            margin-bottom: 12px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .scenarios-box ol {
+            margin-left: 20px;
+            color: #172b4d;
+        }
+
+        .scenarios-box li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+    
+        .footer {
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid #dfe1e6;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: #6b778c;
+            font-size: 14px;
+        }
+
+        .footer-logo {
+            height: 24px;
+            width: auto;
+            vertical-align: middle;
+        }
+
+        .footer-text {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .footer-text a {
+            transition: opacity 0.2s;
+        }
+
+        .footer-text a:hover {
+            opacity: 0.8;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Back to Home</a>
+        <h1>📤 File Upload Practice</h1>
+        <p class="description">
+            Practice uploading single and multiple files. Try different file types, drag and drop, 
+            and verify file uploads.
+        </p>
+
+        <div class="scenarios-box">
+            <h2>🎯 Practice Scenarios - Automation Steps</h2>
+            <ol>
+                <li>Click on the upload area or use file input to select a single file</li>
+                <li>Verify the file name and size are displayed</li>
+                <li>Click "Upload File" and verify the success message</li>
+                <li>Select multiple files using the multi-file upload area</li>
+                <li>Verify all selected files are listed</li>
+                <li>Click "Upload All Files" and verify success message</li>
+                <li>Try uploading an image file (jpg, png, gif) in the image upload section</li>
+                <li>Try uploading a non-image file and verify the error message</li>
+                <li>Upload a file under 5MB and verify success</li>
+                <li>Try uploading a file larger than 5MB and verify the error message</li>
+                <li>Use drag and drop to upload files (if supported by automation tool)</li>
+            </ol>
+        </div>
+
+        <div class="section">
+            <h2>Single File Upload</h2>
+            <div class="upload-area" onclick="document.getElementById('singleFile').click()">
+                <p>📁 Click here or drag and drop a file</p>
+                <p style="color: #6b778c; font-size: 0.9em; margin-top: 10px;">Select a single file</p>
+            </div>
+            <input type="file" id="singleFile" onchange="handleSingleFile(event)">
+            <div class="file-list" id="singleFileList"></div>
+            <button onclick="uploadSingleFile()">Upload File</button>
+            <div class="result-display" id="singleFileResult"></div>
+        </div>
+
+        <div class="section">
+            <h2>Multiple File Upload</h2>
+            <div class="upload-area" onclick="document.getElementById('multipleFiles').click()">
+                <p>📁 Click here or drag and drop multiple files</p>
+                <p style="color: #6b778c; font-size: 0.9em; margin-top: 10px;">Hold Ctrl/Cmd to select multiple files</p>
+            </div>
+            <input type="file" id="multipleFiles" multiple onchange="handleMultipleFiles(event)">
+            <div class="file-list" id="multipleFileList"></div>
+            <button onclick="uploadMultipleFiles()">Upload All Files</button>
+            <div class="result-display" id="multipleFileResult"></div>
+        </div>
+
+        <div class="section">
+            <h2>File Type Restriction</h2>
+            <p style="color: #6b778c; margin-bottom: 10px;">Only images allowed (jpg, png, gif)</p>
+            <div class="upload-area" onclick="document.getElementById('imageFile').click()">
+                <p>🖼️ Upload Image File</p>
+            </div>
+            <input type="file" id="imageFile" accept="image/*" onchange="handleImageFile(event)">
+            <div class="file-list" id="imageFileList"></div>
+            <button onclick="uploadImageFile()">Upload Image</button>
+            <div class="result-display" id="imageFileResult"></div>
+        </div>
+
+        <div class="section">
+            <h2>File Size Validation</h2>
+            <p style="color: #6b778c; margin-bottom: 10px;">Maximum file size: 5MB</p>
+            <div class="upload-area" onclick="document.getElementById('sizeFile').click()">
+                <p>📄 Upload File (Max 5MB)</p>
+            </div>
+            <input type="file" id="sizeFile" onchange="handleSizeFile(event)">
+            <div class="file-list" id="sizeFileList"></div>
+            <button onclick="uploadSizeFile()">Upload File</button>
+            <div class="result-display" id="sizeFileResult"></div>
+        </div>
+    
+                <footer class="footer">
+            <div class="footer-content">
+                <span class="footer-text">
+                    Powered by
+                    <a href="https://www.techelliptica.com" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; gap: 8px; text-decoration: none; color: inherit;">
+                        <img src="https://techelliptica.com/images/logo.png" alt="TechElliptica Logo" class="footer-logo">
+                        <strong>TechElliptica</strong>
+                    </a>
+                </span>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        let singleFile = null;
+        let multipleFiles = [];
+        let imageFile = null;
+        let sizeFile = null;
+
+        // Single file
+        function handleSingleFile(event) {
+            singleFile = event.target.files[0];
+            const list = document.getElementById('singleFileList');
+            if (singleFile) {
+                list.innerHTML = `<div class="file-item">
+                    <span>📄 ${singleFile.name} (${formatFileSize(singleFile.size)})</span>
+                </div>`;
+            }
+        }
+
+        function uploadSingleFile() {
+            const result = document.getElementById('singleFileResult');
+            if (singleFile) {
+                result.textContent = `✅ File "${singleFile.name}" uploaded successfully!`;
+                result.className = 'result-display show';
+            } else {
+                result.textContent = '❌ Please select a file first.';
+                result.className = 'result-display show error';
+            }
+        }
+
+        // Multiple files
+        function handleMultipleFiles(event) {
+            multipleFiles = Array.from(event.target.files);
+            const list = document.getElementById('multipleFileList');
+            list.innerHTML = '';
+            multipleFiles.forEach(file => {
+                const item = document.createElement('div');
+                item.className = 'file-item';
+                item.innerHTML = `<span>📄 ${file.name} (${formatFileSize(file.size)})</span>`;
+                list.appendChild(item);
+            });
+        }
+
+        function uploadMultipleFiles() {
+            const result = document.getElementById('multipleFileResult');
+            if (multipleFiles.length > 0) {
+                result.textContent = `✅ ${multipleFiles.length} file(s) uploaded successfully!`;
+                result.className = 'result-display show';
+            } else {
+                result.textContent = '❌ Please select files first.';
+                result.className = 'result-display show error';
+            }
+        }
+
+        // Image file
+        function handleImageFile(event) {
+            imageFile = event.target.files[0];
+            const list = document.getElementById('imageFileList');
+            const result = document.getElementById('imageFileResult');
+            
+            if (imageFile) {
+                if (imageFile.type.startsWith('image/')) {
+                    list.innerHTML = `<div class="file-item">
+                        <span>🖼️ ${imageFile.name} (${formatFileSize(imageFile.size)})</span>
+                    </div>`;
+                    result.className = 'result-display';
+                } else {
+                    result.textContent = '❌ Please select an image file (jpg, png, gif).';
+                    result.className = 'result-display show error';
+                    imageFile = null;
+                }
+            }
+        }
+
+        function uploadImageFile() {
+            const result = document.getElementById('imageFileResult');
+            if (imageFile && imageFile.type.startsWith('image/')) {
+                result.textContent = `✅ Image "${imageFile.name}" uploaded successfully!`;
+                result.className = 'result-display show';
+            } else {
+                result.textContent = '❌ Please select a valid image file.';
+                result.className = 'result-display show error';
+            }
+        }
+
+        // Size validation
+        function handleSizeFile(event) {
+            sizeFile = event.target.files[0];
+            const list = document.getElementById('sizeFileList');
+            const result = document.getElementById('sizeFileResult');
+            const maxSize = 5 * 1024 * 1024; // 5MB
+            
+            if (sizeFile) {
+                if (sizeFile.size <= maxSize) {
+                    list.innerHTML = `<div class="file-item">
+                        <span>📄 ${sizeFile.name} (${formatFileSize(sizeFile.size)})</span>
+                    </div>`;
+                    result.className = 'result-display';
+                } else {
+                    result.textContent = `❌ File size (${formatFileSize(sizeFile.size)}) exceeds maximum allowed size (5MB).`;
+                    result.className = 'result-display show error';
+                    sizeFile = null;
+                }
+            }
+        }
+
+        function uploadSizeFile() {
+            const result = document.getElementById('sizeFileResult');
+            const maxSize = 5 * 1024 * 1024;
+            
+            if (sizeFile && sizeFile.size <= maxSize) {
+                result.textContent = `✅ File "${sizeFile.name}" uploaded successfully!`;
+                result.className = 'result-display show';
+            } else {
+                result.textContent = '❌ Please select a file under 5MB.';
+                result.className = 'result-display show error';
+            }
+        }
+
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
+        }
+
+        // Drag and drop
+        document.querySelectorAll('.upload-area').forEach(area => {
+            area.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                area.classList.add('dragover');
+            });
+
+            area.addEventListener('dragleave', () => {
+                area.classList.remove('dragover');
+            });
+
+            area.addEventListener('drop', (e) => {
+                e.preventDefault();
+                area.classList.remove('dragover');
+                const files = e.dataTransfer.files;
+                const input = area.nextElementSibling;
+                if (input && input.type === 'file') {
+                    input.files = files;
+                    input.dispatchEvent(new Event('change'));
+                }
+            });
+        });
+    </script>
+    </div>
+
+    <script>
+</html>

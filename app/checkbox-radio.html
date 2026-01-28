@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkbox & Radio Practice</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            background: #f4f5f7;
+            min-height: 100vh;
+            padding: 24px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 32px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 24px;
+            color: #0052cc;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        h1 {
+            color: #172b4d;
+            margin-bottom: 8px;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .description {
+            color: #6b778c;
+            margin-bottom: 24px;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        .section {
+            margin-bottom: 24px;
+            padding: 0;
+            background: #ffffff;
+            border: 1px solid #dfe1e6;
+            border-radius: 3px;
+        }
+
+        .section h2 {
+            color: #0052cc;
+            margin-bottom: 12px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .checkbox-group,
+        .radio-group {
+            margin: 15px 0;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #172b4d;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        input[type="checkbox"],
+        input[type="radio"] {
+            margin-right: 10px;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .option-label {
+            font-weight: normal;
+            margin-left: 5px;
+        }
+
+        button {
+            background: #0052cc;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 3px;
+            font-size: 14px;
+            cursor: pointer;
+            font-weight: 500;
+            margin-top: 12px;
+            transition: background 0.2s;
+        }
+
+        button:hover {
+            background: #0065ff;
+        }
+
+        .result-display {
+            margin-top: 12px;
+            padding: 12px 16px;
+            background: #d4edda;
+            color: #155724;
+            border-radius: 3px;
+            display: none;
+        }
+
+        .result-display.show {
+            display: block;
+        }
+
+        .select-all-buttons {
+            margin-top: 10px;
+        }
+
+        .select-all-buttons button {
+            margin-right: 10px;
+            margin-top: 5px;
+            padding: 8px 15px;
+            font-size: 14px;
+        }
+
+        .scenarios-box {
+            background: #e7f3ff;
+            border-left: 4px solid #667eea;
+            padding: 0;
+            border-radius: 3px;
+            margin-bottom: 24px;
+        }
+
+        .scenarios-box h2 {
+            color: #0052cc;
+            margin-bottom: 12px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .scenarios-box ol {
+            margin-left: 20px;
+            color: #172b4d;
+        }
+
+        .scenarios-box li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+    
+        .footer {
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid #dfe1e6;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: #6b778c;
+            font-size: 14px;
+        }
+
+        .footer-logo {
+            height: 24px;
+            width: auto;
+            vertical-align: middle;
+        }
+
+        .footer-text {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .footer-text a {
+            transition: opacity 0.2s;
+        }
+
+        .footer-text a:hover {
+            opacity: 0.8;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Back to Home</a>
+        <h1>☑️ Checkbox & Radio Practice</h1>
+        <p class="description">
+            Practice interacting with checkboxes and radio buttons. Select multiple checkboxes, 
+            choose single radio options, and verify their states.
+        </p>
+
+        <div class="scenarios-box">
+            <h2>🎯 Practice Scenarios - Automation Steps</h2>
+            <ol>
+                <li>Select multiple checkboxes from "Basic Checkboxes" section</li>
+                <li>Click "Show Selected Checkboxes" and verify the selected options</li>
+                <li>Click "Select All" button to select all items in the second section</li>
+                <li>Click "Deselect All" to uncheck all items</li>
+                <li>Select individual items and verify "Show Selected" displays them correctly</li>
+                <li>Select a radio button from "Basic Radio Buttons" and verify only one can be selected</li>
+                <li>Select a size from the "Size" radio group</li>
+                <li>Select a color from the "Color" radio group</li>
+                <li>Click "Show Selected Options" to verify both size and color selections</li>
+                <li>Try to click the disabled checkbox and radio button (should not be selectable)</li>
+                <li>Click "Toggle Disabled State" to enable/disable the disabled elements</li>
+            </ol>
+        </div>
+
+        <div class="section">
+            <h2>Basic Checkboxes</h2>
+            <div class="checkbox-group">
+                <label>
+                    <input type="checkbox" id="checkbox1" value="option1">
+                    <span class="option-label">Option 1</span>
+                </label>
+                <label>
+                    <input type="checkbox" id="checkbox2" value="option2">
+                    <span class="option-label">Option 2</span>
+                </label>
+                <label>
+                    <input type="checkbox" id="checkbox3" value="option3">
+                    <span class="option-label">Option 3</span>
+                </label>
+                <label>
+                    <input type="checkbox" id="checkbox4" value="option4">
+                    <span class="option-label">Option 4</span>
+                </label>
+            </div>
+            <button onclick="showCheckboxResults()">Show Selected Checkboxes</button>
+            <div class="result-display" id="checkboxResult"></div>
+        </div>
+
+        <div class="section">
+            <h2>Select All / Deselect All</h2>
+            <div class="checkbox-group">
+                <label>
+                    <input type="checkbox" class="select-all-group" value="item1">
+                    <span class="option-label">Item 1</span>
+                </label>
+                <label>
+                    <input type="checkbox" class="select-all-group" value="item2">
+                    <span class="option-label">Item 2</span>
+                </label>
+                <label>
+                    <input type="checkbox" class="select-all-group" value="item3">
+                    <span class="option-label">Item 3</span>
+                </label>
+                <label>
+                    <input type="checkbox" class="select-all-group" value="item4">
+                    <span class="option-label">Item 4</span>
+                </label>
+                <label>
+                    <input type="checkbox" class="select-all-group" value="item5">
+                    <span class="option-label">Item 5</span>
+                </label>
+            </div>
+            <div class="select-all-buttons">
+                <button onclick="selectAll()">Select All</button>
+                <button onclick="deselectAll()">Deselect All</button>
+                <button onclick="showSelectAllResults()">Show Selected</button>
+            </div>
+            <div class="result-display" id="selectAllResult"></div>
+        </div>
+
+        <div class="section">
+            <h2>Basic Radio Buttons</h2>
+            <div class="radio-group">
+                <label>
+                    <input type="radio" name="basicRadio" value="choice1">
+                    <span class="option-label">Choice 1</span>
+                </label>
+                <label>
+                    <input type="radio" name="basicRadio" value="choice2">
+                    <span class="option-label">Choice 2</span>
+                </label>
+                <label>
+                    <input type="radio" name="basicRadio" value="choice3">
+                    <span class="option-label">Choice 3</span>
+                </label>
+                <label>
+                    <input type="radio" name="basicRadio" value="choice4">
+                    <span class="option-label">Choice 4</span>
+                </label>
+            </div>
+            <div class="result-display" id="radioResult"></div>
+        </div>
+
+        <div class="section">
+            <h2>Multiple Radio Groups</h2>
+            <label style="margin-bottom: 10px; display: block;">Select Size:</label>
+            <div class="radio-group">
+                <label>
+                    <input type="radio" name="size" value="small">
+                    <span class="option-label">Small</span>
+                </label>
+                <label>
+                    <input type="radio" name="size" value="medium">
+                    <span class="option-label">Medium</span>
+                </label>
+                <label>
+                    <input type="radio" name="size" value="large">
+                    <span class="option-label">Large</span>
+                </label>
+                <label>
+                    <input type="radio" name="size" value="xlarge">
+                    <span class="option-label">Extra Large</span>
+                </label>
+            </div>
+
+            <label style="margin-bottom: 10px; margin-top: 20px; display: block;">Select Color:</label>
+            <div class="radio-group">
+                <label>
+                    <input type="radio" name="color" value="red">
+                    <span class="option-label">Red</span>
+                </label>
+                <label>
+                    <input type="radio" name="color" value="blue">
+                    <span class="option-label">Blue</span>
+                </label>
+                <label>
+                    <input type="radio" name="color" value="green">
+                    <span class="option-label">Green</span>
+                </label>
+                <label>
+                    <input type="radio" name="color" value="black">
+                    <span class="option-label">Black</span>
+                </label>
+            </div>
+            <button onclick="showMultipleRadioResults()">Show Selected Options</button>
+            <div class="result-display" id="multipleRadioResult"></div>
+        </div>
+
+        <div class="section">
+            <h2>Disabled Checkbox & Radio</h2>
+            <div class="checkbox-group">
+                <label>
+                    <input type="checkbox" id="enabledCheckbox" value="enabled">
+                    <span class="option-label">Enabled Checkbox</span>
+                </label>
+                <label>
+                    <input type="checkbox" id="disabledCheckbox" value="disabled" disabled>
+                    <span class="option-label">Disabled Checkbox</span>
+                </label>
+            </div>
+            <div class="radio-group">
+                <label>
+                    <input type="radio" name="disabledRadio" value="enabled">
+                    <span class="option-label">Enabled Radio</span>
+                </label>
+                <label>
+                    <input type="radio" name="disabledRadio" value="disabled" disabled>
+                    <span class="option-label">Disabled Radio</span>
+                </label>
+            </div>
+            <button onclick="toggleDisabled()">Toggle Disabled State</button>
+            <div class="result-display" id="disabledResult"></div>
+        </div>
+    
+                <footer class="footer">
+            <div class="footer-content">
+                <span class="footer-text">
+                    Powered by
+                    <a href="https://www.techelliptica.com" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; gap: 8px; text-decoration: none; color: inherit;">
+                        <img src="https://techelliptica.com/images/logo.png" alt="TechElliptica Logo" class="footer-logo">
+                        <strong>TechElliptica</strong>
+                    </a>
+                </span>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        // Basic checkboxes
+        function showCheckboxResults() {
+            const checkboxes = ['checkbox1', 'checkbox2', 'checkbox3', 'checkbox4'];
+            const selected = checkboxes
+                .map(id => document.getElementById(id))
+                .filter(cb => cb.checked)
+                .map(cb => cb.value);
+            
+            const result = document.getElementById('checkboxResult');
+            if (selected.length > 0) {
+                result.textContent = `Selected: ${selected.join(', ')}`;
+            } else {
+                result.textContent = 'No checkboxes selected';
+            }
+            result.classList.add('show');
+        }
+
+        // Select all / deselect all
+        function selectAll() {
+            document.querySelectorAll('.select-all-group').forEach(cb => {
+                cb.checked = true;
+            });
+        }
+
+        function deselectAll() {
+            document.querySelectorAll('.select-all-group').forEach(cb => {
+                cb.checked = false;
+            });
+        }
+
+        function showSelectAllResults() {
+            const selected = Array.from(document.querySelectorAll('.select-all-group'))
+                .filter(cb => cb.checked)
+                .map(cb => cb.value);
+            
+            const result = document.getElementById('selectAllResult');
+            if (selected.length > 0) {
+                result.textContent = `Selected items: ${selected.join(', ')}`;
+            } else {
+                result.textContent = 'No items selected';
+            }
+            result.classList.add('show');
+        }
+
+        // Basic radio buttons
+        document.querySelectorAll('input[name="basicRadio"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const result = document.getElementById('radioResult');
+                result.textContent = `Selected: ${this.value}`;
+                result.classList.add('show');
+            });
+        });
+
+        // Multiple radio groups
+        function showMultipleRadioResults() {
+            const size = document.querySelector('input[name="size"]:checked');
+            const color = document.querySelector('input[name="color"]:checked');
+            
+            const result = document.getElementById('multipleRadioResult');
+            let message = [];
+            if (size) message.push(`Size: ${size.value}`);
+            if (color) message.push(`Color: ${color.value}`);
+            
+            if (message.length > 0) {
+                result.textContent = message.join(' | ');
+            } else {
+                result.textContent = 'Please select both size and color';
+            }
+            result.classList.add('show');
+        }
+
+        // Toggle disabled
+        function toggleDisabled() {
+            const disabledCheckbox = document.getElementById('disabledCheckbox');
+            const disabledRadio = document.querySelector('input[name="disabledRadio"][value="disabled"]');
+            
+            disabledCheckbox.disabled = !disabledCheckbox.disabled;
+            disabledRadio.disabled = !disabledRadio.disabled;
+            
+            const result = document.getElementById('disabledResult');
+            result.textContent = `Disabled checkbox: ${disabledCheckbox.disabled}, Disabled radio: ${disabledRadio.disabled}`;
+            result.classList.add('show');
+        }
+    </script>
+    </div>
+
+    <script>
+</html>

@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Interactions Practice</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            background: #f4f5f7;
+            min-height: 100vh;
+            padding: 24px;
+            color: #172b4d;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 32px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 24px;
+            color: #0052cc;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        h1 {
+            color: #172b4d;
+            margin-bottom: 8px;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .description {
+            color: #6b778c;
+            margin-bottom: 24px;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        .section {
+            margin-bottom: 24px;
+            padding: 16px;
+            background: #ffffff;
+            border: 1px solid #dfe1e6;
+            border-radius: 3px;
+        }
+
+        .section h2 {
+            color: #172b4d;
+            margin-bottom: 12px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 12px;
+        }
+
+        .image-item {
+            text-align: center;
+            padding: 12px;
+            background: #f4f5f7;
+            border-radius: 3px;
+            border: 1px solid #dfe1e6;
+        }
+
+        .image-item img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 3px;
+            margin-bottom: 8px;
+        }
+
+        .image-info {
+            font-size: 12px;
+            color: #6b778c;
+            margin-top: 8px;
+        }
+
+        .image-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #172b4d;
+            margin-bottom: 8px;
+        }
+
+        .broken-image {
+            border: 2px dashed #de350b;
+            background: #ffebe6;
+            padding: 20px;
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #bf2600;
+            font-size: 14px;
+        }
+
+        .result-display {
+            margin-top: 12px;
+            padding: 12px 16px;
+            background: #e3fcef;
+            color: #006644;
+            border-radius: 3px;
+            border-left: 3px solid #36b37e;
+            display: none;
+            font-size: 14px;
+        }
+
+        .result-display.show {
+            display: block;
+        }
+
+        .result-display.error {
+            background: #ffebe6;
+            color: #bf2600;
+            border-left-color: #de350b;
+        }
+
+        .scenarios-box {
+            background: #f4f5f7;
+            border: 1px solid #dfe1e6;
+            padding: 16px;
+            border-radius: 3px;
+            margin-bottom: 24px;
+        }
+
+        .scenarios-box h2 {
+            color: #172b4d;
+            margin-bottom: 12px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .scenarios-box ol {
+            margin-left: 20px;
+            color: #172b4d;
+        }
+
+        .scenarios-box li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        button {
+            background: #0052cc;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 3px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            margin: 4px;
+            transition: background 0.2s;
+        }
+
+        button:hover {
+            background: #0065ff;
+        }
+
+        .image-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .image-list li {
+            margin-bottom: 16px;
+            padding: 12px;
+            background: #f4f5f7;
+            border-radius: 3px;
+            border-left: 3px solid #0052cc;
+        }
+
+        .footer {
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid #dfe1e6;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: #6b778c;
+            font-size: 14px;
+        }
+
+        .footer-logo {
+            height: 24px;
+            width: auto;
+            vertical-align: middle;
+        }
+
+        .footer-text {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-text a {
+            transition: opacity 0.2s;
+        }
+
+        .footer-text a:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Back to Home</a>
+        <h1>🖼️ Image Interactions Practice</h1>
+        <p class="description">
+            Practice interacting with images, verifying alt text, checking image sources, and handling broken images.
+            This is essential for testing accessibility and image loading scenarios.
+        </p>
+
+        <div class="scenarios-box">
+            <h2>🎯 Practice Scenarios - Automation Steps</h2>
+            <ol>
+                <li>Verify the alt text of Image 1, Image 2, Image 3, Image 4, Image 5, and Image 6</li>
+                <li>Check the image source (src) attribute of each image</li>
+                <li>Identify which images are broken (Image 3, Image 5, Image 6)</li>
+                <li>Verify that broken images show error indicators or fail to load</li>
+                <li>Click on images and verify their click handlers work</li>
+                <li>Check images with missing alt text attributes</li>
+                <li>Verify images loaded dynamically after page load</li>
+                <li>Practice extracting image information (src, alt, width, height)</li>
+            </ol>
+        </div>
+
+        <div class="section">
+            <h2>Images with Alt Text</h2>
+            <div class="image-grid">
+                <div class="image-item">
+                    <div class="image-label">Image 1</div>
+                    <img src="https://techelliptica.com/images/logo.png" alt="TechElliptica Logo" onclick="handleImageClick(event, 'Image 1', 'TechElliptica Logo', 'https://techelliptica.com/images/logo.png')">
+                    <div class="image-info">Alt: TechElliptica Logo</div>
+                </div>
+                <div class="image-item">
+                    <div class="image-label">Image 2</div>
+                    <img src="https://techelliptica.com/index-image/teacher.png" alt="TechElliptica Teacher" onclick="handleImageClick(event, 'Image 2', 'TechElliptica Teacher', 'https://techelliptica.com/index-image/teacher.png')">
+                    <div class="image-info">Alt: TechElliptica Teacher</div>
+                </div>
+                <div class="image-item">
+                    <div class="image-label">Image 3</div>
+                    <img src="https://invalid-url-that-does-not-exist-12345.com/image.png" alt="Broken Image 3" onerror="handleImageError(this, 'Image 3')" onclick="handleImageClick(event, 'Image 3', 'Broken Image 3', 'https://invalid-url-that-does-not-exist-12345.com/image.png')">
+                    <div class="image-info">Alt: Broken Image 3</div>
+                </div>
+                <div class="image-item">
+                    <div class="image-label">Image 4</div>
+                    <img src="https://via.placeholder.com/200x100?text=Image+4" alt="Placeholder Image 4" onclick="handleImageClick(event, 'Image 4', 'Placeholder Image 4', 'https://via.placeholder.com/200x100?text=Image+4')">
+                    <div class="image-info">Alt: Placeholder Image 4</div>
+                </div>
+                <div class="image-item">
+                    <div class="image-label">Image 5</div>
+                    <img src="https://www.techelliptica.com/nonexistent-image-12345.png" alt="Broken Image 5" onerror="handleImageError(this, 'Image 5')" onclick="handleImageClick(event, 'Image 5', 'Broken Image 5', 'https://www.techelliptica.com/nonexistent-image-12345.png')">
+                    <div class="image-info">Alt: Broken Image 5</div>
+                </div>
+                <div class="image-item">
+                    <div class="image-label">Image 6</div>
+                    <img src="https://broken-image-url-xyz.com/image.jpg" alt="Broken Image 6" onerror="handleImageError(this, 'Image 6')" onclick="handleImageClick(event, 'Image 6', 'Broken Image 6', 'https://broken-image-url-xyz.com/image.jpg')">
+                    <div class="image-info">Alt: Broken Image 6</div>
+                </div>
+            </div>
+            <div class="result-display" id="imageResult"></div>
+        </div>
+
+        <div class="section">
+            <h2>Images Without Alt Text</h2>
+            <div class="image-grid">
+                <div class="image-item">
+                    <div class="image-label">Image Without Alt 1</div>
+                    <img src="https://via.placeholder.com/200x100?text=No+Alt" onclick="handleImageClick(event, 'Image Without Alt 1', '', 'https://via.placeholder.com/200x100?text=No+Alt')">
+                    <div class="image-info">No alt attribute</div>
+                </div>
+                <div class="image-item">
+                    <div class="image-label">Image Without Alt 2</div>
+                    <img src="https://via.placeholder.com/200x100?text=No+Alt+2" onclick="handleImageClick(event, 'Image Without Alt 2', '', 'https://via.placeholder.com/200x100?text=No+Alt+2')">
+                    <div class="image-info">No alt attribute</div>
+                </div>
+            </div>
+            <div class="result-display" id="noAltResult"></div>
+        </div>
+
+        <div class="section">
+            <h2>Image Information Extraction</h2>
+            <p style="color: #6b778c; font-size: 14px; margin-bottom: 12px;">
+                Click the buttons below to extract information from images.
+            </p>
+            <button onclick="extractImageInfo('img1')">Get Image 1 Info</button>
+            <button onclick="extractImageInfo('img2')">Get Image 2 Info</button>
+            <button onclick="extractImageInfo('img3')">Get Image 3 Info</button>
+            <button onclick="extractImageInfo('img4')">Get Image 4 Info</button>
+            <button onclick="extractImageInfo('img5')">Get Image 5 Info</button>
+            <button onclick="extractImageInfo('img6')">Get Image 6 Info</button>
+            <div class="result-display" id="extractResult"></div>
+        </div>
+
+        <div class="section">
+            <h2>Dynamic Images</h2>
+            <p style="color: #6b778c; font-size: 14px; margin-bottom: 12px;">
+                Click the button to add images dynamically after page load.
+            </p>
+            <button onclick="addDynamicImage()">Add Dynamic Image</button>
+            <div class="image-grid" id="dynamicImages">
+                <p style="color: #6b778c; font-style: italic; grid-column: 1 / -1;">No dynamic images yet. Click the button to add images.</p>
+            </div>
+            <div class="result-display" id="dynamicImageResult"></div>
+        </div>
+
+        <div class="section">
+            <h2>Image List View</h2>
+            <ul class="image-list">
+                <li>
+                    <strong>Image 1:</strong> 
+                    <img src="https://techelliptica.com/images/logo.png" alt="TechElliptica Logo" style="max-width: 100px; vertical-align: middle; margin-left: 8px;" onclick="handleImageClick(event, 'Image 1', 'TechElliptica Logo', 'https://techelliptica.com/images/logo.png')">
+                    <span style="margin-left: 8px; color: #6b778c; font-size: 14px;">Alt: TechElliptica Logo</span>
+                </li>
+                <li>
+                    <strong>Image 2:</strong> 
+                    <img src="https://techelliptica.com/index-image/teacher.png" alt="TechElliptica Teacher" style="max-width: 100px; vertical-align: middle; margin-left: 8px;" onclick="handleImageClick(event, 'Image 2', 'TechElliptica Teacher', 'https://techelliptica.com/index-image/teacher.png')">
+                    <span style="margin-left: 8px; color: #6b778c; font-size: 14px;">Alt: TechElliptica Teacher</span>
+                </li>
+                <li>
+                    <strong>Image 3:</strong> 
+                    <img src="https://invalid-url-that-does-not-exist-12345.com/image.png" alt="Broken Image 3" style="max-width: 100px; vertical-align: middle; margin-left: 8px; border: 2px dashed #de350b;" onerror="handleImageError(this, 'Image 3')" onclick="handleImageClick(event, 'Image 3', 'Broken Image 3', 'https://invalid-url-that-does-not-exist-12345.com/image.png')">
+                    <span style="margin-left: 8px; color: #bf2600; font-size: 14px;">Alt: Broken Image 3 (Broken)</span>
+                </li>
+                <li>
+                    <strong>Image 4:</strong> 
+                    <img src="https://via.placeholder.com/200x100?text=Image+4" alt="Placeholder Image 4" style="max-width: 100px; vertical-align: middle; margin-left: 8px;" onclick="handleImageClick(event, 'Image 4', 'Placeholder Image 4', 'https://via.placeholder.com/200x100?text=Image+4')">
+                    <span style="margin-left: 8px; color: #6b778c; font-size: 14px;">Alt: Placeholder Image 4</span>
+                </li>
+                <li>
+                    <strong>Image 5:</strong> 
+                    <img src="https://www.techelliptica.com/nonexistent-image-12345.png" alt="Broken Image 5" style="max-width: 100px; vertical-align: middle; margin-left: 8px; border: 2px dashed #de350b;" onerror="handleImageError(this, 'Image 5')" onclick="handleImageClick(event, 'Image 5', 'Broken Image 5', 'https://www.techelliptica.com/nonexistent-image-12345.png')">
+                    <span style="margin-left: 8px; color: #bf2600; font-size: 14px;">Alt: Broken Image 5 (Broken)</span>
+                </li>
+                <li>
+                    <strong>Image 6:</strong> 
+                    <img src="https://broken-image-url-xyz.com/image.jpg" alt="Broken Image 6" style="max-width: 100px; vertical-align: middle; margin-left: 8px; border: 2px dashed #de350b;" onerror="handleImageError(this, 'Image 6')" onclick="handleImageClick(event, 'Image 6', 'Broken Image 6', 'https://broken-image-url-xyz.com/image.jpg')">
+                    <span style="margin-left: 8px; color: #bf2600; font-size: 14px;">Alt: Broken Image 6 (Broken)</span>
+                </li>
+            </ul>
+        </div>
+
+        <footer class="footer">
+            <div class="footer-content">
+                <span class="footer-text">
+                    Powered by
+                    <a href="https://www.techelliptica.com" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; gap: 8px; text-decoration: none; color: inherit;">
+                        <img src="https://techelliptica.com/images/logo.png" alt="TechElliptica Logo" class="footer-logo">
+                        <strong>TechElliptica</strong>
+                    </a>
+                </span>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        let dynamicImageCount = 0;
+
+        function handleImageClick(event, imageName, altText, src) {
+            const result = document.getElementById('imageResult');
+            const hasAlt = altText && altText.trim() !== '';
+            const info = `Image: ${imageName}\nAlt Text: ${hasAlt ? altText : '(No alt text)'}\nSource: ${src}`;
+            result.textContent = info;
+            result.classList.add('show');
+            setTimeout(() => {
+                result.classList.remove('show');
+            }, 4000);
+        }
+
+        function handleImageError(img, imageName) {
+            img.style.border = '2px dashed #de350b';
+            img.style.background = '#ffebe6';
+            img.style.minHeight = '100px';
+            img.style.display = 'flex';
+            img.style.alignItems = 'center';
+            img.style.justifyContent = 'center';
+            img.alt = img.alt || 'Broken Image';
+            
+            const result = document.getElementById('imageResult');
+            result.textContent = `${imageName} failed to load - This is a broken image!`;
+            result.className = 'result-display show error';
+            setTimeout(() => {
+                result.classList.remove('show');
+            }, 4000);
+        }
+
+        function extractImageInfo(imageId) {
+            const imageMap = {
+                'img1': { selector: '.image-grid .image-item:nth-child(1) img', name: 'Image 1' },
+                'img2': { selector: '.image-grid .image-item:nth-child(2) img', name: 'Image 2' },
+                'img3': { selector: '.image-grid .image-item:nth-child(3) img', name: 'Image 3' },
+                'img4': { selector: '.image-grid .image-item:nth-child(4) img', name: 'Image 4' },
+                'img5': { selector: '.image-grid .image-item:nth-child(5) img', name: 'Image 5' },
+                'img6': { selector: '.image-grid .image-item:nth-child(6) img', name: 'Image 6' }
+            };
+
+            const info = imageMap[imageId];
+            if (!info) return;
+
+            const img = document.querySelector(info.selector);
+            if (!img) {
+                const result = document.getElementById('extractResult');
+                result.textContent = `${info.name} not found!`;
+                result.className = 'result-display show error';
+                return;
+            }
+
+            const result = document.getElementById('extractResult');
+            const imageInfo = `
+                Image: ${info.name}
+                Alt Text: ${img.alt || '(No alt text)'}
+                Source: ${img.src}
+                Width: ${img.naturalWidth || img.width || 'N/A'}px
+                Height: ${img.naturalHeight || img.height || 'N/A'}px
+                Complete: ${img.complete ? 'Yes' : 'No'}
+            `.trim();
+            
+            result.textContent = imageInfo;
+            result.className = 'result-display show';
+            setTimeout(() => {
+                result.classList.remove('show');
+            }, 5000);
+        }
+
+        function addDynamicImage() {
+            dynamicImageCount++;
+            const container = document.getElementById('dynamicImages');
+            
+            if (container.querySelector('p[style*="italic"]')) {
+                container.innerHTML = '';
+            }
+
+            const imageItem = document.createElement('div');
+            imageItem.className = 'image-item';
+            
+            const label = document.createElement('div');
+            label.className = 'image-label';
+            label.textContent = `Dynamic Image ${dynamicImageCount}`;
+            
+            const img = document.createElement('img');
+            img.src = 'https://via.placeholder.com/200x100?text=Dynamic+' + dynamicImageCount;
+            img.alt = `Dynamic Image ${dynamicImageCount}`;
+            img.onclick = function(e) {
+                handleImageClick(e, `Dynamic Image ${dynamicImageCount}`, img.alt, img.src);
+            };
+            
+            const info = document.createElement('div');
+            info.className = 'image-info';
+            info.textContent = `Alt: ${img.alt}`;
+            
+            imageItem.appendChild(label);
+            imageItem.appendChild(img);
+            imageItem.appendChild(info);
+            container.appendChild(imageItem);
+
+            const result = document.getElementById('dynamicImageResult');
+            result.textContent = `Dynamic Image ${dynamicImageCount} added! Alt: ${img.alt}, Src: ${img.src}`;
+            result.classList.add('show');
+            setTimeout(() => {
+                result.classList.remove('show');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

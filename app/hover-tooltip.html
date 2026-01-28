@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hover & Tooltip Practice</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            background: #f4f5f7;
+            min-height: 100vh;
+            padding: 24px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 32px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 24px;
+            color: #0052cc;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        h1 {
+            color: #172b4d;
+            margin-bottom: 8px;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .description {
+            color: #6b778c;
+            margin-bottom: 24px;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+            padding: 0;
+            background: #ffffff;
+            border: 1px solid #dfe1e6;
+            border-radius: 3px;
+        }
+
+        .section h2 {
+            color: #0052cc;
+            margin-bottom: 24px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .hover-element {
+            display: inline-block;
+            padding: 15px 25px;
+            background: #0052cc;
+            color: white;
+            border-radius: 3px;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.2s;
+        }
+
+        .hover-element:hover {
+            background: #0065ff;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            margin: 20px;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 200px;
+            background-color: #172b4d;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -100px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 14px;
+        }
+
+        .tooltip .tooltiptext::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #333 transparent transparent transparent;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .tooltip-top .tooltiptext {
+            bottom: 125%;
+        }
+
+        .tooltip-bottom .tooltiptext {
+            top: 125%;
+            bottom: auto;
+        }
+
+        .tooltip-bottom .tooltiptext::after {
+            top: auto;
+            bottom: 100%;
+            border-color: transparent transparent #333 transparent;
+        }
+
+        .tooltip-left .tooltiptext {
+            right: 125%;
+            left: auto;
+            margin-left: 0;
+            margin-right: -10px;
+        }
+
+        .tooltip-left .tooltiptext::after {
+            left: 100%;
+            top: 50%;
+            margin-top: -5px;
+            border-color: transparent transparent transparent #333;
+        }
+
+        .tooltip-right .tooltiptext {
+            left: 125%;
+            margin-left: 0;
+            margin-right: -10px;
+        }
+
+        .tooltip-right .tooltiptext::after {
+            right: 100%;
+            left: auto;
+            top: 50%;
+            margin-top: -5px;
+            border-color: transparent #333 transparent transparent;
+        }
+
+        .hover-reveal {
+            padding: 12px 16px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            margin: 10px 0;
+        }
+
+        .hidden-content {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            background: #e7f3ff;
+            border-radius: 5px;
+            color: #004085;
+        }
+
+        .hover-reveal:hover .hidden-content {
+            display: block;
+        }
+
+        .hover-button {
+            background: #28a745;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            margin: 10px;
+            transition: all 0.2s;
+        }
+
+        .hover-button:hover {
+            background: #218838;
+            transform: scale(1.05);
+        }
+
+        .hover-button:hover::after {
+            content: " (Hovered!)";
+        }
+
+        .result-display {
+            margin-top: 12px;
+            padding: 12px 16px;
+            background: #d4edda;
+            color: #155724;
+            border-radius: 3px;
+            display: none;
+        }
+
+        .result-display.show {
+            display: block;
+        }
+
+        .scenarios-box {
+            background: #e7f3ff;
+            border-left: 4px solid #667eea;
+            padding: 0;
+            border-radius: 3px;
+            margin-bottom: 24px;
+        }
+
+        .scenarios-box h2 {
+            color: #0052cc;
+            margin-bottom: 12px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .scenarios-box ol {
+            margin-left: 20px;
+            color: #172b4d;
+        }
+
+        .scenarios-box li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+    
+        .footer {
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid #dfe1e6;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: #6b778c;
+            font-size: 14px;
+        }
+
+        .footer-logo {
+            height: 24px;
+            width: auto;
+            vertical-align: middle;
+        }
+
+        .footer-text {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .footer-text a {
+            transition: opacity 0.2s;
+        }
+
+        .footer-text a:hover {
+            opacity: 0.8;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Back to Home</a>
+        <h1>🖱️ Hover & Tooltip Practice</h1>
+        <p class="description">
+            Practice handling hover effects, tooltips, and elements that appear on mouse hover. 
+            These interactions require careful timing in automation scripts.
+        </p>
+
+        <div class="scenarios-box">
+            <h2>🎯 Practice Scenarios - Automation Steps</h2>
+            <ol>
+                <li>Hover over "Hover Me 1", "Hover Me 2", and "Hover Me 3" buttons</li>
+                <li>Verify the hover result message appears for each</li>
+                <li>Hover over "Hover Top" and verify tooltip appears above</li>
+                <li>Hover over "Hover Bottom" and verify tooltip appears below</li>
+                <li>Hover over "Hover Left" and verify tooltip appears on the left</li>
+                <li>Hover over "Hover Right" and verify tooltip appears on the right</li>
+                <li>Hover over the "Hover to Reveal Content" box</li>
+                <li>Verify hidden content appears when hovering</li>
+                <li>Hover over "Hover Me for Action" button and verify action is triggered</li>
+                <li>Hover over "Hover (500ms delay)" and wait for delayed tooltip to appear</li>
+                <li>Hover over different items in "Multiple Hover Elements" section</li>
+                <li>Verify each item shows its corresponding result when hovered</li>
+            </ol>
+        </div>
+
+        <div class="section">
+            <h2>Basic Hover Effects</h2>
+            <div class="hover-element" onmouseenter="showHoverResult('Hover element 1')">Hover Me 1</div>
+            <div class="hover-element" onmouseenter="showHoverResult('Hover element 2')">Hover Me 2</div>
+            <div class="hover-element" onmouseenter="showHoverResult('Hover element 3')">Hover Me 3</div>
+            <div class="result-display" id="hoverResult"></div>
+        </div>
+
+        <div class="section">
+            <h2>Tooltips - Different Positions</h2>
+            <div class="tooltip tooltip-top">
+                <span style="padding: 10px 20px; background: #0052cc; color: white; border-radius: 5px; display: inline-block;">Hover Top</span>
+                <span class="tooltiptext">This is a tooltip on top!</span>
+            </div>
+
+            <div class="tooltip tooltip-bottom">
+                <span style="padding: 10px 20px; background: #0052cc; color: white; border-radius: 5px; display: inline-block;">Hover Bottom</span>
+                <span class="tooltiptext">This is a tooltip at the bottom!</span>
+            </div>
+
+            <div class="tooltip tooltip-left">
+                <span style="padding: 10px 20px; background: #0052cc; color: white; border-radius: 5px; display: inline-block;">Hover Left</span>
+                <span class="tooltiptext">This is a tooltip on the left!</span>
+            </div>
+
+            <div class="tooltip tooltip-right">
+                <span style="padding: 10px 20px; background: #0052cc; color: white; border-radius: 5px; display: inline-block;">Hover Right</span>
+                <span class="tooltiptext">This is a tooltip on the right!</span>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Hover to Reveal Content</h2>
+            <div class="hover-reveal">
+                <strong>Hover over this box to reveal hidden content</strong>
+                <div class="hidden-content">
+                    🎉 This content appears when you hover! Perfect for testing hover interactions.
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Hover Button with Action</h2>
+            <button class="hover-button" onmouseenter="handleButtonHover()">Hover Me for Action</button>
+            <div class="result-display" id="buttonHoverResult"></div>
+        </div>
+
+        <div class="section">
+            <h2>Delayed Tooltip</h2>
+            <div class="tooltip tooltip-top" id="delayedTooltip">
+                <span style="padding: 10px 20px; background: #dc3545; color: white; border-radius: 5px; display: inline-block;">Hover (500ms delay)</span>
+                <span class="tooltiptext" id="delayedTooltipText" style="visibility: hidden;">This tooltip appears after 500ms delay!</span>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Multiple Hover Elements</h2>
+            <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                <div class="hover-element" data-info="Item 1">Item 1</div>
+                <div class="hover-element" data-info="Item 2">Item 2</div>
+                <div class="hover-element" data-info="Item 3">Item 3</div>
+                <div class="hover-element" data-info="Item 4">Item 4</div>
+                <div class="hover-element" data-info="Item 5">Item 5</div>
+            </div>
+            <div class="result-display" id="multipleHoverResult"></div>
+        </div>
+    
+                <footer class="footer">
+            <div class="footer-content">
+                <span class="footer-text">
+                    Powered by
+                    <a href="https://www.techelliptica.com" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; gap: 8px; text-decoration: none; color: inherit;">
+                        <img src="https://techelliptica.com/images/logo.png" alt="TechElliptica Logo" class="footer-logo">
+                        <strong>TechElliptica</strong>
+                    </a>
+                </span>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        function showHoverResult(message) {
+            const result = document.getElementById('hoverResult');
+            result.textContent = `✅ ${message} hovered!`;
+            result.classList.add('show');
+            setTimeout(() => {
+                result.classList.remove('show');
+            }, 2000);
+        }
+
+        function handleButtonHover() {
+            const result = document.getElementById('buttonHoverResult');
+            result.textContent = '✅ Button hovered! Action triggered.';
+            result.classList.add('show');
+        }
+
+        // Delayed tooltip
+        const delayedTooltip = document.getElementById('delayedTooltip');
+        const delayedTooltipText = document.getElementById('delayedTooltipText');
+        let tooltipTimeout;
+
+        delayedTooltip.addEventListener('mouseenter', function() {
+            tooltipTimeout = setTimeout(() => {
+                delayedTooltipText.style.visibility = 'visible';
+                delayedTooltipText.style.opacity = '1';
+            }, 500);
+        });
+
+        delayedTooltip.addEventListener('mouseleave', function() {
+            clearTimeout(tooltipTimeout);
+            delayedTooltipText.style.visibility = 'hidden';
+            delayedTooltipText.style.opacity = '0';
+        });
+
+        // Multiple hover elements
+        document.querySelectorAll('.hover-element[data-info]').forEach(element => {
+            element.addEventListener('mouseenter', function() {
+                const result = document.getElementById('multipleHoverResult');
+                result.textContent = `✅ ${this.dataset.info} hovered!`;
+                result.classList.add('show');
+            });
+        });
+    </script>
+    </div>
+
+    <script>
+</html>

@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table Data Extraction Practice</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            background: #f4f5f7;
+            min-height: 100vh;
+            padding: 24px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 32px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 24px;
+            color: #0052cc;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        h1 {
+            color: #172b4d;
+            margin-bottom: 8px;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .description {
+            color: #6b778c;
+            margin-bottom: 24px;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section h2 {
+            color: #0052cc;
+            margin-bottom: 12px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 12px;
+            background: white;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background: #0052cc;
+            color: white;
+            font-weight: 500;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        th:hover {
+            background: #0065ff;
+        }
+
+        tr:hover {
+            background: #f5f5f5;
+        }
+
+        .action-btn {
+            background: #0052cc;
+            color: white;
+            padding: 6px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .action-btn:hover {
+            background: #0065ff;
+        }
+
+        .action-btn.delete {
+            background: #dc3545;
+        }
+
+        .action-btn.delete:hover {
+            background: #c82333;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 12px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            font-size: 14px;
+        }
+
+        .result-display {
+            margin-top: 12px;
+            padding: 12px 16px;
+            background: #d4edda;
+            color: #155724;
+            border-radius: 3px;
+            display: none;
+        }
+
+        .result-display.show {
+            display: block;
+        }
+
+        .pagination {
+            margin-top: 12px;
+            display: flex;
+            gap: 5px;
+            justify-content: center;
+        }
+
+        .pagination button {
+            padding: 8px 15px;
+            border: 1px solid #ddd;
+            background: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .pagination button.active {
+            background: #0052cc;
+            color: white;
+            border-color: #0052cc;
+        }
+
+        .pagination button:hover:not(.active) {
+            background: #f5f5f5;
+        }
+
+        .scenarios-box {
+            background: #e7f3ff;
+            border-left: 4px solid #667eea;
+            padding: 0;
+            border-radius: 3px;
+            margin-bottom: 24px;
+        }
+
+        .scenarios-box h2 {
+            color: #0052cc;
+            margin-bottom: 12px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .scenarios-box ol {
+            margin-left: 20px;
+            color: #172b4d;
+        }
+
+        .scenarios-box li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+    
+        .footer {
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid #dfe1e6;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: #6b778c;
+            font-size: 14px;
+        }
+
+        .footer-logo {
+            height: 24px;
+            width: auto;
+            vertical-align: middle;
+        }
+
+        .footer-text {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .footer-text a {
+            transition: opacity 0.2s;
+        }
+
+        .footer-text a:hover {
+            opacity: 0.8;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Back to Home</a>
+        <h1>📊 Table Data Extraction Practice</h1>
+        <p class="description">
+            Practice extracting data from HTML tables, sorting tables, filtering rows, and interacting with table elements.
+        </p>
+
+        <div class="scenarios-box">
+            <h2>🎯 Practice Scenarios - Automation Steps</h2>
+            <ol>
+                <li>Click "Extract All Data" and verify all table rows are extracted</li>
+                <li>Extract data from specific rows and columns</li>
+                <li>Click on column headers in "Sortable Table" to sort ascending/descending</li>
+                <li>Verify table rows are sorted correctly after clicking headers</li>
+                <li>Enter text in the search box to filter table rows</li>
+                <li>Verify only matching rows are displayed after filtering</li>
+                <li>Click "View" button on different rows and verify the action</li>
+                <li>Navigate through pagination buttons (1, 2, 3, etc.)</li>
+                <li>Verify different pages show different data</li>
+                <li>Extract data from a specific page after pagination</li>
+            </ol>
+        </div>
+
+        <div class="section">
+            <h2>Basic Data Table</h2>
+            <table id="basicTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>John Doe</td>
+                        <td>john.doe@example.com</td>
+                        <td>Admin</td>
+                        <td>Active</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Jane Smith</td>
+                        <td>jane.smith@example.com</td>
+                        <td>User</td>
+                        <td>Active</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Bob Johnson</td>
+                        <td>bob.johnson@example.com</td>
+                        <td>User</td>
+                        <td>Inactive</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Alice Brown</td>
+                        <td>alice.brown@example.com</td>
+                        <td>Moderator</td>
+                        <td>Active</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Charlie Wilson</td>
+                        <td>charlie.wilson@example.com</td>
+                        <td>User</td>
+                        <td>Active</td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="action-btn" onclick="extractTableData()" style="margin-top: 12px;">Extract All Data</button>
+            <div class="result-display" id="extractResult"></div>
+        </div>
+
+        <div class="section">
+            <h2>Sortable Table</h2>
+            <p style="color: #6b778c; margin-bottom: 10px;">Click on column headers to sort</p>
+            <table id="sortableTable">
+                <thead>
+                    <tr>
+                        <th onclick="sortTable(0)">Product Name ↕</th>
+                        <th onclick="sortTable(1)">Price ↕</th>
+                        <th onclick="sortTable(2)">Stock ↕</th>
+                        <th onclick="sortTable(3)">Category ↕</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Laptop</td>
+                        <td>$999</td>
+                        <td>15</td>
+                        <td>Electronics</td>
+                    </tr>
+                    <tr>
+                        <td>Mouse</td>
+                        <td>$25</td>
+                        <td>50</td>
+                        <td>Accessories</td>
+                    </tr>
+                    <tr>
+                        <td>Keyboard</td>
+                        <td>$75</td>
+                        <td>30</td>
+                        <td>Accessories</td>
+                    </tr>
+                    <tr>
+                        <td>Monitor</td>
+                        <td>$299</td>
+                        <td>20</td>
+                        <td>Electronics</td>
+                    </tr>
+                    <tr>
+                        <td>Headphones</td>
+                        <td>$150</td>
+                        <td>40</td>
+                        <td>Accessories</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>Searchable Table</h2>
+            <input type="text" class="search-box" id="searchInput" placeholder="Search by name, email, or role..." onkeyup="filterTable()">
+            <table id="searchableTable">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Department</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Sarah Connor</td>
+                        <td>sarah.connor@example.com</td>
+                        <td>Engineering</td>
+                        <td><button class="action-btn" onclick="viewRow(this)">View</button></td>
+                    </tr>
+                    <tr>
+                        <td>Mike Davis</td>
+                        <td>mike.davis@example.com</td>
+                        <td>Marketing</td>
+                        <td><button class="action-btn" onclick="viewRow(this)">View</button></td>
+                    </tr>
+                    <tr>
+                        <td>Emily White</td>
+                        <td>emily.white@example.com</td>
+                        <td>Engineering</td>
+                        <td><button class="action-btn" onclick="viewRow(this)">View</button></td>
+                    </tr>
+                    <tr>
+                        <td>David Lee</td>
+                        <td>david.lee@example.com</td>
+                        <td>Sales</td>
+                        <td><button class="action-btn" onclick="viewRow(this)">View</button></td>
+                    </tr>
+                    <tr>
+                        <td>Lisa Garcia</td>
+                        <td>lisa.garcia@example.com</td>
+                        <td>HR</td>
+                        <td><button class="action-btn" onclick="viewRow(this)">View</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>Table with Pagination</h2>
+            <table id="paginationTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Item</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody id="paginationTableBody">
+                    <!-- Will be populated by JavaScript -->
+                </tbody>
+            </table>
+            <div class="pagination" id="pagination"></div>
+        </div>
+    
+                <footer class="footer">
+            <div class="footer-content">
+                <span class="footer-text">
+                    Powered by
+                    <a href="https://www.techelliptica.com" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; gap: 8px; text-decoration: none; color: inherit;">
+                        <img src="https://techelliptica.com/images/logo.png" alt="TechElliptica Logo" class="footer-logo">
+                        <strong>TechElliptica</strong>
+                    </a>
+                </span>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        // Extract table data
+        function extractTableData() {
+            const table = document.getElementById('basicTable');
+            const rows = table.querySelectorAll('tbody tr');
+            const data = [];
+            
+            rows.forEach(row => {
+                const cells = row.querySelectorAll('td');
+                data.push({
+                    id: cells[0].textContent,
+                    name: cells[1].textContent,
+                    email: cells[2].textContent,
+                    role: cells[3].textContent,
+                    status: cells[4].textContent
+                });
+            });
+            
+            const resultDiv = document.getElementById('extractResult');
+            resultDiv.innerHTML = '<strong>Extracted Data:</strong><pre>' + JSON.stringify(data, null, 2) + '</pre>';
+            resultDiv.classList.add('show');
+        }
+
+        // Sortable table
+        let sortDirection = {};
+        function sortTable(columnIndex) {
+            const table = document.getElementById('sortableTable');
+            const tbody = table.querySelector('tbody');
+            const rows = Array.from(tbody.querySelectorAll('tr'));
+            
+            const direction = sortDirection[columnIndex] === 'asc' ? 'desc' : 'asc';
+            sortDirection[columnIndex] = direction;
+            
+            rows.sort((a, b) => {
+                const aText = a.cells[columnIndex].textContent.trim();
+                const bText = b.cells[columnIndex].textContent.trim();
+                
+                // Try to parse as number
+                const aNum = parseFloat(aText.replace('$', ''));
+                const bNum = parseFloat(bText.replace('$', ''));
+                
+                if (!isNaN(aNum) && !isNaN(bNum)) {
+                    return direction === 'asc' ? aNum - bNum : bNum - aNum;
+                }
+                
+                return direction === 'asc' 
+                    ? aText.localeCompare(bText)
+                    : bText.localeCompare(aText);
+            });
+            
+            rows.forEach(row => tbody.appendChild(row));
+        }
+
+        // Searchable table
+        function filterTable() {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toLowerCase();
+            const table = document.getElementById('searchableTable');
+            const rows = table.querySelectorAll('tbody tr');
+            
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(filter) ? '' : 'none';
+            });
+        }
+
+        function viewRow(button) {
+            const row = button.closest('tr');
+            const cells = row.querySelectorAll('td');
+            alert(`Viewing: ${cells[0].textContent} - ${cells[1].textContent}`);
+        }
+
+        // Pagination table
+        const allData = [];
+        for (let i = 1; i <= 25; i++) {
+            allData.push({
+                id: i,
+                item: `Item ${i}`,
+                quantity: Math.floor(Math.random() * 100) + 1,
+                total: (Math.random() * 1000 + 10).toFixed(2)
+            });
+        }
+
+        let currentPage = 1;
+        const itemsPerPage = 5;
+        const totalPages = Math.ceil(allData.length / itemsPerPage);
+
+        function renderPaginationTable() {
+            const tbody = document.getElementById('paginationTableBody');
+            const start = (currentPage - 1) * itemsPerPage;
+            const end = start + itemsPerPage;
+            const pageData = allData.slice(start, end);
+            
+            tbody.innerHTML = '';
+            pageData.forEach(item => {
+                const row = tbody.insertRow();
+                row.insertCell(0).textContent = item.id;
+                row.insertCell(1).textContent = item.item;
+                row.insertCell(2).textContent = item.quantity;
+                row.insertCell(3).textContent = '$' + item.total;
+            });
+            
+            renderPagination();
+        }
+
+        function renderPagination() {
+            const paginationDiv = document.getElementById('pagination');
+            paginationDiv.innerHTML = '';
+            
+            for (let i = 1; i <= totalPages; i++) {
+                const button = document.createElement('button');
+                button.textContent = i;
+                button.className = i === currentPage ? 'active' : '';
+                button.onclick = () => {
+                    currentPage = i;
+                    renderPaginationTable();
+                };
+                paginationDiv.appendChild(button);
+            }
+        }
+
+        // Initialize pagination table
+        renderPaginationTable();
+    </script>
+    </div>
+
+    <script>
+</html>

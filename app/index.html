@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automation Practice - Home</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            background: #f4f5f7;
+            min-height: 100vh;
+            color: #172b4d;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 32px 24px;
+        }
+
+        header {
+            background: #ffffff;
+            border-bottom: 1px solid #dfe1e6;
+            padding: 24px 32px;
+            margin: -32px -24px 32px -24px;
+        }
+
+        header h1 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #172b4d;
+            margin-bottom: 4px;
+        }
+
+        header p {
+            font-size: 14px;
+            color: #6b778c;
+            font-weight: 400;
+        }
+
+        .scenarios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 16px;
+        }
+
+        .scenario-card {
+            background: #ffffff;
+            border: 1px solid #dfe1e6;
+            border-radius: 3px;
+            padding: 16px;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            position: relative;
+        }
+
+        .scenario-card:hover {
+            background: #f4f5f7;
+            border-color: #b3bac5;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .scenario-card-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .scenario-card h2 {
+            color: #172b4d;
+            margin: 0;
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 1.5;
+            flex: 1;
+        }
+
+        .scenario-card.super-assignment {
+            grid-column: span 2;
+        }
+
+        .scenario-card.super-assignment h2 {
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .scenario-card p {
+            color: #6b778c;
+            line-height: 1.5;
+            margin: 8px 0 12px 0;
+            font-size: 14px;
+        }
+
+        .scenario-card .difficulty {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .difficulty.easy {
+            background: #e3fcef;
+            color: #006644;
+        }
+
+        .difficulty.medium {
+            background: #fff4e5;
+            color: #974f00;
+        }
+
+        .difficulty.hard {
+            background: #ffebe6;
+            color: #bf2600;
+        }
+
+        .icon {
+            font-size: 20px;
+            margin-right: 8px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #f4f5f7;
+        }
+
+        .footer {
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid #dfe1e6;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: #6b778c;
+            font-size: 14px;
+        }
+
+        .footer-logo {
+            height: 24px;
+            width: auto;
+            vertical-align: middle;
+        }
+
+        .footer-text {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-text a {
+            transition: opacity 0.2s;
+        }
+
+        .footer-text a:hover {
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .scenario-card.super-assignment {
+                grid-column: span 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Automation Practice Hub</h1>
+            <p>Master web automation with hands-on scenarios</p>
+        </header>
+
+        <div class="scenarios-grid">
+            <a href="form-submission.html" class="scenario-card">
+                <div class="scenario-card-header">
+                    <h2><span class="icon">📝</span>Form Submission</h2>
+                </div>
+                <p>Practice filling and submitting forms with various input types including text, email, password, and textarea fields.</p>
+                <div class="card-footer">
+                    <span class="difficulty easy">Easy</span>
+                </div>
+            </a>
+
+            <a href="button-interactions.html" class="scenario-card">
+                <div class="scenario-card-header">
+                    <h2><span class="icon">🔘</span>Button Interactions</h2>
+                </div>
+                <p>Learn to interact with different types of buttons including click events, disabled states, and dynamic buttons.</p>
+                <div class="card-footer">
+                    <span class="difficulty easy">Easy</span>
+                </div>
+            </a>
+
+            <a href="dropdown-select.html" class="scenario-card">
+                <div class="scenario-card-header">
+                    <h2><span class="icon">📋</span>Dropdown & Select</h2>
+                </div>
+                <p>Practice selecting options from dropdown menus, multi-select dropdowns, and custom select elements.</p>
+                <div class="card-footer">
+                    <span class="difficulty medium">Medium</span>
+                </div>
+            </a>
+
+            <a href="checkbox-radio.html" class="scenario-card">
+                <div class="scenario-card-header">
+                    <h2><span class="icon">☑️</span>Checkbox & Radio</h2>
+                </div>
+                <p>Master handling checkboxes and radio buttons, including selecting multiple options and verifying states.</p>
+                <div class="card-footer">
+                    <span class="difficulty easy">Easy</span>
+                </div>
+            </a>
+
+            <a href="dynamic-content.html" class="scenario-card">
+                <div class="scenario-card-header">
+                    <h2><span class="icon">⚡</span>Dynamic Content</h2>
+                </div>
+                <p>Practice waiting for and interacting with dynamically loaded content, AJAX calls, and delayed elements.</p>
+                <div class="card-footer">
+                    <span class="difficulty medium">Medium</span>
+                </div>
+            </a>
+
+            <a href="alerts-modals.html" class="scenario-card">
+                <div class="scenario-card-header">
+                    <h2><span class="icon">⚠️</span>Alerts & Modals</h2>
+                </div>
+                <p>Handle JavaScript alerts, confirm dialogs, prompt boxes, and custom modal popups.</p>
+                <div class="card-footer">
+                    <span class="difficulty medium">Medium</span>
+                </div>
+            </a>
+
+            <a href="table-data.html" class="scenario-card">
+                <div class="scenario-card-header">
+                    <h2><span class="icon">📊</span>Table Data Extraction</h2>
+                </div>
+                <p>Extract data from HTML tables, sort tables, filter rows, and interact with table elements.</p>
+                <div class="card-footer">
+                    <span class="difficulty medium">Medium</span>
+                </div>
+            </a>
+
+            <a href="file-upload.html" class="scenario-card">
+                <div class="scenario-card-header">
+                    <h2><span class="icon">📤</span>File Upload</h2>
+                </div>
+                <p>Practice uploading single and multiple files, handling file input elements, and verifying uploads.</p>
+                <div class="card-footer">
+                    <span class="difficulty medium">Medium</span>
+                </div>
+            </a>
+
+            <a href="hover-tooltip.html" class="scenario-card">
+                <div class="scenario-card-header">
+                    <h2><span class="icon">🖱️</span>Hover & Tooltip</h2>
+                </div>
+                <p>Learn to handle hover effects, tooltips, and elements that appear on mouse hover.</p>
+                <div class="card-footer">
+                    <span class="difficulty medium">Medium</span>
+                </div>
+            </a>
+
+            <a href="drag-drop.html" class="scenario-card">
+                <div class="scenario-card-header">
+                    <h2><span class="icon">↔️</span>Drag & Drop</h2>
+                </div>
+                <p>Practice drag and drop functionality, reordering elements, and moving items between containers.</p>
+                <div class="card-footer">
+                    <span class="difficulty hard">Hard</span>
+                </div>
+            </a>
+
+            <a href="iframe.html" class="scenario-card">
+                <div class="scenario-card-header">
+                    <h2><span class="icon">🖼️</span>Iframe Handling</h2>
+                </div>
+                <p>Learn to switch between iframes, interact with elements inside iframes, and handle nested frames.</p>
+                <div class="card-footer">
+                    <span class="difficulty hard">Hard</span>
+                </div>
+            </a>
+
+            <a href="date-picker.html" class="scenario-card">
+                <div class="scenario-card-header">
+                    <h2><span class="icon">📅</span>Date Picker</h2>
+                </div>
+                <p>Practice interacting with date pickers, selecting dates, and handling calendar widgets.</p>
+                <div class="card-footer">
+                    <span class="difficulty medium">Medium</span>
+                </div>
+            </a>
+
+            <a href="link-interactions.html" class="scenario-card">
+                <div class="scenario-card-header">
+                    <h2><span class="icon">🔗</span>Link Interactions</h2>
+                </div>
+                <p>Practice clicking links, handling links that open in new tabs, and verifying link navigation.</p>
+                <div class="card-footer">
+                    <span class="difficulty easy">Easy</span>
+                </div>
+            </a>
+
+            <a href="image-interactions.html" class="scenario-card">
+                <div class="scenario-card-header">
+                    <h2><span class="icon">🖼️</span>Image Interactions</h2>
+                </div>
+                <p>Practice verifying alt text, checking image sources, handling broken images, and extracting image information.</p>
+                <div class="card-footer">
+                    <span class="difficulty medium">Medium</span>
+                </div>
+            </a>
+
+            <a href="super-assignment.html" class="scenario-card super-assignment">
+                <div class="scenario-card-header">
+                    <h2><span class="icon">🎯</span>Super Assignment</h2>
+                </div>
+                <p>Comprehensive job registration form with all form components, progress bars, loaders, iframes, and table data display.</p>
+                <div class="card-footer">
+                    <span class="difficulty hard">Hard</span>
+                </div>
+            </a>
+        </div>
+
+        <footer class="footer">
+            <div class="footer-content">
+                <span class="footer-text">
+                    Powered by
+                    <a href="https://www.techelliptica.com" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; gap: 8px; text-decoration: none; color: inherit;">
+                        <img src="https://techelliptica.com/images/logo.png" alt="TechElliptica Logo" class="footer-logo">
+                        <strong>TechElliptica</strong>
+                    </a>
+                </span>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
