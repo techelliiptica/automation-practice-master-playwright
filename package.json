@@ -1,39 +1,45 @@
 {
   "name": "automation-practice-playwright",
   "version": "1.0.0",
-  "description": "Playwright automation framework for automation practice app",
+  "description": "Playwright BDD automation framework for automation practice app",
   "main": "index.js",
   "scripts": {
-    "test": "playwright test",
-    "test:headed": "playwright test --headed",
-    "test:debug": "playwright test --debug",
-    "test:ui": "playwright test --ui",
-    "test:report": "playwright show-report",
-    "test:form-submission": "playwright test tests/form-submission.spec.js",
-    "test:button-interactions": "playwright test tests/button-interactions.spec.js",
-    "test:dropdown-select": "playwright test tests/dropdown-select.spec.js",
-    "test:checkbox-radio": "playwright test tests/checkbox-radio.spec.js",
-    "test:dynamic-content": "playwright test tests/dynamic-content.spec.js",
-    "test:alerts-modals": "playwright test tests/alerts-modals.spec.js",
-    "test:table-data": "playwright test tests/table-data.spec.js",
-    "test:file-upload": "playwright test tests/file-upload.spec.js",
-    "test:hover-tooltip": "playwright test tests/hover-tooltip.spec.js",
-    "test:drag-drop": "playwright test tests/drag-drop.spec.js",
-    "test:iframe": "playwright test tests/iframe.spec.js",
-    "test:date-picker": "playwright test tests/date-picker.spec.js",
-    "test:link-interactions": "playwright test tests/link-interactions.spec.js",
-    "test:image-interactions": "playwright test tests/image-interactions.spec.js",
-    "test:super-assignment": "playwright test tests/super-assignment.spec.js"
+    "test": "cucumber-js",
+    "test:headed": "HEADLESS=false cucumber-js",
+    "test:debug": "cucumber-js --format progress-bar",
+    "test:report": "node generate-report.js",
+    "test:form-submission": "cucumber-js features/form-submission.feature",
+    "test:button-interactions": "cucumber-js features/button-interactions.feature",
+    "test:dropdown-select": "cucumber-js features/dropdown-select.feature",
+    "test:checkbox-radio": "cucumber-js features/checkbox-radio.feature",
+    "test:dynamic-content": "cucumber-js features/dynamic-content.feature",
+    "test:alerts-modals": "cucumber-js features/alerts-modals.feature",
+    "test:table-data": "cucumber-js features/table-data.feature",
+    "test:file-upload": "cucumber-js features/file-upload.feature",
+    "test:hover-tooltip": "cucumber-js features/hover-tooltip.feature",
+    "test:drag-drop": "cucumber-js features/drag-drop.feature",
+    "test:iframe": "cucumber-js features/iframe.feature",
+    "test:date-picker": "cucumber-js features/date-picker.feature",
+    "test:link-interactions": "cucumber-js features/link-interactions.feature",
+    "test:image-interactions": "cucumber-js features/image-interactions.feature",
+    "test:super-assignment": "cucumber-js features/super-assignment.feature",
+    "test:home": "cucumber-js features/home.feature"
   },
   "keywords": [
     "playwright",
     "automation",
     "testing",
-    "e2e"
+    "e2e",
+    "bdd",
+    "cucumber",
+    "gherkin"
   ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@playwright/test": "^1.40.0"
+    "@playwright/test": "^1.40.0",
+    "@cucumber/cucumber": "^10.0.0",
+    "@cucumber/pretty-formatter": "^1.0.1",
+    "cucumber-html-reporter": "^7.1.1"
   }
 }

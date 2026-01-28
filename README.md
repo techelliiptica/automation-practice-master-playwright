@@ -1,6 +1,6 @@
-# Automation Practice - Playwright Framework
+# Automation Practice - Playwright BDD Framework
 
-A comprehensive **JavaScript-based** Playwright automation framework for testing the Automation Practice web application. This framework provides a complete test automation solution with Page Object Model pattern, covering all major web automation scenarios.
+A comprehensive **JavaScript-based BDD (Behavior-Driven Development)** Playwright automation framework for testing the Automation Practice web application. This framework uses **Cucumber** with **Gherkin syntax** to write human-readable, executable specifications, combined with Page Object Model pattern for maintainable test code.
 
 ## 👨‍💻 Developed By
 
@@ -51,20 +51,25 @@ Unauthorized commercial use or distribution of this project may result in legal 
 
 - **Language**: JavaScript (ES6+)
 - **Testing Framework**: Playwright
+- **BDD Framework**: Cucumber.js
+- **Syntax**: Gherkin (Given/When/Then)
 - **Module System**: CommonJS (require/module.exports)
 - **Package Manager**: npm
-- **Design Pattern**: Page Object Model (POM)
+- **Design Pattern**: Page Object Model (POM) + BDD
 
 ## ✨ Framework Features
 
+- ✅ **BDD Approach** - Gherkin syntax for human-readable test scenarios
 - ✅ **JavaScript-based** - Pure JavaScript, no TypeScript compilation needed
 - ✅ **Page Object Model** - Clean, maintainable test structure
+- ✅ **Cucumber Integration** - Full Cucumber.js support with step definitions
 - ✅ **Multi-browser Support** - Chromium, Firefox, WebKit
-- ✅ **Comprehensive Coverage** - 15+ test scenarios
+- ✅ **Comprehensive Coverage** - 15+ feature files covering all scenarios
 - ✅ **Auto Web Server** - Automatically starts local server
 - ✅ **Rich Reporting** - HTML reports with screenshots and videos
-- ✅ **Debug Tools** - Built-in debugging and UI mode
+- ✅ **Debug Tools** - Built-in debugging capabilities
 - ✅ **CI/CD Ready** - Configured for continuous integration
+- ✅ **Reusable Steps** - Shared step definitions across features
 
 ## 🚀 Setup
 
@@ -91,20 +96,27 @@ Unauthorized commercial use or distribution of this project may result in legal 
 
 ### Quick Start
 
-After installation, run your first test:
+After installation, run your first BDD test:
 ```bash
 npm run test:home
 ```
 
-This runs the home page tests to verify everything is set up correctly.
+This runs the home page feature file to verify everything is set up correctly.
+
+### Understanding BDD Structure
+
+- **Feature Files** (`.feature`) - Written in Gherkin syntax, describe what to test
+- **Step Definitions** (`.js`) - Implement the steps defined in feature files
+- **Page Objects** - Encapsulate page interactions (reused by step definitions)
+- **Hooks** - Setup and teardown logic (Before/After)
 
 ## 🏃 Running Tests
 
-### Run all tests:
+### Run all BDD tests:
 ```bash
 npm test
 ```
-Runs all test files (`*.spec.js`) in the `tests/` directory across all browsers.
+Runs all feature files (`*.feature`) using Cucumber.js.
 
 ### Run tests in headed mode (with browser UI):
 ```bash
@@ -112,13 +124,13 @@ npm run test:headed
 ```
 Opens browser windows so you can see tests executing.
 
-### Run tests with UI mode:
+### Run tests in debug mode:
 ```bash
-npm run test:ui
+npm run test:debug
 ```
-Interactive UI mode with watch mode - great for development.
+Runs tests with progress bar output for debugging.
 
-### Run specific test suite:
+### Run specific feature:
 ```bash
 npm run test:form-submission
 npm run test:button-interactions
@@ -135,26 +147,26 @@ npm run test:date-picker
 npm run test:link-interactions
 npm run test:image-interactions
 npm run test:super-assignment
+npm run test:home
 ```
-
-### Run tests in debug mode:
-```bash
-npm run test:debug
-```
-Opens Playwright Inspector for step-by-step debugging.
 
 ### Run tests on specific browser:
 ```bash
-npx playwright test --project=chromium
-npx playwright test --project=firefox
-npx playwright test --project=webkit
+BROWSER=chromium npm test
+BROWSER=firefox npm test
+BROWSER=webkit npm test
+```
+
+### Run specific scenario by tag:
+```bash
+npx cucumber-js --tags "@form-submission"
 ```
 
 ### View test report:
 ```bash
 npm run test:report
 ```
-Opens the HTML test report in your browser.
+Generates and opens the HTML Cucumber report in your browser.
 
 ## 📁 Project Structure
 
@@ -167,31 +179,39 @@ automation-practice/
 │   ├── super-assignment.html    # Comprehensive form
 │   └── ... (15+ HTML pages)
 │
+├── features/                     # BDD Feature Files (Gherkin)
+│   ├── home.feature
+│   ├── form-submission.feature
+│   ├── button-interactions.feature
+│   ├── super-assignment.feature
+│   ├── dropdown-select.feature
+│   ├── checkbox-radio.feature
+│   ├── link-interactions.feature
+│   ├── image-interactions.feature
+│   ├── dynamic-content.feature
+│   ├── alerts-modals.feature
+│   ├── table-data.feature
+│   ├── file-upload.feature
+│   ├── hover-tooltip.feature
+│   ├── drag-drop.feature
+│   ├── iframe.feature
+│   ├── date-picker.feature
+│   └── step-definitions/         # Step Definitions (JavaScript)
+│       ├── common-steps.js
+│       ├── form-submission-steps.js
+│       ├── button-interactions-steps.js
+│       ├── super-assignment-steps.js
+│       └── ... (other step definitions)
+│   └── support/                  # Support files
+│       ├── world.js              # Custom World for Cucumber
+│       └── hooks.js              # Before/After hooks
+│
 ├── pages/                        # Page Object Models (JavaScript)
 │   ├── home-page.js
 │   ├── form-submission-page.js
 │   ├── button-interactions-page.js
 │   ├── super-assignment-page.js
-│   ├── dropdown-select-page.js
-│   ├── checkbox-radio-page.js
-│   ├── link-interactions-page.js
-│   ├── image-interactions-page.js
-│   ├── dynamic-content-page.js
-│   ├── alerts-modals-page.js
-│   ├── table-data-page.js
-│   ├── file-upload-page.js
-│   ├── hover-tooltip-page.js
-│   ├── drag-drop-page.js
-│   ├── iframe-page.js
-│   ├── date-picker-page.js
-│   └── index.js                 # Page exports
-│
-├── tests/                        # Test files (JavaScript)
-│   ├── home.spec.js
-│   ├── form-submission.spec.js
-│   ├── button-interactions.spec.js
-│   ├── super-assignment.spec.js
-│   └── ... (15+ test files)
+│   └── ... (all page objects)
 │
 ├── utils/                        # Utility functions
 │   └── base-page.js             # Base page class
@@ -199,7 +219,14 @@ automation-practice/
 ├── test-data/                    # Test data files
 │   └── sample-resume.pdf        # Sample file for upload tests
 │
-├── playwright.config.js          # Playwright configuration (JavaScript)
+├── reports/                      # Test reports
+│   ├── cucumber-report.html     # HTML report
+│   └── cucumber-report.json     # JSON report
+│
+├── screenshots/                  # Screenshots on failure
+│
+├── cucumber.config.js            # Cucumber configuration
+├── generate-report.js            # Report generator script
 ├── package.json                  # Node.js dependencies and scripts
 └── README.md                     # This file
 ```
@@ -292,31 +319,95 @@ automation-practice/
 
 ## 🔧 Configuration
 
-The framework uses `playwright.config.js` (JavaScript) for configuration. Key settings:
+### Cucumber Configuration
 
-- **Base URL**: `http://localhost:3000`
-- **Browsers**: Chromium, Firefox, WebKit
-- **Retries**: 2 retries on CI, 0 locally
-- **Screenshots**: On failure only
-- **Videos**: Retained on failure
-- **Web Server**: Automatically starts HTTP server for the app
-- **Test Directory**: `./tests` (all `.spec.js` files)
-- **Module System**: CommonJS
+The framework uses `cucumber.config.js` for BDD configuration. Key settings:
+
+- **Step Definitions**: `features/step-definitions/**/*.js`
+- **Support Files**: `features/support/**/*.js`
+- **Reports**: HTML and JSON reports in `reports/` directory
+- **Default Timeout**: 60 seconds per step
+
+### Custom World
+
+The framework uses a custom Cucumber World (`features/support/world.js`) that:
+- Initializes Playwright browser instances
+- Provides page object access
+- Handles screenshots on failure
+- Manages browser lifecycle
+
+### Hooks
+
+Global hooks (`features/support/hooks.js`) handle:
+- **BeforeAll**: Starts web server automatically
+- **Before**: Initializes browser for each scenario
+- **After**: Takes screenshots on failure and closes browser
+- **AfterAll**: Cleans up web server
 
 ### Customizing Configuration
 
-Edit `playwright.config.js` to modify:
-- Browser configurations
-- Test timeouts
-- Reporter settings
-- Environment variables
-- Parallel execution settings
+Edit `cucumber.config.js` to modify:
+- Step definition paths
+- Report formats
+- Timeout settings
+- Formatter options
 
-## 📝 Writing New Tests
+## 📝 Writing BDD Tests
 
-### Step 1: Create a Page Object Model
+### BDD Approach
 
-Create a new file in `pages/` directory (e.g., `pages/my-page.js`):
+This framework uses **Behavior-Driven Development (BDD)** with **Gherkin syntax**. Tests are written in plain English using Given/When/Then format, making them readable by both technical and non-technical stakeholders.
+
+### Step 1: Create a Feature File
+
+Create a new feature file in `features/` directory (e.g., `features/my-feature.feature`):
+
+```gherkin
+Feature: My Feature
+  As a user
+  I want to perform some action
+  So that I can achieve a goal
+
+  Background:
+    Given I navigate to "my-page"
+
+  Scenario: Perform action successfully
+    When I click on the "Submit" button
+    Then I should see "Success message"
+
+  Scenario: Handle error case
+    When I click on the "Submit" button without filling form
+    Then I should see "Error message"
+```
+
+### Step 2: Create Step Definitions
+
+Create step definitions in `features/step-definitions/` (e.g., `features/step-definitions/my-feature-steps.js`):
+
+```javascript
+const { Given, When, Then } = require('@cucumber/cucumber');
+const { expect } = require('@playwright/test');
+const { MyPage } = require('../../../pages/my-page');
+
+let myPage;
+
+Given('I navigate to {string}', async function(pageName) {
+  await this.page.goto(`/${pageName}.html`, { waitUntil: 'domcontentloaded' });
+  myPage = new MyPage(this.page);
+});
+
+When('I click on the {string} button', async function(buttonText) {
+  await myPage.submitButton.click();
+});
+
+Then('I should see {string}', async function(expectedText) {
+  await expect(this.page.locator(`text=${expectedText}`)).toBeVisible();
+});
+```
+
+### Step 3: Create Page Object (if needed)
+
+Create or use existing page objects in `pages/` directory:
 
 ```javascript
 const { BasePage } = require('../utils/base-page');
@@ -324,60 +415,23 @@ const { BasePage } = require('../utils/base-page');
 class MyPage extends BasePage {
   constructor(page) {
     super(page);
-    // Define locators as instance properties
-    this.myElement = page.locator('#myElement');
     this.submitButton = page.locator('button[type="submit"]');
-  }
-
-  // Add page-specific methods
-  async doSomething() {
-    await this.myElement.click();
-  }
-
-  async fillForm(data) {
-    await this.myElement.fill(data);
+    this.successMessage = page.locator('.success-message');
   }
 }
 
 module.exports = { MyPage };
 ```
 
-### Step 2: Create Test File
+### BDD Best Practices
 
-Create a new test file in `tests/` directory (e.g., `tests/my-feature.spec.js`):
-
-```javascript
-const { test, expect } = require('@playwright/test');
-const { MyPage } = require('../pages/my-page');
-
-test.describe('My Feature', () => {
-  test.beforeEach(async ({ page }) => {
-    const myPage = new MyPage(page);
-    await myPage.navigateTo('/my-page.html');
-  });
-
-  test('should do something', async ({ page }) => {
-    const myPage = new MyPage(page);
-    await myPage.doSomething();
-    await expect(myPage.myElement).toBeVisible();
-  });
-
-  test('should handle form submission', async ({ page }) => {
-    const myPage = new MyPage(page);
-    await myPage.fillForm('Test Data');
-    await myPage.submitButton.click();
-    // Add assertions
-  });
-});
-```
-
-### Best Practices
-
-- **Use async/await** for all asynchronous operations
-- **Extend BasePage** for common functionality
-- **Use descriptive method names** that explain what they do
-- **Keep page objects focused** - one page object per page/component
-- **Use locators** instead of direct selectors when possible
+- **Write scenarios in plain English** - Use business language
+- **Use Given/When/Then structure** - Given (setup), When (action), Then (verification)
+- **Keep scenarios focused** - One scenario tests one behavior
+- **Reuse step definitions** - Create reusable steps in `common-steps.js`
+- **Use data tables** - For complex data input
+- **Use tags** - Organize scenarios with `@tag-name`
+- **Keep steps atomic** - Each step should do one thing
 
 ## 🐛 Debugging
 
@@ -385,74 +439,95 @@ test.describe('My Feature', () => {
 ```bash
 npm run test:debug
 ```
-Opens Playwright Inspector to step through tests line by line.
-
-### UI Mode
-```bash
-npm run test:ui
-```
-Interactive UI mode with watch mode - tests run automatically on file changes.
+Runs tests with progress bar for step-by-step debugging.
 
 ### Debugging Tips
 
-1. **Use `page.pause()`** in your test code to pause execution:
+1. **Use `page.pause()`** in step definitions to pause execution:
    ```javascript
-   await page.pause(); // Opens Playwright Inspector
+   await this.page.pause(); // Opens Playwright Inspector
    ```
 
 2. **Check test results**:
-   - Screenshots: `test-results/` directory
-   - Videos: `test-results/` directory (on failure)
-   - Traces: Available when trace is enabled
+   - Screenshots: `screenshots/` directory (auto-captured on failure)
+   - HTML Report: `reports/cucumber-report.html`
+   - JSON Report: `reports/cucumber-report.json`
 
 3. **View HTML report**:
    ```bash
    npm run test:report
    ```
 
-4. **Run specific test**:
+4. **Run specific feature**:
    ```bash
-   npx playwright test tests/my-test.spec.js --debug
+   npx cucumber-js features/my-feature.feature
    ```
 
-5. **Console logging**: Use `console.log()` in your JavaScript code for debugging
+5. **Run specific scenario**:
+   ```bash
+   npx cucumber-js features/my-feature.feature:10
+   ```
+
+6. **Run scenarios by tag**:
+   ```bash
+   npx cucumber-js --tags "@smoke"
+   ```
+
+7. **Console logging**: Use `console.log()` in step definitions for debugging
+
+8. **Dry run** (check step definitions without executing):
+   ```bash
+   npx cucumber-js --dry-run
+   ```
 
 ## 📊 Test Reports
 
-### HTML Report
+### Cucumber HTML Report
 
-After running tests, view the HTML report:
+After running tests, generate and view the HTML report:
 ```bash
 npm run test:report
 ```
 
-This opens an interactive HTML report showing:
-- **Test results** - Pass/fail status for each test
-- **Screenshots** - Captured on test failure
-- **Videos** - Recorded for failed tests
-- **Execution timeline** - Step-by-step test execution
-- **Trace viewer** - Detailed trace of test execution (if enabled)
+This generates an interactive HTML report showing:
+- **Feature results** - Pass/fail status for each feature
+- **Scenario results** - Detailed scenario execution
+- **Step results** - Individual step pass/fail status
+- **Screenshots** - Automatically attached on failure
+- **Execution summary** - Overall test statistics
+- **Metadata** - Browser, platform, execution time
 
 ### Report Location
 
 Reports are generated in:
-- **HTML Report**: `playwright-report/` directory
-- **Test Results**: `test-results/` directory
-- **Screenshots**: `test-results/*/test-failed-*.png`
-- **Videos**: `test-results/*/video.webm`
+- **HTML Report**: `reports/cucumber-report.html`
+- **JSON Report**: `reports/cucumber-report.json`
+- **Screenshots**: `screenshots/` directory (on failure)
+
+### Report Features
+
+- **Bootstrap theme** - Modern, responsive design
+- **Scenario timestamps** - Track execution time
+- **Screenshot attachments** - Visual debugging
+- **Metadata display** - Environment and browser info
 
 ## 🤝 Contributing
 
-When contributing to this framework:
+When contributing to this BDD framework:
 
-1. **Follow the existing Page Object Model pattern** - All page objects extend `BasePage`
-2. **Use JavaScript (CommonJS)** - Use `require`/`module.exports` syntax
-3. **Write descriptive test names** - Use clear, action-oriented test descriptions
-4. **Use proper waits** - Avoid hard-coded timeouts, use Playwright's built-in waits
-5. **Add appropriate assertions** - Use Playwright's `expect` API
-6. **Keep tests independent** - Each test should be isolated and not depend on others
-7. **Follow naming conventions** - Use camelCase for variables and methods
-8. **Add comments** - Document complex logic or non-obvious behavior
+1. **Follow BDD principles** - Write scenarios in Gherkin (Given/When/Then)
+2. **Use plain English** - Scenarios should be readable by non-technical stakeholders
+3. **Follow Page Object Model** - All page objects extend `BasePage`
+4. **Use JavaScript (CommonJS)** - Use `require`/`module.exports` syntax
+5. **Reuse step definitions** - Create reusable steps in `common-steps.js`
+6. **Keep scenarios focused** - One scenario tests one behavior
+7. **Use data tables** - For complex data input in scenarios
+8. **Use tags** - Organize scenarios with `@tag-name` for filtering
+9. **Use proper waits** - Avoid hard-coded timeouts, use Playwright's built-in waits
+10. **Add appropriate assertions** - Use Playwright's `expect` API in step definitions
+11. **Keep tests independent** - Each scenario should be isolated
+12. **Follow naming conventions** - Use camelCase for variables and methods
+13. **Add comments** - Document complex logic in step definitions
 
 ## 📄 License & Copyright
 
