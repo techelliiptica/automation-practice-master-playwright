@@ -1,0 +1,18 @@
+module.exports = {
+  HomePage: require('./home-page').HomePage,
+  FormSubmissionPage: require('./form-submission-page').FormSubmissionPage,
+  ButtonInteractionsPage: require('./button-interactions-page').ButtonInteractionsPage,
+  SuperAssignmentPage: require('./super-assignment-page').SuperAssignmentPage,
+  DropdownSelectPage: require('./dropdown-select-page').DropdownSelectPage,
+  CheckboxRadioPage: require('./checkbox-radio-page').CheckboxRadioPage,
+  LinkInteractionsPage: require('./link-interactions-page').LinkInteractionsPage,
+  ImageInteractionsPage: require('./image-interactions-page').ImageInteractionsPage,
+  DynamicContentPage: require('./dynamic-content-page').DynamicContentPage,
+  AlertsModalsPage: require('./alerts-modals-page').AlertsModalsPage,
+  TableDataPage: require('./table-data-page').TableDataPage,
+  FileUploadPage: require('./file-upload-page').FileUploadPage,
+  HoverTooltipPage: require('./hover-tooltip-page').HoverTooltipPage,
+  DragDropPage: require('./drag-drop-page').DragDropPage,
+  IframePage: require('./iframe-page').IframePage,
+  DatePickerPage: require('./date-picker-page').DatePickerPage,
+};

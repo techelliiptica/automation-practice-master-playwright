@@ -9,21 +9,21 @@
     "test:debug": "playwright test --debug",
     "test:ui": "playwright test --ui",
     "test:report": "playwright show-report",
-    "test:form-submission": "playwright test tests/form-submission.spec.ts",
-    "test:button-interactions": "playwright test tests/button-interactions.spec.ts",
-    "test:dropdown-select": "playwright test tests/dropdown-select.spec.ts",
-    "test:checkbox-radio": "playwright test tests/checkbox-radio.spec.ts",
-    "test:dynamic-content": "playwright test tests/dynamic-content.spec.ts",
-    "test:alerts-modals": "playwright test tests/alerts-modals.spec.ts",
-    "test:table-data": "playwright test tests/table-data.spec.ts",
-    "test:file-upload": "playwright test tests/file-upload.spec.ts",
-    "test:hover-tooltip": "playwright test tests/hover-tooltip.spec.ts",
-    "test:drag-drop": "playwright test tests/drag-drop.spec.ts",
-    "test:iframe": "playwright test tests/iframe.spec.ts",
-    "test:date-picker": "playwright test tests/date-picker.spec.ts",
-    "test:link-interactions": "playwright test tests/link-interactions.spec.ts",
-    "test:image-interactions": "playwright test tests/image-interactions.spec.ts",
-    "test:super-assignment": "playwright test tests/super-assignment.spec.ts"
+    "test:form-submission": "playwright test tests/form-submission.spec.js",
+    "test:button-interactions": "playwright test tests/button-interactions.spec.js",
+    "test:dropdown-select": "playwright test tests/dropdown-select.spec.js",
+    "test:checkbox-radio": "playwright test tests/checkbox-radio.spec.js",
+    "test:dynamic-content": "playwright test tests/dynamic-content.spec.js",
+    "test:alerts-modals": "playwright test tests/alerts-modals.spec.js",
+    "test:table-data": "playwright test tests/table-data.spec.js",
+    "test:file-upload": "playwright test tests/file-upload.spec.js",
+    "test:hover-tooltip": "playwright test tests/hover-tooltip.spec.js",
+    "test:drag-drop": "playwright test tests/drag-drop.spec.js",
+    "test:iframe": "playwright test tests/iframe.spec.js",
+    "test:date-picker": "playwright test tests/date-picker.spec.js",
+    "test:link-interactions": "playwright test tests/link-interactions.spec.js",
+    "test:image-interactions": "playwright test tests/image-interactions.spec.js",
+    "test:super-assignment": "playwright test tests/super-assignment.spec.js"
   },
   "keywords": [
     "playwright",
@@ -34,7 +34,6 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@playwright/test": "^1.40.0",
-    "@types/node": "^20.10.0"
+    "@playwright/test": "^1.40.0"
   }
 }
