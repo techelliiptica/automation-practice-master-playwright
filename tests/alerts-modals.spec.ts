@@ -55,9 +55,10 @@ test.describe('Alerts & Modals', () => {
     const alertsPage = new AlertsModalsPage(page);
     
     await alertsPage.openModal();
-    await expect(alertsPage.modal).toBeVisible();
+    const modal = await alertsPage.getModal('simpleModal');
+    await expect(modal).toBeVisible();
     
     await alertsPage.closeModal();
-    await expect(alertsPage.modal).not.toBeVisible();
+    await expect(modal).not.toBeVisible();
   });
 });

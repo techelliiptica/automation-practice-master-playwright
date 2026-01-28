@@ -42,6 +42,6 @@ export class LinkInteractionsPage extends BasePage {
   }
 
   async clickBrokenLink(linkNumber: number) {
-    await this.page.locator(`text=Link ${linkNumber}`).click();
+    await this.page.locator(`a[href*="Link ${linkNumber}"], a:has-text("Link ${linkNumber}")`).first().click();
   }
 }

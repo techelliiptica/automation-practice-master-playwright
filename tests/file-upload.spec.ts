@@ -13,7 +13,7 @@ test.describe('File Upload', () => {
     
     const filePath = path.join(__dirname, '../test-data/sample-resume.pdf');
     await uploadPage.uploadSingleFile(filePath);
-    await uploadPage.submitUpload();
+    await uploadPage.uploadSingleFileButton();
     
     await expect(uploadPage.resultDisplay).toBeVisible();
   });
@@ -23,7 +23,7 @@ test.describe('File Upload', () => {
     
     const filePath = path.join(__dirname, '../test-data/sample-resume.pdf');
     await uploadPage.uploadMultipleFiles([filePath, filePath]);
-    await uploadPage.submitUpload();
+    await uploadPage.uploadMultipleFilesButton();
     
     await expect(uploadPage.resultDisplay).toBeVisible();
   });

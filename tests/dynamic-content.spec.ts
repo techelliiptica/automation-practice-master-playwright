@@ -11,22 +11,22 @@ test.describe('Dynamic Content', () => {
     const dynamicPage = new DynamicContentPage(page);
     
     await dynamicPage.addDynamicElement();
-    await expect(dynamicPage.dynamicContainer).toBeVisible();
+    await expect(page.locator('#dynamicList .list-item, #dynamicList li')).toBeVisible();
   });
 
   test('should remove dynamic element', async ({ page }) => {
     const dynamicPage = new DynamicContentPage(page);
     
     await dynamicPage.addDynamicElement();
+    await page.waitForTimeout(500);
     await dynamicPage.removeDynamicElement();
-    // Verify element is removed
+    await expect(page.locator('#dynamicList .list-item, #dynamicList li')).not.toBeVisible();
   });
 
   test('should wait for delayed content', async ({ page }) => {
     const dynamicPage = new DynamicContentPage(page);
     
     await dynamicPage.clickDelayedButton();
-    await dynamicPage.waitForDynamicContent();
-    await expect(dynamicPage.dynamicContainer).toBeVisible();
+    await expect(page.locator('#delayedContent')).not.toContainText('Click the button');
   });
 });

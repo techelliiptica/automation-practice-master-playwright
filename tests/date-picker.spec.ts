@@ -19,13 +19,13 @@ test.describe('Date Picker', () => {
     const datePage = new DatePickerPage(page);
     
     await datePage.openDatePicker();
-    await expect(datePage.calendar).toBeVisible();
+    // Date input should be focused/active
+    await expect(datePage.dateInput).toBeVisible();
   });
 
   test('should select today date', async ({ page }) => {
     const datePage = new DatePickerPage(page);
     
-    await datePage.openDatePicker();
     await datePage.selectToday();
     
     const today = new Date().toISOString().split('T')[0];

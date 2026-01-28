@@ -16,7 +16,8 @@ export class IframePage extends BasePage {
   }
 
   getNestedIframeContent(): FrameLocator {
-    return this.page.frameLocator('iframe').first().frameLocator('iframe');
+    const parentIframe = this.page.frameLocator('#parentIframe');
+    return parentIframe.frameLocator('iframe');
   }
 
   async clickButtonInIframe(buttonText: string) {

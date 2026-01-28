@@ -20,11 +20,11 @@ test.describe('Checkbox & Radio', () => {
   test('should select radio option', async ({ page }) => {
     const checkboxPage = new CheckboxRadioPage(page);
     
-    await checkboxPage.selectRadioOption('radio1');
-    expect(await checkboxPage.isCheckboxChecked('radio1')).toBeTruthy();
+    await checkboxPage.selectRadioOption('choice1');
+    expect(await checkboxPage.isRadioChecked('choice1')).toBeTruthy();
     
-    await checkboxPage.selectRadioOption('radio2');
-    expect(await checkboxPage.isCheckboxChecked('radio1')).toBeFalsy();
-    expect(await checkboxPage.isCheckboxChecked('radio2')).toBeTruthy();
+    await checkboxPage.selectRadioOption('choice2');
+    expect(await checkboxPage.isRadioChecked('choice1')).toBeFalsy();
+    expect(await checkboxPage.isRadioChecked('choice2')).toBeTruthy();
   });
 });

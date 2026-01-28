@@ -41,6 +41,6 @@ test.describe('Image Interactions', () => {
     const imagePage = new ImageInteractionsPage(page);
     
     await imagePage.addDynamicImage();
-    await expect(page.locator('text=Dynamic Image 1')).toBeVisible();
+    await expect(page.locator('.image-label:has-text("Dynamic Image 1")')).toBeVisible();
   });
 });

@@ -9,10 +9,10 @@ export class DynamicContentPage extends BasePage {
 
   constructor(page: Page) {
     super(page);
-    this.addButton = page.locator('button:has-text("Add")');
-    this.removeButton = page.locator('button:has-text("Remove")');
-    this.delayedButton = page.locator('button:has-text("Delayed")');
-    this.dynamicContainer = page.locator('#dynamicContent');
+    this.addButton = page.locator('button:has-text("Add Item")');
+    this.removeButton = page.locator('button:has-text("Clear All")');
+    this.delayedButton = page.locator('button:has-text("Load Content (3 second delay)")');
+    this.dynamicContainer = page.locator('#dynamicList');
   }
 
   async addDynamicElement() {
@@ -25,9 +25,10 @@ export class DynamicContentPage extends BasePage {
 
   async clickDelayedButton() {
     await this.delayedButton.click();
+    await this.page.waitForTimeout(3500);
   }
 
   async waitForDynamicContent() {
-    await this.dynamicContainer.waitFor({ state: 'visible' });
+    await this.page.locator('#delayedContent').waitFor({ state: 'visible' });
   }
 }

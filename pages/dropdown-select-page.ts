@@ -8,8 +8,8 @@ export class DropdownSelectPage extends BasePage {
 
   constructor(page: Page) {
     super(page);
-    this.singleSelect = page.locator('#singleSelect');
-    this.multiSelect = page.locator('#multiSelect');
+    this.singleSelect = page.locator('#country');
+    this.multiSelect = page.locator('#languages');
     this.resultDisplay = page.locator('.result-display');
   }
 

@@ -10,15 +10,15 @@ test.describe('Dropdown & Select', () => {
   test('should select option from single select', async ({ page }) => {
     const dropdownPage = new DropdownSelectPage(page);
     
-    await dropdownPage.selectOption('option2');
+    await dropdownPage.selectOption('usa');
     const selectedValue = await dropdownPage.getSelectedValue();
-    expect(selectedValue).toBe('option2');
+    expect(selectedValue).toBe('usa');
   });
 
   test('should select multiple options', async ({ page }) => {
     const dropdownPage = new DropdownSelectPage(page);
     
-    await dropdownPage.selectMultipleOptions(['option1', 'option3']);
-    await expect(dropdownPage.resultDisplay).toBeVisible();
+    await dropdownPage.selectMultipleOptions(['javascript', 'python']);
+    await expect(dropdownPage.resultDisplay.first()).toBeVisible();
   });
 });

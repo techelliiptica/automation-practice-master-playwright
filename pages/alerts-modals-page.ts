@@ -11,12 +11,12 @@ export class AlertsModalsPage extends BasePage {
 
   constructor(page: Page) {
     super(page);
-    this.alertButton = page.locator('button:has-text("Alert")');
-    this.confirmButton = page.locator('button:has-text("Confirm")');
-    this.promptButton = page.locator('button:has-text("Prompt")');
-    this.modalButton = page.locator('button:has-text("Modal")');
-    this.modal = page.locator('.modal, [role="dialog"]');
-    this.modalCloseButton = page.locator('.modal-close, button:has-text("Close")');
+    this.alertButton = page.locator('button:has-text("Show Alert")');
+    this.confirmButton = page.locator('button:has-text("Show Confirm")');
+    this.promptButton = page.locator('button:has-text("Show Prompt")');
+    this.modalButton = page.locator('button:has-text("Open Simple Modal")');
+    this.modal = page.locator('#simpleModal.modal');
+    this.modalCloseButton = page.locator('#simpleModal .close, #simpleModal button:has-text("Close")');
   }
 
   async clickAlertButton() {
@@ -36,6 +36,14 @@ export class AlertsModalsPage extends BasePage {
   }
 
   async closeModal() {
-    await this.modalCloseButton.click();
+    await this.modalCloseButton.first().click();
+  }
+
+  async openModalById(modalId: string) {
+    await this.page.locator(`button:has-text("Open ${modalId}")`).click();
+  }
+
+  async getModal(modalId: string) {
+    return this.page.locator(`#${modalId}.modal`);
   }
 }

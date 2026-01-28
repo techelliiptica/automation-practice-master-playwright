@@ -8,7 +8,7 @@ export class HoverTooltipPage extends BasePage {
   constructor(page: Page) {
     super(page);
     this.hoverElement = page.locator('[data-tooltip], .hover-element, button:has-text("Hover")').first();
-    this.tooltip = page.locator('.tooltip, [role="tooltip"]');
+    this.tooltip = page.locator('.tooltip').first();
   }
 
   async hoverOverElement() {

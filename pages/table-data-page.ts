@@ -10,9 +10,9 @@ export class TableDataPage extends BasePage {
 
   constructor(page: Page) {
     super(page);
-    this.table = page.locator('table');
+    this.table = page.locator('#basicTable');
     this.sortButton = page.locator('button:has-text("Sort")');
-    this.filterInput = page.locator('input[type="search"], input[placeholder*="filter" i]');
+    this.filterInput = page.locator('#filterInput, input[type="search"], input[placeholder*="filter" i]');
     this.paginationNext = page.locator('button:has-text("Next")');
     this.paginationPrev = page.locator('button:has-text("Previous")');
   }
@@ -22,7 +22,7 @@ export class TableDataPage extends BasePage {
   }
 
   async getCellText(rowIndex: number, columnIndex: number) {
-    return await this.table.locator(`tbody tr:nth-child(${rowIndex + 1}) td:nth-child(${columnIndex + 1})`).textContent();
+    return await this.table.locator(`tbody tr:nth-child(${rowIndex + 1}) td:nth-child(${columnIndex + 1})`).first().textContent();
   }
 
   async sortTable() {

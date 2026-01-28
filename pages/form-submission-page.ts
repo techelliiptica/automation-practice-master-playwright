@@ -11,10 +11,10 @@ export class FormSubmissionPage extends BasePage {
 
   constructor(page: Page) {
     super(page);
-    this.nameInput = page.locator('#name');
+    this.nameInput = page.locator('#fullName');
     this.emailInput = page.locator('#email');
     this.passwordInput = page.locator('#password');
-    this.messageTextarea = page.locator('#message');
+    this.messageTextarea = page.locator('#bio');
     this.submitButton = page.locator('button[type="submit"]');
     this.resultDisplay = page.locator('.result-display');
   }

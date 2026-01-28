@@ -56,7 +56,7 @@ test.describe('Button Interactions', () => {
     await expect(buttonPage.contextMenu).toBeVisible();
     
     await buttonPage.selectContextMenuOption('Edit');
-    await expect(buttonPage.rightClickMessage).toContainText('Edit');
+    await expect(buttonPage.rightClickMessage).toContainText('edit');
   });
 
   test('should handle delayed button response', async ({ page }) => {

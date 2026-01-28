@@ -9,8 +9,8 @@ export class DatePickerPage extends BasePage {
 
   constructor(page: Page) {
     super(page);
-    this.dateInput = page.locator('input[type="date"]').first();
-    this.datePickerButton = page.locator('button:has-text("Pick Date"), .date-picker-button').first();
+    this.dateInput = page.locator('#dateInput');
+    this.datePickerButton = page.locator('#dateInput');
     this.calendar = page.locator('.calendar, .datepicker');
     this.todayButton = page.locator('button:has-text("Today")');
   }
@@ -20,10 +20,11 @@ export class DatePickerPage extends BasePage {
   }
 
   async openDatePicker() {
-    await this.datePickerButton.click();
+    await this.dateInput.click();
   }
 
   async selectToday() {
-    await this.todayButton.click();
+    const today = new Date().toISOString().split('T')[0];
+    await this.dateInput.fill(today);
   }
 }

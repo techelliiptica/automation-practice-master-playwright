@@ -11,7 +11,7 @@ export class FileUploadPage extends BasePage {
     super(page);
     this.singleFileInput = page.locator('input[type="file"]').first();
     this.multipleFileInput = page.locator('input[type="file"][multiple]');
-    this.uploadButton = page.locator('button:has-text("Upload")');
+    this.uploadButton = page.locator('button:has-text("Upload File")').first();
     this.resultDisplay = page.locator('.result-display');
   }
 
@@ -25,5 +25,13 @@ export class FileUploadPage extends BasePage {
 
   async submitUpload() {
     await this.uploadButton.click();
+  }
+
+  async uploadSingleFileButton() {
+    await this.page.locator('button:has-text("Upload File")').first().click();
+  }
+
+  async uploadMultipleFilesButton() {
+    await this.page.locator('button:has-text("Upload All Files")').click();
   }
 }
