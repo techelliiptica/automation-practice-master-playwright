@@ -1,0 +1,16 @@
+node_modules
+.git
+.gitignore
+*.md
+.DS_Store
+test-data
+tests
+pages
+utils
+*.spec.js
+playwright.config.js
+package*.json
+screenshots
+reports
+.env
+*.log
