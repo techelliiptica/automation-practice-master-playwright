@@ -1,6 +1,6 @@
 const { When, Then, Before } = require('@cucumber/cucumber');
 const { expect } = require('@playwright/test');
-const { DynamicContentPage } = require('../../../pages/dynamic-content-page');
+const { DynamicContentPage } = require('../../pages/dynamic-content-page');
 
 let dynamicPage;
 
@@ -10,7 +10,7 @@ Before({ tags: '@dynamic-content' }, async function() {
 
 When('I click on the {string} button', async function(buttonText) {
   if (!dynamicPage) {
-    dynamicPage = new (require('../../../pages/dynamic-content-page').DynamicContentPage)(this.page);
+    dynamicPage = new (require('../../pages/dynamic-content-page').DynamicContentPage)(this.page);
   }
   
   if (buttonText === 'Add Item') {

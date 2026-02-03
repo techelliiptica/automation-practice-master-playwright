@@ -1,6 +1,6 @@
 const { When, Then, Before } = require('@cucumber/cucumber');
 const { expect } = require('@playwright/test');
-const { CheckboxRadioPage } = require('../../../pages/checkbox-radio-page');
+const { CheckboxRadioPage } = require('../../pages/checkbox-radio-page');
 
 let checkboxPage;
 

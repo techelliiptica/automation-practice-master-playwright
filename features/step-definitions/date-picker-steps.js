@@ -1,6 +1,6 @@
 const { When, Then, Before } = require('@cucumber/cucumber');
 const { expect } = require('@playwright/test');
-const { DatePickerPage } = require('../../../pages/date-picker-page');
+const { DatePickerPage } = require('../../pages/date-picker-page');
 
 let datePage;
 

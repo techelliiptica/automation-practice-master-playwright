@@ -1,6 +1,6 @@
 const { When, Then, Before } = require('@cucumber/cucumber');
 const { expect } = require('@playwright/test');
-const { ImageInteractionsPage } = require('../../../pages/image-interactions-page');
+const { ImageInteractionsPage } = require('../../pages/image-interactions-page');
 
 let imagePage;
 
@@ -37,7 +37,7 @@ Then('{string} should be a broken image', async function(imageName) {
 
 When('I click on the {string} button', async function(buttonText) {
   if (!imagePage) {
-    imagePage = new (require('../../../pages/image-interactions-page').ImageInteractionsPage)(this.page);
+    imagePage = new (require('../../pages/image-interactions-page').ImageInteractionsPage)(this.page);
   }
   
   if (buttonText.includes('Get Image')) {

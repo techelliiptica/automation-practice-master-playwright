@@ -1,6 +1,6 @@
 const { When, Then, Before } = require('@cucumber/cucumber');
 const { expect } = require('@playwright/test');
-const { AlertsModalsPage } = require('../../../pages/alerts-modals-page');
+const { AlertsModalsPage } = require('../../pages/alerts-modals-page');
 
 let alertsPage;
 
@@ -10,7 +10,7 @@ Before({ tags: '@alerts-modals' }, async function() {
 
 When('I click on the {string} button', async function(buttonText) {
   if (!alertsPage) {
-    alertsPage = new (require('../../../pages/alerts-modals-page').AlertsModalsPage)(this.page);
+    alertsPage = new (require('../../pages/alerts-modals-page').AlertsModalsPage)(this.page);
   }
   
   if (buttonText === 'Show Alert') {

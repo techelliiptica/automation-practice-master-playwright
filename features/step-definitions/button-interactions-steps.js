@@ -1,6 +1,6 @@
-const { When, Then, Before } = require('@cucumber/cucumber');
+const { Given, When, Then, Before } = require('@cucumber/cucumber');
 const { expect } = require('@playwright/test');
-const { ButtonInteractionsPage } = require('../../../pages/button-interactions-page');
+const { ButtonInteractionsPage } = require('../../pages/button-interactions-page');
 
 let buttonPage;
 
@@ -10,7 +10,7 @@ Before({ tags: '@button-interactions' }, async function() {
 
 When('I click on the {string} button', async function(buttonText) {
   if (!buttonPage) {
-    buttonPage = new (require('../../../pages/button-interactions-page').ButtonInteractionsPage)(this.page);
+    buttonPage = new (require('../../pages/button-interactions-page').ButtonInteractionsPage)(this.page);
   }
   
   const buttonMap = {

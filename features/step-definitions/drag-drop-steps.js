@@ -1,6 +1,6 @@
 const { When, Then, Before } = require('@cucumber/cucumber');
 const { expect } = require('@playwright/test');
-const { DragDropPage } = require('../../../pages/drag-drop-page');
+const { DragDropPage } = require('../../pages/drag-drop-page');
 
 let dragDropPage;
 

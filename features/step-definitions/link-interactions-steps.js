@@ -1,6 +1,6 @@
 const { When, Then, Before } = require('@cucumber/cucumber');
 const { expect } = require('@playwright/test');
-const { LinkInteractionsPage } = require('../../../pages/link-interactions-page');
+const { LinkInteractionsPage } = require('../../pages/link-interactions-page');
 
 let linkPage;
 
@@ -22,7 +22,7 @@ When('I click on the link that opens in a new tab', async function() {
 
 When('I click on the {string} button', async function(buttonText) {
   if (!linkPage) {
-    linkPage = new (require('../../../pages/link-interactions-page').LinkInteractionsPage)(this.page);
+    linkPage = new (require('../../pages/link-interactions-page').LinkInteractionsPage)(this.page);
   }
   
   if (buttonText === 'Add Dynamic Link') {

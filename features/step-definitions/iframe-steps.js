@@ -1,6 +1,6 @@
 const { When, Then, Before } = require('@cucumber/cucumber');
 const { expect } = require('@playwright/test');
-const { IframePage } = require('../../../pages/iframe-page');
+const { IframePage } = require('../../pages/iframe-page');
 
 let iframePage;
 

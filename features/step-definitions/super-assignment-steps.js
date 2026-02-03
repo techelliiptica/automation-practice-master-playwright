@@ -1,6 +1,6 @@
 const { When, Then, Before } = require('@cucumber/cucumber');
 const { expect } = require('@playwright/test');
-const { SuperAssignmentPage } = require('../../../pages/super-assignment-page');
+const { SuperAssignmentPage } = require('../../pages/super-assignment-page');
 const path = require('path');
 
 let superPage;
@@ -62,7 +62,7 @@ When('I fill in cover letter with {string}', async function(text) {
 });
 
 When('I upload a resume file', async function() {
-  const resumePath = path.join(__dirname, '../../../test-data/sample-resume.pdf');
+  const resumePath = path.join(__dirname, '../../test-data/sample-resume.pdf');
   await superPage.uploadResume(resumePath);
 });
 
@@ -96,7 +96,7 @@ Then('I should see my submission in the table', async function() {
 
 When('I click on the submit button', async function() {
   if (!superPage) {
-    superPage = new (require('../../../pages/super-assignment-page').SuperAssignmentPage)(this.page);
+    superPage = new (require('../../pages/super-assignment-page').SuperAssignmentPage)(this.page);
   }
   await superPage.submitButton.click();
 });
@@ -111,7 +111,7 @@ Then('I should see the download button', async function() {
 
 When('I click on the download button', async function() {
   if (!superPage) {
-    superPage = new (require('../../../pages/super-assignment-page').SuperAssignmentPage)(this.page);
+    superPage = new (require('../../pages/super-assignment-page').SuperAssignmentPage)(this.page);
   }
   const [download] = await Promise.all([
     this.page.waitForEvent('download'),
@@ -135,7 +135,7 @@ When('I fill all required fields', async function() {
   await superPage.selectWorkPreference('Remote');
   await superPage.selectSkills(['Java']);
   await superPage.selectLanguages(['English']);
-  const resumePath = path.join(__dirname, '../../../test-data/sample-resume.pdf');
+  const resumePath = path.join(__dirname, '../../test-data/sample-resume.pdf');
   await superPage.uploadResume(resumePath);
   await superPage.acceptTerms();
 });

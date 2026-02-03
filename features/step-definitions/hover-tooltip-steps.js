@@ -1,6 +1,6 @@
 const { When, Then, Before } = require('@cucumber/cucumber');
 const { expect } = require('@playwright/test');
-const { HoverTooltipPage } = require('../../../pages/hover-tooltip-page');
+const { HoverTooltipPage } = require('../../pages/hover-tooltip-page');
 
 let hoverPage;
 

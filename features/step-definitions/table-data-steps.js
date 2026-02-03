@@ -1,6 +1,6 @@
 const { When, Then, Before } = require('@cucumber/cucumber');
 const { expect } = require('@playwright/test');
-const { TableDataPage } = require('../../../pages/table-data-page');
+const { TableDataPage } = require('../../pages/table-data-page');
 
 let tablePage;
 

@@ -1,6 +1,6 @@
 const { When, Then, Before } = require('@cucumber/cucumber');
 const { expect } = require('@playwright/test');
-const { DropdownSelectPage } = require('../../../pages/dropdown-select-page');
+const { DropdownSelectPage } = require('../../pages/dropdown-select-page');
 
 let dropdownPage;
 
