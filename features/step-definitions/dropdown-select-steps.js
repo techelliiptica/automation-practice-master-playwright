@@ -4,7 +4,7 @@ const { DropdownSelectPage } = require('../../pages/dropdown-select-page');
 
 let dropdownPage;
 
-Before({ tags: '@dropdown-select' }, async function() {
+Before({ tags: '@dropdown-select', order: 1 }, async function() {
   dropdownPage = new DropdownSelectPage(this.page);
 });
 

@@ -4,7 +4,7 @@ const { DatePickerPage } = require('../../pages/date-picker-page');
 
 let datePage;
 
-Before({ tags: '@date-picker' }, async function() {
+Before({ tags: '@date-picker', order: 1 }, async function() {
   datePage = new DatePickerPage(this.page);
 });
 

@@ -5,7 +5,7 @@ const path = require('path');
 
 let superPage;
 
-Before({ tags: '@super-assignment' }, async function() {
+Before({ tags: '@super-assignment', order: 1 }, async function() {
   superPage = new SuperAssignmentPage(this.page);
 });
 

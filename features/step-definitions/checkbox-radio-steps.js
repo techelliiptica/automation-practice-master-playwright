@@ -4,7 +4,7 @@ const { CheckboxRadioPage } = require('../../pages/checkbox-radio-page');
 
 let checkboxPage;
 
-Before({ tags: '@checkbox-radio' }, async function() {
+Before({ tags: '@checkbox-radio', order: 1 }, async function() {
   checkboxPage = new CheckboxRadioPage(this.page);
 });
 

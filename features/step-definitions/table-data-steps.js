@@ -4,7 +4,7 @@ const { TableDataPage } = require('../../pages/table-data-page');
 
 let tablePage;
 
-Before({ tags: '@table-data' }, async function() {
+Before({ tags: '@table-data', order: 1 }, async function() {
   tablePage = new TableDataPage(this.page);
 });
 

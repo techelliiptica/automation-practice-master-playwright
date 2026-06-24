@@ -1,17 +1,18 @@
 module.exports = {
   default: {
     require: [
-      'features/step-definitions/**/*.js',
-      'features/support/**/*.js'
+      'features/support/**/*.js',
+      'features/step-definitions/**/*.js'
     ],
     format: [
       'progress-bar',
+      'merv-client/cucumber-formatter',
       'json:reports/cucumber-report.json',
       'html:reports/cucumber-report.html'
     ],
     formatOptions: {
-      snippetInterface: 'async-await'
-    },
-    publishQuiet: true
+      snippetInterface: 'async-await',
+      merv: {}
+    }
   }
 };

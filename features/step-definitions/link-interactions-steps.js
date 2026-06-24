@@ -4,30 +4,24 @@ const { LinkInteractionsPage } = require('../../pages/link-interactions-page');
 
 let linkPage;
 
-Before({ tags: '@link-interactions' }, async function() {
+Before({ tags: '@link-interactions', order: 1 }, async function() {
   linkPage = new LinkInteractionsPage(this.page);
-});
-
-When('I click on the {string} link', async function(linkText) {
-  if (linkText === 'Link to Home Page') {
-    await linkPage.clickBasicLink();
-  } else {
-    await this.page.click(`a:has-text("${linkText}")`);
-  }
+  this.linkClickHandler = async (linkText) => {
+    if (linkText === 'Link to Home Page') {
+      await linkPage.clickBasicLink();
+    } else {
+      await this.page.click(`a:has-text("${linkText}")`);
+    }
+  };
+  this.buttonClickHandler = async (buttonText) => {
+    if (buttonText === 'Add Dynamic Link') {
+      await linkPage.addDynamicLink();
+    }
+  };
 });
 
 When('I click on the link that opens in a new tab', async function() {
   this.newPage = await linkPage.clickNewTabLink();
-});
-
-When('I click on the {string} button', async function(buttonText) {
-  if (!linkPage) {
-    linkPage = new (require('../../pages/link-interactions-page').LinkInteractionsPage)(this.page);
-  }
-  
-  if (buttonText === 'Add Dynamic Link') {
-    await linkPage.addDynamicLink();
-  }
 });
 
 When('I click on {string}', async function(linkNumber) {

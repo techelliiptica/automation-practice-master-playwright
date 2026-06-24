@@ -1,9 +1,12 @@
-const { Before, After, BeforeAll, AfterAll } = require('@cucumber/cucumber');
+const { Before, After, BeforeAll, AfterAll, AfterStep } = require('@cucumber/cucumber');
 const { execSync } = require('child_process');
+const { AutomationTool, MervPlaywright, loadMervConfig, captureCucumberStepScreenshot } = require('merv-client');
 
 let serverProcess;
+let screenshotEnabled = false;
 
 BeforeAll(async function() {
+  screenshotEnabled = loadMervConfig(process.cwd()).screenshot;
   // Start web server if not already running
   try {
     execSync('curl -f http://localhost:3000 > /dev/null 2>&1', { stdio: 'ignore' });
@@ -37,6 +40,14 @@ Before(async function() {
   // Initialize browser before each scenario
   const browserName = process.env.BROWSER || 'chromium';
   await this.initBrowser(browserName);
+  this.resetStepHandlers();
+  if (this.page) {
+    MervPlaywright.setAutomationToolObject(AutomationTool.PLAYWRIGHT, this.page);
+  }
+});
+
+AfterStep(async function({ testStepId, result }) {
+  await captureCucumberStepScreenshot(this.page, { testStepId, result }, { screenshotEnabled });
 });
 
 After(async function(scenario) {
@@ -45,6 +56,8 @@ After(async function(scenario) {
     const screenshotName = scenario.pickle.name.replace(/\s+/g, '-').toLowerCase();
     await this.takeScreenshot(`failed-${screenshotName}`);
   }
+
+  MervPlaywright.clear();
 
   // Close browser after each scenario
   await this.closeBrowser();

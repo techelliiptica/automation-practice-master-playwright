@@ -225,7 +225,7 @@ automation-practice/
 │
 ├── screenshots/                  # Screenshots on failure
 │
-├── cucumber.config.js            # Cucumber configuration
+├── cucumber.js                   # Cucumber configuration
 ├── generate-report.js            # Report generator script
 ├── package.json                  # Node.js dependencies and scripts
 └── README.md                     # This file
@@ -321,7 +321,7 @@ automation-practice/
 
 ### Cucumber Configuration
 
-The framework uses `cucumber.config.js` for BDD configuration. Key settings:
+The framework uses `cucumber.js` for BDD configuration. Key settings:
 
 - **Step Definitions**: `features/step-definitions/**/*.js`
 - **Support Files**: `features/support/**/*.js`
@@ -346,7 +346,7 @@ Global hooks (`features/support/hooks.js`) handle:
 
 ### Customizing Configuration
 
-Edit `cucumber.config.js` to modify:
+Edit `cucumber.js` to modify:
 - Step definition paths
 - Report formats
 - Timeout settings

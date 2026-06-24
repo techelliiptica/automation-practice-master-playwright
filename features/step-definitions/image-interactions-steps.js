@@ -4,8 +4,16 @@ const { ImageInteractionsPage } = require('../../pages/image-interactions-page')
 
 let imagePage;
 
-Before({ tags: '@image-interactions' }, async function() {
+Before({ tags: '@image-interactions', order: 1 }, async function() {
   imagePage = new ImageInteractionsPage(this.page);
+  this.buttonClickHandler = async (buttonText) => {
+    if (buttonText.includes('Get Image')) {
+      const imageId = buttonText.match(/\d+/)[0];
+      await imagePage.extractImageInfo(imageId);
+    } else if (buttonText === 'Add Dynamic Image') {
+      await imagePage.addDynamicImage();
+    }
+  };
 });
 
 When('I check the alt text of {string}', async function(imageName) {
@@ -35,23 +43,6 @@ Then('{string} should be a broken image', async function(imageName) {
   expect(this.isBroken).toBeTruthy();
 });
 
-When('I click on the {string} button', async function(buttonText) {
-  if (!imagePage) {
-    imagePage = new (require('../../pages/image-interactions-page').ImageInteractionsPage)(this.page);
-  }
-  
-  if (buttonText.includes('Get Image')) {
-    const imageId = buttonText.match(/\d+/)[0];
-    await imagePage.extractImageInfo(imageId);
-  } else if (buttonText === 'Add Dynamic Image') {
-    await imagePage.addDynamicImage();
-  }
-});
-
 Then('I should see image information displayed', async function() {
   await expect(imagePage.resultDisplay).toBeVisible();
-});
-
-Then('I should see {string}', async function(text) {
-  await expect(this.page.locator(`text=${text}`)).toBeVisible();
 });

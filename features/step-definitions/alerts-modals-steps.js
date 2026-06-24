@@ -4,33 +4,27 @@ const { AlertsModalsPage } = require('../../pages/alerts-modals-page');
 
 let alertsPage;
 
-Before({ tags: '@alerts-modals' }, async function() {
+Before({ tags: '@alerts-modals', order: 1 }, async function() {
   alertsPage = new AlertsModalsPage(this.page);
-});
-
-When('I click on the {string} button', async function(buttonText) {
-  if (!alertsPage) {
-    alertsPage = new (require('../../pages/alerts-modals-page').AlertsModalsPage)(this.page);
-  }
-  
-  if (buttonText === 'Show Alert') {
-    this.page.on('dialog', async dialog => {
-      this.dialog = dialog;
-      await dialog.accept();
-    });
-    await alertsPage.clickAlertButton();
-  } else if (buttonText === 'Show Confirm') {
-    // Dialog handler will be set in Then step
-    await alertsPage.clickConfirmButton();
-  } else if (buttonText === 'Show Prompt') {
-    this.page.on('dialog', async dialog => {
-      this.dialog = dialog;
-      await dialog.accept(this.promptValue || 'Test input');
-    });
-    await alertsPage.clickPromptButton();
-  } else if (buttonText === 'Open Simple Modal') {
-    await alertsPage.openModal();
-  }
+  this.buttonClickHandler = async (buttonText) => {
+    if (buttonText === 'Show Alert') {
+      this.page.on('dialog', async dialog => {
+        this.dialog = dialog;
+        await dialog.accept();
+      });
+      await alertsPage.clickAlertButton();
+    } else if (buttonText === 'Show Confirm') {
+      await alertsPage.clickConfirmButton();
+    } else if (buttonText === 'Show Prompt') {
+      this.page.on('dialog', async dialog => {
+        this.dialog = dialog;
+        await dialog.accept(this.promptValue || 'Test input');
+      });
+      await alertsPage.clickPromptButton();
+    } else if (buttonText === 'Open Simple Modal') {
+      await alertsPage.openModal();
+    }
+  };
 });
 
 When('I click on the close button', async function() {

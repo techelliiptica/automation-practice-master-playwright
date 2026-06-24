@@ -8,6 +8,13 @@ class CustomWorld {
     this.page = null;
     this.browser = null;
     this.context = null;
+    this.buttonClickHandler = null;
+    this.linkClickHandler = null;
+  }
+
+  resetStepHandlers() {
+    this.buttonClickHandler = null;
+    this.linkClickHandler = null;
   }
 
   async initBrowser(browserName = 'chromium') {

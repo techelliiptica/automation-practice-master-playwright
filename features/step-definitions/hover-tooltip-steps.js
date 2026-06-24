@@ -4,7 +4,7 @@ const { HoverTooltipPage } = require('../../pages/hover-tooltip-page');
 
 let hoverPage;
 
-Before({ tags: '@hover-tooltip' }, async function() {
+Before({ tags: '@hover-tooltip', order: 1 }, async function() {
   hoverPage = new HoverTooltipPage(this.page);
 });
 

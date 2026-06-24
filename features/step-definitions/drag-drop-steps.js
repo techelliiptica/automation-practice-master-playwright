@@ -4,7 +4,7 @@ const { DragDropPage } = require('../../pages/drag-drop-page');
 
 let dragDropPage;
 
-Before({ tags: '@drag-drop' }, async function() {
+Before({ tags: '@drag-drop', order: 1 }, async function() {
   dragDropPage = new DragDropPage(this.page);
 });
 

@@ -15,7 +15,7 @@ Feature: Home Page Navigation
     And I should see "Checkbox & Radio"
     And I should see "Dynamic Content"
     And I should see "Alerts & Modals"
-    And I should see "Table Data"
+    And I should see "Table Data Extraction"
     And I should see "File Upload"
     And I should see "Hover & Tooltip"
     And I should see "Drag & Drop"

@@ -4,7 +4,7 @@ const { IframePage } = require('../../pages/iframe-page');
 
 let iframePage;
 
-Before({ tags: '@iframe' }, async function() {
+Before({ tags: '@iframe', order: 1 }, async function() {
   iframePage = new IframePage(this.page);
 });
 

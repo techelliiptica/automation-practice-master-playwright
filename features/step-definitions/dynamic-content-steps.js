@@ -4,29 +4,20 @@ const { DynamicContentPage } = require('../../pages/dynamic-content-page');
 
 let dynamicPage;
 
-Before({ tags: '@dynamic-content' }, async function() {
+Before({ tags: '@dynamic-content', order: 1 }, async function() {
   dynamicPage = new DynamicContentPage(this.page);
-});
-
-When('I click on the {string} button', async function(buttonText) {
-  if (!dynamicPage) {
-    dynamicPage = new (require('../../pages/dynamic-content-page').DynamicContentPage)(this.page);
-  }
-  
-  if (buttonText === 'Add Item') {
-    await dynamicPage.addDynamicElement();
-  } else if (buttonText === 'Clear All') {
-    await dynamicPage.removeDynamicElement();
-  } else if (buttonText === 'Load Content (3 second delay)') {
-    await dynamicPage.clickDelayedButton();
-  }
+  this.buttonClickHandler = async (buttonText) => {
+    if (buttonText === 'Add Item') {
+      await dynamicPage.addDynamicElement();
+    } else if (buttonText === 'Clear All') {
+      await dynamicPage.removeDynamicElement();
+    } else if (buttonText === 'Load Content (3 second delay)') {
+      await dynamicPage.clickDelayedButton();
+    }
+  };
 });
 
 When('I wait for {string} second', async function(seconds) {
-  await this.page.waitForTimeout(parseInt(seconds) * 1000);
-});
-
-When('I wait for {string} seconds', async function(seconds) {
   await this.page.waitForTimeout(parseInt(seconds) * 1000);
 });
 
